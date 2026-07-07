@@ -1,11 +1,3 @@
-import Groq from "groq-sdk";
-
-// Initialize the secure Groq SDK using the private server-side environment key.
-// This key is safely hidden on Vercel and is never exposed to the client.
-const groq = new Groq({
-  apiKey: process.env.GROQ_API_KEY,
-});
-
 export default async function handler(req, res) {
   
   // Vercel Serverless handles incoming requests. We strictly restrict this to POST.
@@ -44,21 +36,43 @@ Responsibilities:
 8. Never fabricate policies, schemes, or legal parameters. If you are unsure of any information or if the query involves specific legal rules, politely guide the citizen to verify the details directly from official government sources (like PGPortal, UIDAI, or their local municipal offices).
 `;
 
-    const completion = await groq.chat.completions.create({
-      model: "llama-3.3-70b-versatile",
-      temperature: 0.4,
-      max_tokens: 1024,
-      messages: [
-        {
-          role: "system",
-          content: systemPrompt,
-        },
-        {
-          role: "user",
-          content: message.trim(),
-        },
-      ],
+    const apiKey = process.env.GROQ_API_KEY;
+    if (!apiKey) {
+      throw new Error("GROQ_API_KEY environment variable is not defined.");
+    }
+
+    // Call the Groq Chat Completions API using native fetch
+    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: "llama-3.3-70b-versatile",
+        temperature: 0.4,
+        max_tokens: 1024,
+        messages: [
+          {
+            role: "system",
+            content: systemPrompt,
+          },
+          {
+            role: "user",
+            content: message.trim(),
+          },
+        ],
+      }),
     });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(
+        `Groq API responded with status ${response.status}: ${JSON.stringify(errorData)}`
+      );
+    }
+
+    const completion = await response.json();
 
     const reply =
       completion.choices?.[0]?.message?.content ||
