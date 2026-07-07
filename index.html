@@ -515,7 +515,7 @@ Description: ${complaintDesc}`;
               en: `🔍 I searched our simplified database for "${userPrompt}". To get specific details, try asking me about **"PM-Kisan Scheme"**, **"Aadhaar card address steps"**, or **"Write streetlight letter"**!`,
               hi: `🔍 मैंने आपकी बात "${userPrompt}" को खोजने का प्रयास किया। इसके बारे में अधिक जानने के लिए, कृपया **"किसान योजना"**, **"आधार कार्ड सुधार"**, या **"बिजली सुधार पत्र"** जैसे प्रश्न पूछें!`,
               bn: `🔍 আমি আপনার প্রশ্ন "${userPrompt}" খুঁজলাম। এই বিষয়ে জানতে দয়া করে আমাকে **"কিষাণ প্রকল্প"**, **"আধার কার্ড পরিবর্তন"**, অথবা **"রাস্তার আলোর দরখাস্ত"** লিখে প্রশ্ন করুন!`,
-              ta: `🔍 நான் உங்கள் கேள்விக்கான "${userPrompt}" தகவலைத் தேடினேன். இன்னும் தெளிவாக அறிய **"விவசாயிகள் திட்டம்"**, **"ஆதார் முகவரி மாற்றம்"** அல்லது **"சாலைப் பள்ளம் புகார் கடிதம்"** என்று என்னிடம் கேளுங்கள்!`,
+              ta: `🔍 நான் உங்கள் கேள்விக்கான "${userPrompt}" தகவலைத் தேடினேன். இன்னும் தெளிவாக அறிய **"விவசாயிகள் திட்டம்"**, **"ஆதார் முகவரி மாற்றம்"** அல்லது **"சாலைப் பள்ளம் புகார் கடிதம்"** என்று என்னிடம் கேலும்ங்கள்!`,
               te: `🔍 నేను మన సులువైన డేటాబేస్ లో "${userPrompt}" కోసం వెతికాను. మరిన్ని వివరాల కోసం **"రైతు పథకం"**, **"ఆధార్ కార్డ్ మార్పులు"**, లేదా **"రోడ్డు గుంతల దరఖాస్తు"** గురించి నన్ను అడగండి!`
             };
             return fallbacks[lang] || fallbacks.en;
@@ -709,14 +709,14 @@ Description: ${complaintDesc}`;
           if (line.trim().startsWith('>')) {
             const letterTextOnly = line.replace(/^>\s*/, '').trim();
             return (
-              <blockquote key={idx} className="border-l-4 border-orange-500 pl-4 py-2.5 my-2.5 bg-slate-100 dark:bg-slate-900/60 text-slate-800 dark:text-slate-300 rounded-r-xl font-mono text-[11px] leading-relaxed relative group">
+              <blockquote key={idx} className="border-l-4 border-orange-500 pl-4 py-2.5 my-2.5 bg-slate-100 dark:bg-slate-900/60 text-slate-900 dark:text-slate-300 rounded-r-xl font-mono text-[11px] leading-relaxed relative group">
                 {containsFormatting ? pieces : line.replace(/^>\s*/, '')}
                 <button 
                   onClick={() => {
                     document.execCommand('copy') || navigator.clipboard.writeText(letterTextOnly);
                     triggerToast(currentText.complaintDrafted);
                   }} 
-                  className="absolute top-2 right-2 p-1.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white transition-all shadow-sm"
+                  className="absolute top-2 right-2 p-1.5 rounded-lg bg-white dark:bg-slate-850 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white transition-all shadow-sm"
                   title="Copy This Draft"
                 >
                   <svg className="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
@@ -763,7 +763,6 @@ Description: ${complaintDesc}`;
           {/* ==========================================
               NAVIGATION BAR (Circular Logo - Day theme mobile optimized)
               ========================================== */}
-          {}
           <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b ${
             isDark 
               ? 'bg-slate-950/90 backdrop-blur-md border-slate-900 py-2.5' 
@@ -864,22 +863,23 @@ Description: ${complaintDesc}`;
               </div>
             </div>
 
+            {}
             {/* Mobile Menu Dropdown - Crisp Day mode contrast */}
             {mobileMenuOpen && (
               <div className={`md:hidden px-4 pt-2 pb-4 space-y-2 border-t mt-2 ${
-                isDark ? 'bg-slate-950 border-slate-900 text-slate-200' : 'bg-white border-slate-200 text-slate-900'
+                isDark ? 'bg-slate-950 border-slate-900 text-slate-200' : 'bg-white border-slate-200 text-slate-950 shadow-md'
               }`}>
-                <button onClick={() => handleSmoothScroll('main')} className="block w-full text-left py-2 text-xs font-extrabold uppercase tracking-wider text-slate-800 dark:text-slate-200">Main</button>
-                <button onClick={() => handleSmoothScroll('services')} className="block w-full text-left py-2 text-xs font-extrabold uppercase tracking-wider text-slate-800 dark:text-slate-200">Services</button>
-                <button onClick={() => handleSmoothScroll('raise-complaint')} className="block w-full text-left py-2 text-xs font-extrabold uppercase tracking-wider text-slate-800 dark:text-slate-200">Raise Complaint</button>
-                <button onClick={() => handleSmoothScroll('my-complaints')} className="block w-full text-left py-2 text-xs font-extrabold uppercase tracking-wider text-slate-800 dark:text-slate-200">My Complaints</button>
-                <button onClick={() => handleSmoothScroll('resources-section')} className="block w-full text-left py-2 text-xs font-extrabold uppercase tracking-wider text-slate-800 dark:text-slate-200">Resources</button>
-                <button onClick={() => handleSmoothScroll('about')} className="block w-full text-left py-2 text-xs font-extrabold uppercase tracking-wider text-slate-800 dark:text-slate-200">About</button>
+                <button onClick={() => handleSmoothScroll('main')} className="block w-full text-left py-2 text-xs font-extrabold uppercase tracking-wider text-slate-900 dark:text-slate-200">Main</button>
+                <button onClick={() => handleSmoothScroll('services')} className="block w-full text-left py-2 text-xs font-extrabold uppercase tracking-wider text-slate-900 dark:text-slate-200">Services</button>
+                <button onClick={() => handleSmoothScroll('raise-complaint')} className="block w-full text-left py-2 text-xs font-extrabold uppercase tracking-wider text-slate-900 dark:text-slate-200">Raise Complaint</button>
+                <button onClick={() => handleSmoothScroll('my-complaints')} className="block w-full text-left py-2 text-xs font-extrabold uppercase tracking-wider text-slate-900 dark:text-slate-200">My Complaints</button>
+                <button onClick={() => handleSmoothScroll('resources-section')} className="block w-full text-left py-2 text-xs font-extrabold uppercase tracking-wider text-slate-900 dark:text-slate-200">Resources</button>
+                <button onClick={() => handleSmoothScroll('about')} className="block w-full text-left py-2 text-xs font-extrabold uppercase tracking-wider text-slate-900 dark:text-slate-200">About</button>
                 <div className="pt-2 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
                   <select 
                     value={lang} 
                     onChange={(e) => setLang(e.target.value)}
-                    className="bg-transparent text-xs font-bold text-slate-800 dark:text-slate-200 border-none focus:outline-none"
+                    className="bg-transparent text-xs font-bold text-slate-900 dark:text-slate-200 border-none focus:outline-none"
                   >
                     <option value="en" className="text-slate-900">English</option>
                     <option value="hi" className="text-slate-900">हिन्दी (Hindi)</option>
@@ -895,7 +895,6 @@ Description: ${complaintDesc}`;
           {/* ==========================================
               MAIN HERO PAGE CONTAINER (With readable glass card over 45% visible background video)
               ========================================== */}
-          {}
           <section id="main" className="relative pt-28 pb-12 overflow-hidden z-10 min-h-[90vh] flex items-center">
             
             {/* HERO VIDEO BACKGROUND ELEMENT WITH HIGH CONTRAST WASH */}
@@ -916,7 +915,7 @@ Description: ${complaintDesc}`;
               <div className={`absolute inset-0 transition-colors duration-300 ${
                 isDark 
                   ? 'bg-slate-950/80' 
-                  : 'bg-white/92 md:bg-white/85'
+                  : 'bg-white/96 sm:bg-white/90 md:bg-white/85'
               }`}></div>
             </div>
 
@@ -926,7 +925,7 @@ Description: ${complaintDesc}`;
               <div className="flex justify-center mb-6">
                 <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 dark:border-orange-500/30">
                   <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></span>
-                  <span className="text-[10px] font-extrabold tracking-wider uppercase text-orange-600 dark:text-orange-400">
+                  <span className="text-[10px] font-extrabold tracking-wider uppercase text-orange-700 dark:text-orange-400">
                     A Safe and Simple Helper Portal for All Citizens
                   </span>
                 </div>
@@ -935,23 +934,24 @@ Description: ${complaintDesc}`;
               {/* Grid content */}
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
                 
+                {}
                 {/* Left: Comforting greetings surrounded by elegant contrast panel */}
                 <div className={`lg:col-span-5 flex flex-col justify-center space-y-6 p-6 sm:p-8 rounded-3xl border backdrop-blur-xl transition-all ${
                   isDark ? 'bg-slate-950/75 border-slate-900/80 shadow-2xl' : 'bg-white/95 border-white/60 shadow-lg shadow-slate-200/50'
                 }`}>
                   <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight tracking-tight">
-                    <span className="bg-gradient-to-r from-orange-500 via-slate-800 dark:via-white to-emerald-600 bg-clip-text text-transparent block">
+                    <span className="bg-gradient-to-r from-orange-700 via-slate-950 dark:via-white to-emerald-800 bg-clip-text text-transparent block">
                       {currentText.title}
                     </span>
                   </h1>
 
-                  <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-400 leading-relaxed font-semibold">
+                  <p className="text-xs sm:text-sm text-slate-900 dark:text-slate-400 leading-relaxed font-semibold">
                     {currentText.subtitle}
                   </p>
 
                   {/* Trust Card - Day Mode mobile optimized */}
                   <div className={`p-4 rounded-2xl border ${
-                    isDark ? 'bg-slate-900/60 border-slate-800' : 'bg-slate-100/80 border-slate-200'
+                    isDark ? 'bg-slate-900/60 border-slate-800' : 'bg-slate-100/90 border-slate-250'
                   }`}>
                     <div className="flex items-start gap-3">
                       <div className="w-3 h-3 rounded-full mt-1.5 bg-emerald-500 animate-pulse"></div>
@@ -959,7 +959,7 @@ Description: ${complaintDesc}`;
                         <span className="block text-xs font-bold tracking-tight text-slate-900 dark:text-slate-100">
                           Direct and Secure Connection Active
                         </span>
-                        <span className="block text-[11px] text-slate-700 dark:text-slate-400 mt-1 leading-relaxed">
+                        <span className="block text-[11px] text-slate-900 dark:text-slate-400 mt-1 leading-relaxed font-medium">
                           Your queries are routed directly through our secure interface to bring you quick, friendly, and expert advice. All communications are private and citizen-safe.
                         </span>
                       </div>
@@ -970,7 +970,7 @@ Description: ${complaintDesc}`;
                   <div className="flex flex-wrap gap-4 pt-2">
                     <button 
                       onClick={() => handleSmoothScroll('services')}
-                      className="text-xs font-extrabold text-orange-600 hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-300 transition-all flex items-center gap-1 bg-orange-500/10 hover:bg-orange-500/20 px-4 py-2.5 rounded-xl border border-orange-500/20"
+                      className="text-xs font-extrabold text-orange-700 hover:text-orange-800 dark:text-orange-400 dark:hover:text-orange-300 transition-all flex items-center gap-1 bg-orange-500/10 hover:bg-orange-500/20 px-4 py-2.5 rounded-xl border border-orange-500/20"
                     >
                       <span>Explore Directories</span>
                       <svg className="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -978,7 +978,7 @@ Description: ${complaintDesc}`;
 
                     <button 
                       onClick={() => handleSmoothScroll('raise-complaint')}
-                      className="text-xs font-extrabold text-emerald-700 hover:text-emerald-800 dark:text-emerald-400 dark:hover:text-emerald-300 transition-all flex items-center gap-1 bg-emerald-500/10 hover:bg-emerald-500/20 px-4 py-2.5 rounded-xl border border-emerald-500/20"
+                      className="text-xs font-extrabold text-emerald-850 hover:text-emerald-900 dark:text-emerald-400 dark:hover:text-emerald-300 transition-all flex items-center gap-1 bg-emerald-500/10 hover:bg-emerald-500/20 px-4 py-2.5 rounded-xl border border-emerald-500/20"
                     >
                       <span>File a Civic Letter</span>
                       <svg className="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
@@ -986,8 +986,8 @@ Description: ${complaintDesc}`;
                   </div>
                 </div>
 
-                {/* Right: THE FRIENDLY AI COMPANION (Primary Focus - Fixed Height, Scrollable) */}
                 {}
+                {/* Right: THE FRIENDLY AI COMPANION (Primary Focus - Fixed Height, Scrollable) */}
                 <div className="lg:col-span-7 flex flex-col justify-stretch">
                   
                   <div className={`flex flex-col h-[520px] border rounded-3xl shadow-xl overflow-hidden transition-all relative ${
@@ -1005,7 +1005,7 @@ Description: ${complaintDesc}`;
                         </div>
                         <div>
                           <p className="text-xs font-extrabold text-slate-900 dark:text-slate-100">{currentText.chatHeading}</p>
-                          <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">{currentText.chatSub}</p>
+                          <p className="text-[10px] text-slate-900 dark:text-slate-400 font-bold">{currentText.chatSub}</p>
                         </div>
                       </div>
                       
@@ -1025,7 +1025,7 @@ Description: ${complaintDesc}`;
                               ? 'bg-orange-600 text-white rounded-tr-none font-medium' 
                               : isDark 
                                 ? 'bg-slate-900 text-slate-200 border border-slate-800 rounded-tl-none' 
-                                : 'bg-white text-slate-900 border border-slate-200 rounded-tl-none font-medium shadow'
+                                : 'bg-white text-slate-950 border border-slate-250 rounded-tl-none font-bold shadow'
                           }`}>
                             {parseFriendlyMarkdown(m.text)}
                           </div>
@@ -1053,30 +1053,30 @@ Description: ${complaintDesc}`;
                     <div className={`p-3 border-t ${
                       isDark ? 'bg-slate-950/30 border-slate-800' : 'bg-slate-100/40 border-slate-200'
                     }`}>
-                      <p className="text-[10px] font-extrabold text-slate-500 mb-2 uppercase tracking-wider">
+                      <p className="text-[10px] font-extrabold text-slate-900 dark:text-slate-500 mb-2 uppercase tracking-wider">
                         {currentText.suggestedTitle}
                       </p>
                       <div className="flex flex-wrap gap-2">
                         <button 
                           onClick={() => handleSendMessage("Tell me about the PM-Kisan scheme and who qualifies")}
-                          className={`text-[10.5px] font-semibold rounded-lg px-2.5 py-1 text-left border transition-all ${
-                            isDark ? 'bg-slate-900 hover:bg-slate-800 border-slate-800 text-slate-300' : 'bg-white hover:bg-slate-100 border-slate-200 text-slate-800 shadow-sm'
+                          className={`text-[10.5px] font-bold rounded-lg px-2.5 py-1 text-left border transition-all ${
+                            isDark ? 'bg-slate-900 hover:bg-slate-800 border-slate-800 text-slate-300' : 'bg-white hover:bg-slate-100 border-slate-250 text-slate-900 shadow-sm'
                           }`}
                         >
                           🌾 Farmer Yojana benefits
                         </button>
                         <button 
                           onClick={() => handleSendMessage("How to update my address in Aadhaar easily?")}
-                          className={`text-[10.5px] font-semibold rounded-lg px-2.5 py-1 text-left border transition-all ${
-                            isDark ? 'bg-slate-900 hover:bg-slate-800 border-slate-800 text-slate-300' : 'bg-white hover:bg-slate-100 border-slate-200 text-slate-800 shadow-sm'
+                          className={`text-[10.5px] font-bold rounded-lg px-2.5 py-1 text-left border transition-all ${
+                            isDark ? 'bg-slate-900 hover:bg-slate-800 border-slate-800 text-slate-300' : 'bg-white hover:bg-slate-100 border-slate-250 text-slate-900 shadow-sm'
                           }`}
                         >
                           📄 Aadhaar checklist
                         </button>
                         <button 
                           onClick={() => handleSendMessage("I want to write a letter to local officers to repair streetlights")}
-                          className={`text-[10.5px] font-semibold rounded-lg px-2.5 py-1 text-left border transition-all ${
-                            isDark ? 'bg-slate-900 hover:bg-slate-800 border-slate-800 text-slate-300' : 'bg-white hover:bg-slate-100 border-slate-200 text-slate-800 shadow-sm'
+                          className={`text-[10.5px] font-bold rounded-lg px-2.5 py-1 text-left border transition-all ${
+                            isDark ? 'bg-slate-900 hover:bg-slate-800 border-slate-800 text-slate-300' : 'bg-white hover:bg-slate-100 border-slate-250 text-slate-900 shadow-sm'
                           }`}
                         >
                           ✍️ Write streetlight letter
@@ -1097,7 +1097,7 @@ Description: ${complaintDesc}`;
                         className={`flex-1 text-xs py-3 px-3.5 rounded-xl border outline-none transition-all ${
                           isDark 
                             ? 'bg-slate-950 border-slate-800 text-slate-200 focus:border-slate-600 focus:bg-slate-900' 
-                            : 'bg-slate-50 border-slate-300 text-slate-900 focus:border-orange-500 focus:bg-white font-medium'
+                            : 'bg-slate-50 border-slate-300 text-slate-950 focus:border-orange-500 focus:bg-white font-bold'
                         }`}
                       />
                       <button 
@@ -1119,7 +1119,6 @@ Description: ${complaintDesc}`;
           {/* ==========================================
               SIMPLIFIED HELP DIRECTORIES (Interactive Dropdowns)
               ========================================== */}
-          {}
           <section id="services" className={`py-16 border-t ${
             isDark ? 'border-slate-900' : 'border-slate-200 bg-slate-50'
           }`}>
@@ -1129,11 +1128,12 @@ Description: ${complaintDesc}`;
                 <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-slate-100">
                   {currentText.servicesHeading}
                 </h2>
-                <p className="text-xs sm:text-sm text-slate-750 dark:text-slate-400">
+                <p className="text-xs sm:text-sm text-slate-900 dark:text-slate-400 font-bold">
                   {currentText.servicesSub}
                 </p>
               </div>
 
+              {}
               {/* Simplified Folders Dropdowns */}
               <div className="max-w-3xl mx-auto space-y-3.5">
                 
@@ -1145,7 +1145,7 @@ Description: ${complaintDesc}`;
                 }`}>
                   <button 
                     onClick={() => setActiveFolder(activeFolder === 0 ? null : 0)}
-                    className="w-full px-6 py-4.5 flex items-center justify-between text-left font-bold text-sm focus:outline-none text-slate-800 dark:text-slate-200"
+                    className="w-full px-6 py-4.5 flex items-center justify-between text-left font-bold text-sm focus:outline-none text-slate-900 dark:text-slate-200"
                   >
                     <div className="flex items-center space-x-3">
                       <div className="w-8 h-8 rounded-lg bg-orange-500/10 flex items-center justify-center text-orange-500">
@@ -1158,27 +1158,27 @@ Description: ${complaintDesc}`;
                   
                   {activeFolder === 0 && (
                     <div className={`px-6 pb-5 pt-1 text-xs leading-relaxed space-y-3 border-t ${
-                      isDark ? 'border-slate-800 text-slate-300' : 'border-slate-250 text-slate-800 font-medium'
+                      isDark ? 'border-slate-800 text-slate-300' : 'border-slate-250 text-slate-900 font-bold'
                     }`}>
                       <p>Understand instructions and essential checklists for prime central social security and livelihood programs.</p>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
                         <div className={`p-4 rounded-xl border ${isDark ? 'bg-slate-950/50 border-slate-800' : 'bg-white border-slate-200'}`}>
-                          <h4 className="font-extrabold text-orange-600 dark:text-orange-400 mb-1">PM-Kisan Livelihood</h4>
-                          <p className="text-[11px] text-slate-700 dark:text-slate-400">Requires verified land mutation titles and bank link for Direct Benefit Transfer.</p>
+                          <h4 className="font-extrabold text-orange-700 dark:text-orange-400 mb-1">PM-Kisan Livelihood</h4>
+                          <p className="text-[11px] text-slate-900 dark:text-slate-400 font-bold">Requires verified land mutation titles and bank link for Direct Benefit Transfer.</p>
                           <button 
                             onClick={() => { handleSendMessage("What are the criteria and paper requirements for PM-Kisan Scheme?"); handleSmoothScroll('main'); }}
-                            className="text-orange-600 hover:underline dark:text-orange-400 text-[11px] font-bold mt-2 inline-flex items-center gap-1 focus:outline-none"
+                            className="text-orange-700 hover:underline dark:text-orange-400 text-[11px] font-black mt-2 inline-flex items-center gap-1 focus:outline-none"
                           >
                             <span>Explain in Chat</span>
                             <svg className="w-3 h-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                           </button>
                         </div>
                         <div className={`p-4 rounded-xl border ${isDark ? 'bg-slate-950/50 border-slate-800' : 'bg-white border-slate-200'}`}>
-                          <h4 className="font-extrabold text-orange-600 dark:text-orange-400 mb-1">Ayushman Bharat Medical</h4>
-                          <p className="text-[11px] text-slate-700 dark:text-slate-400">Provides extensive healthcare hospitalization support cover for families.</p>
+                          <h4 className="font-extrabold text-orange-700 dark:text-orange-400 mb-1">Ayushman Bharat Medical</h4>
+                          <p className="text-[11px] text-slate-900 dark:text-slate-400 font-bold">Provides extensive healthcare hospitalization support cover for families.</p>
                           <button 
                             onClick={() => { handleSendMessage("Tell me about Ayushman Bharat health card benefits and how to apply"); handleSmoothScroll('main'); }}
-                            className="text-orange-600 hover:underline dark:text-orange-400 text-[11px] font-bold mt-2 inline-flex items-center gap-1 focus:outline-none"
+                            className="text-orange-700 hover:underline dark:text-orange-400 text-[11px] font-black mt-2 inline-flex items-center gap-1 focus:outline-none"
                           >
                             <span>Explain in Chat</span>
                             <svg className="w-3 h-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -1197,7 +1197,7 @@ Description: ${complaintDesc}`;
                 }`}>
                   <button 
                     onClick={() => setActiveFolder(activeFolder === 1 ? null : 1)}
-                    className="w-full px-6 py-4.5 flex items-center justify-between text-left font-bold text-sm focus:outline-none text-slate-800 dark:text-slate-200"
+                    className="w-full px-6 py-4.5 flex items-center justify-between text-left font-bold text-sm focus:outline-none text-slate-900 dark:text-slate-200"
                   >
                     <div className="flex items-center space-x-3">
                       <div className="w-8 h-8 rounded-lg bg-orange-500/10 flex items-center justify-center text-orange-500">
@@ -1210,27 +1210,27 @@ Description: ${complaintDesc}`;
                   
                   {activeFolder === 1 && (
                     <div className={`px-6 pb-5 pt-1 text-xs leading-relaxed space-y-3 border-t ${
-                      isDark ? 'border-slate-800 text-slate-300' : 'border-slate-250 text-slate-800 font-medium'
+                      isDark ? 'border-slate-800 text-slate-300' : 'border-slate-250 text-slate-900 font-bold'
                     }`}>
                       <p>Avoid agents or helper fees. Find clean checklist parameters for your central identity cards.</p>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
                         <div className={`p-4 rounded-xl border ${isDark ? 'bg-slate-950/50 border-slate-800' : 'bg-white border-slate-200'}`}>
-                          <h4 className="font-extrabold text-orange-600 dark:text-orange-400 mb-1">Aadhaar Address Guide</h4>
-                          <p className="text-[11px] text-slate-700 dark:text-slate-400">How to update your local address online without paying a middleman.</p>
+                          <h4 className="font-extrabold text-orange-700 dark:text-orange-400 mb-1">Aadhaar Address Guide</h4>
+                          <p className="text-[11px] text-slate-900 dark:text-slate-400 font-bold">How to update your local address online without paying a middleman.</p>
                           <button 
                             onClick={() => { handleSendMessage("What documents can I use to update my Aadhaar card address?"); handleSmoothScroll('main'); }}
-                            className="text-orange-600 hover:underline dark:text-orange-400 text-[11px] font-bold mt-2 inline-flex items-center gap-1 focus:outline-none"
+                            className="text-orange-700 hover:underline dark:text-orange-400 text-[11px] font-black mt-2 inline-flex items-center gap-1 focus:outline-none"
                           >
                             <span>Explain in Chat</span>
                             <svg className="w-3 h-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                           </button>
                         </div>
                         <div className={`p-4 rounded-xl border ${isDark ? 'bg-slate-950/50 border-slate-800' : 'bg-white border-slate-200'}`}>
-                          <h4 className="font-extrabold text-orange-600 dark:text-orange-400 mb-1">Ration Card Linkage</h4>
-                          <p className="text-[11px] text-slate-700 dark:text-slate-400">Secure essential food supplies by linking Aadhaar to your local Ration Card.</p>
+                          <h4 className="font-extrabold text-orange-700 dark:text-orange-400 mb-1">Ration Card Linkage</h4>
+                          <p className="text-[11px] text-slate-900 dark:text-slate-400 font-bold">Secure essential food supplies by linking Aadhaar to your local Ration Card.</p>
                           <button 
                             onClick={() => { handleSendMessage("How do I link my Ration card with Aadhaar Card or apply for family member entry?"); handleSmoothScroll('main'); }}
-                            className="text-orange-600 hover:underline dark:text-orange-400 text-[11px] font-bold mt-2 inline-flex items-center gap-1 focus:outline-none"
+                            className="text-orange-700 hover:underline dark:text-orange-400 text-[11px] font-black mt-2 inline-flex items-center gap-1 focus:outline-none"
                           >
                             <span>Explain in Chat</span>
                             <svg className="w-3 h-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -1249,7 +1249,7 @@ Description: ${complaintDesc}`;
                 }`}>
                   <button 
                     onClick={() => setActiveFolder(activeFolder === 2 ? null : 2)}
-                    className="w-full px-6 py-4.5 flex items-center justify-between text-left font-bold text-sm focus:outline-none text-slate-800 dark:text-slate-200"
+                    className="w-full px-6 py-4.5 flex items-center justify-between text-left font-bold text-sm focus:outline-none text-slate-900 dark:text-slate-200"
                   >
                     <div className="flex items-center space-x-3">
                       <div className="w-8 h-8 rounded-lg bg-orange-500/10 flex items-center justify-center text-orange-500">
@@ -1262,27 +1262,27 @@ Description: ${complaintDesc}`;
                   
                   {activeFolder === 2 && (
                     <div className={`px-6 pb-5 pt-1 text-xs leading-relaxed space-y-3 border-t ${
-                      isDark ? 'border-slate-800 text-slate-300' : 'border-slate-250 text-slate-800 font-medium'
+                      isDark ? 'border-slate-800 text-slate-300' : 'border-slate-250 text-slate-900 font-bold'
                     }`}>
                       <p>Draft beautifully organized letters regarding street lights, local potholes, or clean water supplies.</p>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
                         <div className={`p-4 rounded-xl border ${isDark ? 'bg-slate-950/50 border-slate-800' : 'bg-white border-slate-200'}`}>
-                          <h4 className="font-extrabold text-orange-600 dark:text-orange-400 mb-1">Drinking Water Safety</h4>
-                          <p className="text-[11px] text-slate-700 dark:text-slate-400">Compile polite requests asking water engineers to repair pipeline leaks.</p>
+                          <h4 className="font-extrabold text-orange-700 dark:text-orange-400 mb-1">Drinking Water Safety</h4>
+                          <p className="text-[11px] text-slate-900 dark:text-slate-400 font-bold">Compile polite requests asking water engineers to repair pipeline leaks.</p>
                           <button 
                             onClick={() => { handleSendMessage("Draft a polite complaint letter for municipal drinking water supply contamination issues"); handleSmoothScroll('main'); }}
-                            className="text-orange-600 hover:underline dark:text-orange-400 text-[11px] font-bold mt-2 inline-flex items-center gap-1 focus:outline-none"
+                            className="text-orange-700 hover:underline dark:text-orange-400 text-[11px] font-black mt-2 inline-flex items-center gap-1 focus:outline-none"
                           >
                             <span>Explain in Chat</span>
                             <svg className="w-3 h-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                           </button>
                         </div>
                         <div className={`p-4 rounded-xl border ${isDark ? 'bg-slate-950/50 border-slate-800' : 'bg-white border-slate-200'}`}>
-                          <h4 className="font-extrabold text-orange-600 dark:text-orange-400 mb-1">Streetlight Repairs</h4>
-                          <p className="text-[11px] text-slate-700 dark:text-slate-400">Instantly draft formal requests for resolving non-functional public lighting.</p>
+                          <h4 className="font-extrabold text-orange-700 dark:text-orange-400 mb-1">Streetlight Repairs</h4>
+                          <p className="text-[11px] text-slate-900 dark:text-slate-400 font-bold">Instantly draft formal requests for resolving non-functional public lighting.</p>
                           <button 
                             onClick={() => { handleSendMessage("Write a formal, polite letter requesting repair of broken street lights in our lane"); handleSmoothScroll('main'); }}
-                            className="text-orange-600 hover:underline dark:text-orange-400 text-[11px] font-bold mt-2 inline-flex items-center gap-1 focus:outline-none"
+                            className="text-orange-700 hover:underline dark:text-orange-400 text-[11px] font-black mt-2 inline-flex items-center gap-1 focus:outline-none"
                           >
                             <span>Explain in Chat</span>
                             <svg className="w-3 h-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -1298,10 +1298,10 @@ Description: ${complaintDesc}`;
             </div>
           </section>
 
+          {}
           {/* ==========================================
               RAISE A CIVIC COMPLAINT SECTION (With custom brackets templates)
               ========================================== */}
-          {}
           <section id="raise-complaint" className={`py-16 border-t ${
             isDark ? 'border-slate-900 bg-slate-900/10' : 'border-slate-200 bg-slate-50'
           }`}>
@@ -1310,7 +1310,7 @@ Description: ${complaintDesc}`;
               <div className="text-center mb-10 space-y-3">
                 <span className="text-xs font-black uppercase tracking-wider text-orange-500">Empathetic Digital Assistance</span>
                 <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-slate-100">Raise a Civic Complaint</h2>
-                <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-400 max-w-xl mx-auto font-medium">
+                <p className="text-xs sm:text-sm text-slate-900 dark:text-slate-400 max-w-xl mx-auto font-bold">
                   Report neighborhood issues cleanly. Our AI Friend instantly structures a polished request letter with bracket fields to fill in, finds the correct local department, and prepares your request.
                 </p>
               </div>
@@ -1328,7 +1328,7 @@ Description: ${complaintDesc}`;
                       
                       {/* Image Upload box */}
                       <div className="space-y-2">
-                        <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
+                        <label className="block text-xs font-bold text-slate-900 dark:text-slate-300 uppercase tracking-wider">
                           Upload Image (Optional)
                         </label>
                         <div className={`relative border-2 border-dashed rounded-2xl p-4 text-center cursor-pointer transition-all flex flex-col items-center justify-center min-h-[140px] ${
@@ -1353,7 +1353,7 @@ Description: ${complaintDesc}`;
                           ) : (
                             <div className="space-y-2 flex flex-col items-center justify-center">
                               <svg className="w-8 h-8 text-orange-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-                              <span className="text-[11px] font-bold text-slate-600 dark:text-slate-400">Click or drag local photo here</span>
+                              <span className="text-[11px] font-extrabold text-slate-900 dark:text-slate-400">Click or drag local photo here</span>
                             </div>
                           )}
                         </div>
@@ -1362,7 +1362,7 @@ Description: ${complaintDesc}`;
                       {/* Location input - Crisp white layout under light mode */}
                       <div className="space-y-2 flex flex-col justify-between">
                         <div>
-                          <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">
+                          <label className="block text-xs font-bold text-slate-900 dark:text-slate-300 uppercase tracking-wider mb-2">
                             Incident Location
                           </label>
                           <div className="relative">
@@ -1372,7 +1372,7 @@ Description: ${complaintDesc}`;
                               onChange={(e) => setComplaintLocation(e.target.value)}
                               placeholder="e.g. Ward 12, Sector 5, Sector Lane"
                               className={`w-full text-xs py-3.5 pl-3.5 pr-10 rounded-xl border outline-none transition-all ${
-                                isDark ? 'bg-slate-950 border-slate-800 text-slate-200 focus:border-slate-700' : 'bg-white border-slate-300 text-slate-900 focus:border-orange-500 shadow-sm font-medium'
+                                isDark ? 'bg-slate-950 border-slate-800 text-slate-200 focus:border-slate-700' : 'bg-white border-slate-300 text-slate-950 focus:border-orange-500 shadow-sm font-bold'
                               }`}
                             />
                             <button 
@@ -1385,7 +1385,7 @@ Description: ${complaintDesc}`;
                             </button>
                           </div>
                         </div>
-                        <p className="text-[10px] text-slate-500 font-bold">
+                        <p className="text-[10px] text-slate-500 font-extrabold">
                           Use the target icon to auto-detect your location coordinates.
                         </p>
                       </div>
@@ -1394,7 +1394,7 @@ Description: ${complaintDesc}`;
 
                     {/* Description Textbox */}
                     <div className="space-y-2">
-                      <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
+                      <label className="block text-xs font-bold text-slate-900 dark:text-slate-300 uppercase tracking-wider">
                         Description of the Issue
                       </label>
                       <textarea 
@@ -1403,11 +1403,12 @@ Description: ${complaintDesc}`;
                         onChange={(e) => setComplaintDesc(e.target.value)}
                         placeholder="Tell us what is broken (e.g. 'Street light is off for a week' or 'water leakage on market lane'..."
                         className={`w-full text-xs p-4 rounded-xl border outline-none transition-all resize-none ${
-                          isDark ? 'bg-slate-950 border-slate-800 text-slate-200' : 'bg-white border-slate-300 text-slate-900 shadow-sm font-medium'
+                          isDark ? 'bg-slate-950 border-slate-800 text-slate-200' : 'bg-white border-slate-300 text-slate-950 shadow-sm font-bold'
                         }`}
                       />
                     </div>
 
+                    {}
                     {/* Trigger Button */}
                     <div className="flex justify-end pt-2">
                       <button 
@@ -1444,21 +1445,21 @@ Description: ${complaintDesc}`;
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
                           
                           <div className={`p-3.5 rounded-xl border flex flex-col justify-between ${
-                            isDark ? 'bg-slate-950/40 border-slate-800' : 'bg-slate-50 border-slate-200'
+                            isDark ? 'bg-slate-950/40 border-slate-800' : 'bg-slate-100 border-slate-250 shadow-sm'
                           }`}>
                             <span className="text-[10px] uppercase font-bold text-slate-500">Classified Category</span>
                             <span className="text-xs font-extrabold text-orange-600 mt-1">{analysisResult.category}</span>
                           </div>
 
                           <div className={`p-3.5 rounded-xl border flex flex-col justify-between ${
-                            isDark ? 'bg-slate-950/40 border-slate-800' : 'bg-slate-50 border-slate-200'
+                            isDark ? 'bg-slate-950/40 border-slate-800' : 'bg-slate-100 border-slate-250 shadow-sm'
                           }`}>
                             <span className="text-[10px] uppercase font-bold text-slate-500">Responsible Unit</span>
-                            <span className="text-xs font-extrabold text-slate-800 dark:text-slate-200 mt-1">{analysisResult.department}</span>
+                            <span className="text-xs font-extrabold text-slate-900 dark:text-slate-200 mt-1">{analysisResult.department}</span>
                           </div>
 
                           <div className={`p-3.5 rounded-xl border flex flex-col justify-between ${
-                            isDark ? 'bg-slate-950/40 border-slate-800' : 'bg-slate-50 border-slate-200'
+                            isDark ? 'bg-slate-950/40 border-slate-800' : 'bg-slate-100 border-slate-250 shadow-sm'
                           }`}>
                             <span className="text-[10px] uppercase font-bold text-slate-500">Estimated Priority</span>
                             <span className={`text-xs font-extrabold mt-1 px-2.5 py-0.5 rounded-lg inline-block w-max ${
@@ -1472,7 +1473,7 @@ Description: ${complaintDesc}`;
 
                         {/* Draft Editor Text Area */}
                         <div className="space-y-2">
-                          <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
+                          <label className="block text-xs font-bold text-slate-900 dark:text-slate-300 uppercase tracking-wider">
                             AI Generated Formal Complaint (Review & edit the bracket () spaces below)
                           </label>
                           <textarea 
@@ -1480,7 +1481,7 @@ Description: ${complaintDesc}`;
                             value={analysisResult.generatedComplaint}
                             onChange={(e) => setAnalysisResult({...analysisResult, generatedComplaint: e.target.value})}
                             className={`w-full text-xs font-mono p-4 rounded-xl border outline-none transition-all leading-relaxed ${
-                              isDark ? 'bg-slate-950 border-slate-800 text-slate-300' : 'bg-white border-slate-300 text-slate-900 shadow-inner font-bold'
+                              isDark ? 'bg-slate-950 border-slate-800 text-slate-300' : 'bg-white border-slate-300 text-slate-950 shadow-inner font-black'
                             }`}
                           />
                         </div>
@@ -1517,26 +1518,26 @@ Description: ${complaintDesc}`;
 
                     {/* Metadata Summary Box - High contrast */}
                     <div className={`max-w-md mx-auto p-4 rounded-2xl border text-left text-xs space-y-3.5 ${
-                      isDark ? 'bg-slate-950/60 border-slate-800' : 'bg-slate-50 border-slate-200'
+                      isDark ? 'bg-slate-950/60 border-slate-800' : 'bg-slate-100 border-slate-250'
                     }`}>
                       <div className="flex justify-between items-center border-b pb-2 border-slate-200 dark:border-slate-800">
-                        <span className="font-bold text-slate-500">Complaint ID</span>
+                        <span className="font-bold text-slate-900">Complaint ID</span>
                         <span className="font-extrabold text-orange-600 font-mono text-sm select-all">{successComplaint.id}</span>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="font-bold text-slate-500">Category</span>
+                        <span className="font-bold text-slate-900">Category</span>
                         <span className="font-extrabold text-slate-900 dark:text-slate-200">{successComplaint.category}</span>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="font-bold text-slate-500">Department</span>
+                        <span className="font-bold text-slate-900">Department</span>
                         <span className="font-extrabold text-slate-900 dark:text-slate-200">{successComplaint.department}</span>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="font-bold text-slate-500">Priority Level</span>
+                        <span className="font-bold text-slate-900">Priority Level</span>
                         <span className="font-extrabold text-red-600">{successComplaint.priority}</span>
                       </div>
                       <div className="flex justify-between items-center pt-2 border-t border-slate-200 dark:border-slate-800">
-                        <span className="font-bold text-slate-500">Status</span>
+                        <span className="font-bold text-slate-900">Status</span>
                         <span className="font-extrabold text-emerald-600 font-extrabold">Submitted</span>
                       </div>
                     </div>
@@ -1570,7 +1571,6 @@ Description: ${complaintDesc}`;
           {/* ==========================================
               FLOWCHART JOURNEY GRAPHIC
               ========================================== */}
-          {}
           <section id="flowchart" className={`py-16 border-t ${
             isDark ? 'border-slate-900 bg-slate-950/20' : 'border-slate-200 bg-slate-100/30'
           }`}>
@@ -1580,7 +1580,7 @@ Description: ${complaintDesc}`;
                 <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-slate-100">
                   {currentText.flowchartTitle}
                 </h2>
-                <p className="text-xs sm:text-sm text-slate-750 dark:text-slate-400 font-bold">
+                <p className="text-xs sm:text-sm text-slate-900 dark:text-slate-400 font-extrabold">
                   {currentText.flowchartSub}
                 </p>
               </div>
@@ -1606,8 +1606,8 @@ Description: ${complaintDesc}`;
                       <svg className="w-6 h-6 animate-pulse" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                     </div>
                     <div>
-                      <h3 className="text-xs font-black uppercase tracking-wider text-orange-550 mb-1.5">{currentText.step1}</h3>
-                      <p className="text-[11px] text-slate-800 dark:text-slate-400 leading-relaxed font-bold">
+                      <h3 className="text-xs font-black uppercase tracking-wider text-orange-600 mb-1.5">{currentText.step1}</h3>
+                      <p className="text-[11px] text-slate-900 dark:text-slate-400 leading-relaxed font-black">
                         {currentText.step1Desc}
                       </p>
                     </div>
@@ -1619,8 +1619,8 @@ Description: ${complaintDesc}`;
                       <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                     </div>
                     <div>
-                      <h3 className="text-xs font-black uppercase tracking-wider text-slate-800 dark:text-slate-300 mb-1.5">{currentText.step2}</h3>
-                      <p className="text-[11px] text-slate-800 dark:text-slate-400 leading-relaxed font-bold">
+                      <h3 className="text-xs font-black uppercase tracking-wider text-slate-900 dark:text-slate-300 mb-1.5">{currentText.step2}</h3>
+                      <p className="text-[11px] text-slate-900 dark:text-slate-400 leading-relaxed font-black">
                         {currentText.step2Desc}
                       </p>
                     </div>
@@ -1632,8 +1632,8 @@ Description: ${complaintDesc}`;
                       <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
                     </div>
                     <div>
-                      <h3 className="text-xs font-black uppercase tracking-wider text-emerald-600 mb-1.5">{currentText.step3}</h3>
-                      <p className="text-[11px] text-slate-800 dark:text-slate-400 leading-relaxed font-bold">
+                      <h3 className="text-xs font-black uppercase tracking-wider text-emerald-700 mb-1.5">{currentText.step3}</h3>
+                      <p className="text-[11px] text-slate-900 dark:text-slate-400 leading-relaxed font-black">
                         {currentText.step3Desc}
                       </p>
                     </div>
@@ -1646,7 +1646,7 @@ Description: ${complaintDesc}`;
                     </div>
                     <div>
                       <h3 className="text-xs font-black uppercase tracking-wider text-blue-600 mb-1.5">{currentText.step4}</h3>
-                      <p className="text-[11px] text-slate-800 dark:text-slate-400 leading-relaxed font-bold">
+                      <p className="text-[11px] text-slate-900 dark:text-slate-400 leading-relaxed font-black">
                         {currentText.step4Desc}
                       </p>
                     </div>
@@ -1658,10 +1658,10 @@ Description: ${complaintDesc}`;
             </div>
           </section>
 
+          {}
           {/* ==========================================
               COMPLAINT TRACKING VIEWPORT (Dynamic verification ledger)
               ========================================== */}
-          {}
           <section id="my-complaints" className={`py-16 border-t ${
             isDark ? 'border-slate-900 bg-slate-950/10' : 'border-slate-200 bg-slate-50'
           }`}>
@@ -1677,11 +1677,11 @@ Description: ${complaintDesc}`;
                   <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-slate-100 leading-tight">
                     Track Your Complaint
                   </h2>
-                  <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-400 leading-relaxed font-bold">
+                  <p className="text-xs sm:text-sm text-slate-900 dark:text-slate-400 leading-relaxed font-bold">
                     Enter your Complaint ID (e.g. SB-2026-XXXXXX or try preloaded SB-101) below to search your device memory and view real-time status.
                   </p>
                   
-                  <div className="pt-2 text-xs font-bold text-slate-700 dark:text-slate-400 flex flex-col gap-2">
+                  <div className="pt-2 text-xs font-bold text-slate-900 dark:text-slate-400 flex flex-col gap-2">
                     <div className="flex items-center gap-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-orange-500"></span>
                       <span>Reads local records stored inside browser memory</span>
@@ -1712,7 +1712,7 @@ Description: ${complaintDesc}`;
                         className={`flex-1 text-xs py-3 px-3.5 rounded-xl border outline-none transition-all ${
                           isDark 
                             ? 'bg-slate-950 border-slate-800 text-slate-200 focus:border-slate-700' 
-                            : 'bg-white border-slate-300 text-slate-900 focus:border-orange-500 shadow-sm font-semibold'
+                            : 'bg-white border-slate-300 text-slate-950 focus:border-orange-500 shadow-sm font-bold'
                         }`}
                       />
                       <button 
@@ -1726,12 +1726,12 @@ Description: ${complaintDesc}`;
                     {/* Show outputs */}
                     {trackingResult ? (
                       <div className={`p-4 rounded-2xl border transition-all space-y-4 ${
-                        isDark ? 'bg-slate-950/80 border-slate-800' : 'bg-white border-slate-300 shadow-inner'
+                        isDark ? 'bg-slate-950/80 border-slate-800' : 'bg-white border-slate-250 shadow-inner'
                       }`}>
                         <div className="flex items-start justify-between">
                           <div>
                             <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wide">COMPLAINT RECORD DETECTED</span>
-                            <h4 className="text-sm font-black text-slate-850 dark:text-slate-100 mt-0.5">{trackingResult.id}</h4>
+                            <h4 className="text-sm font-black text-slate-900 dark:text-slate-100 mt-0.5">{trackingResult.id}</h4>
                           </div>
                           <span className="text-[10px] px-2.5 py-0.5 rounded-full font-bold border border-emerald-500/20 bg-emerald-500/10 text-emerald-600">
                             Active Verifiable
@@ -1742,15 +1742,15 @@ Description: ${complaintDesc}`;
                         <div className="grid grid-cols-2 gap-2 text-[11px] pb-3 border-b border-slate-200 dark:border-slate-800">
                           <div>
                             <span className="block text-slate-500 font-bold">Category</span>
-                            <span className="font-extrabold text-slate-800 dark:text-slate-200">{trackingResult.category}</span>
+                            <span className="font-extrabold text-slate-950 dark:text-slate-200">{trackingResult.category}</span>
                           </div>
                           <div>
                             <span className="block text-slate-500 font-bold">Assigned Department</span>
-                            <span className="font-extrabold text-slate-800 dark:text-slate-200">{trackingResult.department}</span>
+                            <span className="font-extrabold text-slate-950 dark:text-slate-200">{trackingResult.department}</span>
                           </div>
                         </div>
                         
-                        <p className="text-[11px] text-slate-800 dark:text-slate-400 leading-relaxed font-medium">
+                        <p className="text-[11px] text-slate-950 dark:text-slate-400 leading-relaxed font-bold">
                           <strong>Reported issue:</strong> {trackingResult.description}
                         </p>
 
@@ -1769,8 +1769,8 @@ Description: ${complaintDesc}`;
                             <div className="relative flex items-start gap-3">
                               <span className="absolute -left-[24px] w-4.5 h-4.5 rounded-full bg-emerald-500 border-4 border-white dark:border-slate-900 flex items-center justify-center"></span>
                               <div>
-                                <h5 className="font-black text-slate-900 dark:text-white">🟢 Submitted</h5>
-                                <p className="text-[10px] text-slate-600 mt-0.5 font-semibold">Complaint generated and safely filed in our local system.</p>
+                                <h5 className="font-black text-slate-950 dark:text-white">🟢 Submitted</h5>
+                                <p className="text-[10px] text-slate-800 mt-0.5 font-bold">Complaint generated and safely filed in our local system.</p>
                               </div>
                             </div>
 
@@ -1782,8 +1782,8 @@ Description: ${complaintDesc}`;
                                   : "bg-slate-200 dark:bg-slate-800"
                               }`}></span>
                               <div>
-                                <h5 className="font-black text-slate-900 dark:text-white">🟢 Assigned</h5>
-                                <p className="text-[10px] text-slate-600 mt-0.5 font-semibold">Ticket forwarded successfully to the local division officer.</p>
+                                <h5 className="font-black text-slate-950 dark:text-white">🟢 Assigned</h5>
+                                <p className="text-[10px] text-slate-800 mt-0.5 font-bold">Ticket forwarded successfully to the local division officer.</p>
                               </div>
                             </div>
 
@@ -1795,8 +1795,8 @@ Description: ${complaintDesc}`;
                                   : "bg-slate-200 dark:bg-slate-800"
                               }`}></span>
                               <div>
-                                <h5 className="font-black text-slate-900 dark:text-white">🟡 Under Review</h5>
-                                <p className="text-[10px] text-slate-600 mt-0.5 font-semibold">Local engineers are inspecting the physical site and preparing raw materials.</p>
+                                <h5 className="font-black text-slate-950 dark:text-white">🟡 Under Review</h5>
+                                <p className="text-[10px] text-slate-800 mt-0.5 font-bold">Local engineers are inspecting the physical site and preparing raw materials.</p>
                               </div>
                             </div>
 
@@ -1808,8 +1808,8 @@ Description: ${complaintDesc}`;
                                   : "bg-slate-200 dark:bg-slate-800"
                               }`}></span>
                               <div>
-                                <h5 className="font-black text-slate-900 dark:text-white">⚪ Resolved</h5>
-                                <p className="text-[10px] text-slate-600 mt-0.5 font-semibold">Works concluded safely. Streets are safe and cleared for citizens.</p>
+                                <h5 className="font-black text-slate-950 dark:text-white">⚪ Resolved</h5>
+                                <p className="text-[10px] text-slate-800 mt-0.5 font-bold">Works concluded safely. Streets are safe and cleared for citizens.</p>
                               </div>
                             </div>
 
@@ -1818,7 +1818,7 @@ Description: ${complaintDesc}`;
 
                       </div>
                     ) : (
-                      <div className="text-center py-6 text-xs text-slate-650 dark:text-slate-400 font-bold border border-dashed border-slate-300 dark:border-slate-800 rounded-2xl">
+                      <div className="text-center py-6 text-xs text-slate-900 dark:text-slate-400 font-extrabold border border-dashed border-slate-300 dark:border-slate-800 rounded-2xl">
                         Type any simple letter code (e.g. SB-101, SB-102) to inspect neighborhood progress reports.
                       </div>
                     )}
@@ -1838,7 +1838,7 @@ Description: ${complaintDesc}`;
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               
               <div className="text-center max-w-2xl mx-auto mb-8">
-                <h3 className="text-sm font-extrabold uppercase tracking-widest text-slate-800 dark:text-slate-500">
+                <h3 className="text-sm font-extrabold uppercase tracking-widest text-slate-900 dark:text-slate-500">
                   {currentText.officialResources}
                 </h3>
               </div>
@@ -1846,37 +1846,38 @@ Description: ${complaintDesc}`;
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 
                 <a href="https://pgportal.gov.in/" target="_blank" rel="noreferrer" className={`p-4 rounded-2xl border text-center transition-all hover:-translate-y-0.5 ${
-                  isDark ? 'bg-slate-900 border-slate-800 hover:bg-slate-800 text-slate-200' : 'bg-white border-slate-200 hover:bg-slate-50 text-slate-900 shadow-sm'
+                  isDark ? 'bg-slate-900 border-slate-800 hover:bg-slate-800 text-slate-200' : 'bg-white border-slate-200 hover:bg-slate-50 text-slate-950 shadow-sm'
                 }`}>
-                  <h4 className="text-xs font-black text-orange-500 uppercase tracking-wide mb-1">PGPortal</h4>
-                  <p className="text-[10px] text-slate-650 dark:text-slate-500 leading-relaxed font-bold">Centralized National Grievance Portal</p>
+                  <h4 className="text-xs font-black text-orange-600 uppercase tracking-wide mb-1">PGPortal</h4>
+                  <p className="text-[10px] text-slate-900 dark:text-slate-500 leading-relaxed font-bold">Centralized National Grievance Portal</p>
                 </a>
 
                 <a href="https://uidai.gov.in/" target="_blank" rel="noreferrer" className={`p-4 rounded-2xl border text-center transition-all hover:-translate-y-0.5 ${
-                  isDark ? 'bg-slate-900 border-slate-800 hover:bg-slate-800 text-slate-200' : 'bg-white border-slate-200 hover:bg-slate-50 text-slate-900 shadow-sm'
+                  isDark ? 'bg-slate-900 border-slate-800 hover:bg-slate-800 text-slate-200' : 'bg-white border-slate-200 hover:bg-slate-50 text-slate-950 shadow-sm'
                 }`}>
-                  <h4 className="text-xs font-black text-orange-500 uppercase tracking-wide mb-1">UIDAI Aadhaar</h4>
-                  <p className="text-[10px] text-slate-650 dark:text-slate-500 leading-relaxed font-bold">Official Government Card Services</p>
+                  <h4 className="text-xs font-black text-orange-600 uppercase tracking-wide mb-1">UIDAI Aadhaar</h4>
+                  <p className="text-[10px] text-slate-900 dark:text-slate-500 leading-relaxed font-bold">Official Government Card Services</p>
                 </a>
 
                 <a href="https://pmkisan.gov.in/" target="_blank" rel="noreferrer" className={`p-4 rounded-2xl border text-center transition-all hover:-translate-y-0.5 ${
-                  isDark ? 'bg-slate-900 border-slate-800 hover:bg-slate-800 text-slate-200' : 'bg-white border-slate-200 hover:bg-slate-50 text-slate-900 shadow-sm'
+                  isDark ? 'bg-slate-900 border-slate-800 hover:bg-slate-800 text-slate-200' : 'bg-white border-slate-200 hover:bg-slate-50 text-slate-950 shadow-sm'
                 }`}>
-                  <h4 className="text-xs font-black text-orange-500 uppercase tracking-wide mb-1">PM-Kisan Portal</h4>
-                  <p className="text-[10px] text-slate-650 dark:text-slate-500 leading-relaxed font-bold">Official Farming Benefit Register</p>
+                  <h4 className="text-xs font-black text-orange-600 uppercase tracking-wide mb-1">PM-Kisan Portal</h4>
+                  <p className="text-[10px] text-slate-900 dark:text-slate-500 leading-relaxed font-bold">Official Farming Benefit Register</p>
                 </a>
 
                 <a href="https://www.digitalindia.gov.in/" target="_blank" rel="noreferrer" className={`p-4 rounded-2xl border text-center transition-all hover:-translate-y-0.5 ${
-                  isDark ? 'bg-slate-900 border-slate-800 hover:bg-slate-800 text-slate-200' : 'bg-white border-slate-200 hover:bg-slate-50 text-slate-900 shadow-sm'
+                  isDark ? 'bg-slate-900 border-slate-800 hover:bg-slate-800 text-slate-200' : 'bg-white border-slate-200 hover:bg-slate-50 text-slate-950 shadow-sm'
                 }`}>
-                  <h4 className="text-xs font-black text-orange-500 uppercase tracking-wide mb-1">Digital India</h4>
-                  <p className="text-[10px] text-slate-650 dark:text-slate-500 leading-relaxed font-bold">National Digital Empowerment Initiatives</p>
+                  <h4 className="text-xs font-black text-orange-600 uppercase tracking-wide mb-1">Digital India</h4>
+                  <p className="text-[10px] text-slate-900 dark:text-slate-500 leading-relaxed font-bold">National Digital Empowerment Initiatives</p>
                 </a>
 
               </div>
             </div>
           </section>
 
+          {}
           {/* ABOUT MISSION SECTION */}
           <section id="about" className={`py-16 border-t ${
             isDark ? 'border-slate-900 bg-slate-950/20' : 'border-slate-200 bg-white'
@@ -1886,20 +1887,19 @@ Description: ${complaintDesc}`;
                 <svg className="w-6 h-6 animate-pulse" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               </div>
               <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-slate-100">{currentText.aboutTitle}</h2>
-              <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-400 leading-relaxed max-w-2xl mx-auto font-bold">
+              <p className="text-xs sm:text-sm text-slate-900 dark:text-slate-400 leading-relaxed max-w-2xl mx-auto font-bold">
                 {currentText.aboutText}
               </p>
             </div>
           </section>
 
           {/* FOOTER */}
-          {}
           <footer className={`border-t py-12 ${
             isDark ? 'border-slate-900 bg-slate-950/40' : 'border-slate-200 bg-slate-50'
           }`}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               
-              <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-slate-700 dark:text-slate-400 font-bold">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-slate-900 dark:text-slate-400 font-bold">
                 
                 {/* Brand Footprint with Circle Logo */}
                 <div className="flex items-center space-x-3">
@@ -1916,7 +1916,7 @@ Description: ${complaintDesc}`;
                   </div>
                   <div>
                     <span className="block text-xs font-extrabold tracking-tight text-slate-900 dark:text-slate-200">{currentText.brand}</span>
-                    <span className="block text-[10px] text-slate-500 dark:text-slate-400">Independent Citizens Assistance Helper</span>
+                    <span className="block text-[10px] text-slate-900 dark:text-slate-400">Independent Citizens Assistance Helper</span>
                   </div>
                 </div>
 
@@ -1953,7 +1953,7 @@ Description: ${complaintDesc}`;
           {toastMessage && (
             <div className="fixed bottom-5 right-5 z-50 animate-bounce">
               <div className={`py-3 px-5 rounded-2xl border text-xs font-extrabold shadow-xl flex items-center gap-2 ${
-                isDark ? 'bg-slate-900 border-slate-800 text-slate-200 shadow-slate-950/50' : 'bg-white border-slate-150 text-slate-900 shadow-slate-200/50'
+                isDark ? 'bg-slate-900 border-slate-800 text-slate-200 shadow-slate-950/50' : 'bg-white border-slate-150 text-slate-950 shadow-slate-200/50'
               }`}>
                 <div className="w-1.5 h-1.5 rounded-full bg-orange-500"></div>
                 <span>{toastMessage}</span>
