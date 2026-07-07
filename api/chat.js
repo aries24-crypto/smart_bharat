@@ -1,6 +1,5 @@
 export default async function handler(req, res) {
-  
-  // Vercel Serverless handles incoming requests. We strictly restrict this to POST.
+  // Restrict endpoint strictly to POST requests
   if (req.method !== "POST") {
     res.setHeader("Allow", ["POST"]);
     return res.status(405).json({
@@ -12,7 +11,7 @@ export default async function handler(req, res) {
   try {
     const { message } = req.body || {};
 
-    // Validate that the message parameter exists and is a valid string.
+    // Validate request body parameter
     if (!message || typeof message !== "string" || message.trim() === "") {
       return res.status(400).json({
         success: false,
@@ -38,10 +37,14 @@ Responsibilities:
 
     const apiKey = process.env.GROQ_API_KEY;
     if (!apiKey) {
-      throw new Error("GROQ_API_KEY environment variable is not defined.");
+      console.error("Missing Environment Variable: GROQ_API_KEY");
+      return res.status(500).json({
+        success: false,
+        message: "Backend configuration error: API key is not configured on the server.",
+      });
     }
 
-    // Call the Groq Chat Completions API using native fetch
+    // Call the Groq chat completions API securely
     const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -66,27 +69,24 @@ Responsibilities:
     });
 
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(
-        `Groq API responded with status ${response.status}: ${JSON.stringify(errorData)}`
-      );
+      const errorText = await response.text();
+      console.error(`Groq API Error Response (${response.status}):`, errorText);
+      throw new Error(`Groq API returned status code ${response.status}`);
     }
 
     const completion = await response.json();
+    const reply = completion.choices?.[0]?.message?.content;
 
-    const reply =
-      completion.choices?.[0]?.message?.content ||
-      "I am sorry, I couldn't process that query at the moment. Please try asking again.";
+    if (!reply) {
+      throw new Error("Empty choices array or malformed response structure from Groq.");
+    }
 
-    // Return the successful structured response
     return res.status(200).json({
       success: true,
       response: reply,
     });
   } catch (error) {
-    // Log errors safely server-side without exposing vulnerable stack traces to users.
-    console.error("Groq Vercel Serverless Function Error:", error);
-
+    console.error("Vercel Serverless Function Error:", error);
     return res.status(500).json({
       success: false,
       message: "Our civic companion services are currently busy. Please try again in a few moments.",
