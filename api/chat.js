@@ -1,4 +1,15 @@
 export default async function handler(req, res) {
+  // 1. Enable CORS for cross-origin preview environments
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS,PATCH,DELETE,POST,PUT");
+  res.setHeader("Access-Control-Allow-Headers", "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization");
+
+  // Handle CORS preflight OPTIONS request
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+
   // Restrict endpoint strictly to POST requests
   if (req.method !== "POST") {
     res.setHeader("Allow", ["POST"]);
@@ -9,7 +20,28 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { message } = req.body || {};
+    // 2. Robust Body Parsing (fallback if Vercel hasn't parsed the body stream)
+    let body = req.body;
+    if (typeof body === "string") {
+      try {
+        body = JSON.parse(body);
+      } catch (e) {
+        console.error("Failed to parse stringified body:", e);
+      }
+    } else if (!body && req.readable) {
+      const buffers = [];
+      for await (const chunk of req) {
+        buffers.push(chunk);
+      }
+      const rawBody = Buffer.concat(buffers).toString();
+      try {
+        body = JSON.parse(rawBody);
+      } catch (e) {
+        console.error("Failed to parse raw body stream:", e);
+      }
+    }
+
+    const { message } = body || {};
 
     // Validate request body parameter
     if (!message || typeof message !== "string" || message.trim() === "") {
@@ -40,7 +72,7 @@ Responsibilities:
       console.error("Missing Environment Variable: GROQ_API_KEY");
       return res.status(500).json({
         success: false,
-        message: "Backend configuration error: API key is not configured on the server.",
+        message: "Backend configuration error: GROQ_API_KEY is not configured in Vercel environment variables.",
       });
     }
 
@@ -71,7 +103,10 @@ Responsibilities:
     if (!response.ok) {
       const errorText = await response.text();
       console.error(`Groq API Error Response (${response.status}):`, errorText);
-      throw new Error(`Groq API returned status code ${response.status}`);
+      return res.status(response.status).json({
+        success: false,
+        message: `Groq API error: ${errorText || 'Failed to complete request.'}`,
+      });
     }
 
     const completion = await response.json();
@@ -89,7 +124,7 @@ Responsibilities:
     console.error("Vercel Serverless Function Error:", error);
     return res.status(500).json({
       success: false,
-      message: "Our civic companion services are currently busy. Please try again in a few moments.",
+      message: `Our civic companion services are currently busy. Error details: ${error.message || error}`,
     });
   }
 }
