@@ -1,0 +1,48 @@
+Smart Bharat - AI Powered Civic Companion Project Overview
+
+Smart Bharat is a GenAI-powered civic platform designed to simplify how
+citizens interact with government services. It combines an intelligent
+AI assistant with a modern, accessible interface to help users
+understand government schemes, discover relevant services, receive
+document guidance, report civic issues, and track complaints through a
+single platform.
+
+Key Features - AI-powered civic companion for government-related
+assistance. - Natural language support for citizen queries. -
+Multilingual assistance for improved accessibility. - Government service
+and scheme discovery. - Document guidance for various public services. -
+AI-assisted complaint generation. - Complaint tracking using a unique
+Smart Bharat Complaint ID. - Responsive design for desktop and mobile
+devices. - Light and dark theme support. - Modern UI with smooth
+animations and an accessible user experience. - Clean landing page
+showcasing all major platform capabilities.
+
+Implementation Highlights - The application securely connects to the AI
+backend through a Vercel serverless API. - The Groq API key is never
+exposed to the frontend and is securely managed using server-side
+environment variables. - The landing page is dynamic, responsive, and
+designed to provide a premium user experience. - The project implements
+all major capabilities requested in the original hackathon problem
+statement, including AI assistance, multilingual support, government
+service guidance, complaint reporting, accessibility, and
+transparency. - The application has been tested to ensure the primary
+workflows function as expected.
+
+Design Decisions - The Smart Bharat logo was designed specifically for
+this project to create a unique and recognizable identity. - HTML, CSS,
+and JavaScript for the landing page are intentionally kept together in a
+single file. This was a deliberate engineering decision for this
+hackathon to improve maintainability, allowing developers and judges to
+quickly understand the project and make changes from one place without
+navigating multiple files. - The code is organized with clear sections,
+descriptive comments where necessary, and consistent naming to maximize
+readability despite the compact project structure.
+
+Why Smart Bharat Smart Bharat focuses on solving a real-world problem by
+making government services easier to understand and access. Instead of
+simply acting as another chatbot, it provides meaningful AI assistance,
+improves accessibility through multilingual support, simplifies
+complaint reporting, and promotes transparency through complaint
+tracking. The platform is designed to be secure, user-friendly, and
+scalable while maintaining a clean codebase suitable for rapid hackathon
+development.
