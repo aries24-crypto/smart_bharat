@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Smart Bharat - AI Powered Civic Companion</title>
+  <title>Smart Bharat - Simple & Friendly Citizen Companion</title>
   
   <!-- Tailwind CSS v3 CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -15,7 +15,7 @@
   <!-- Babel Standalone for live JSX compilation -->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-  <!-- Google Fonts - Inter for clean typography -->
+  <!-- Google Fonts - Inter for clear and comforting readability -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
@@ -23,40 +23,40 @@
       font-family: 'Inter', sans-serif;
     }
     
-    /* Elegant Wave Flow Animations for Tricolor Aura */
-    @keyframes waveSlow {
+    /* Gentle, reassuring background animation representing the tricolor theme */
+    @keyframes slowWave {
       0% { transform: translate(0, 0) scale(1); }
-      33% { transform: translate(30px, -50px) scale(1.1); }
-      66% { transform: translate(-20px, 20px) scale(0.95); }
+      33% { transform: translate(20px, -30px) scale(1.05); }
+      66% { transform: translate(-15px, 15px) scale(0.98); }
       100% { transform: translate(0, 0) scale(1); }
     }
-    .animate-aura-saffron {
-      animation: waveSlow 18s ease-in-out infinite;
+    .animate-aura-orange {
+      animation: slowWave 15s ease-in-out infinite;
     }
     .animate-aura-green {
-      animation: waveSlow 22s ease-in-out infinite;
+      animation: slowWave 18s ease-in-out infinite;
     }
     
-    /* Spin animation for Ashok Chakra */
-    @keyframes spinChakra {
+    /* Gentle rotation for our symbolic wheel */
+    @keyframes gentleRotation {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
-    .animate-chakra-spin {
-      animation: spinChakra 120s linear infinite;
+    .animate-wheel-rotation {
+      animation: gentleRotation 160s linear infinite;
     }
 
-    /* Wave effect inside flowchart paths */
-    @keyframes flowLine {
+    /* Animated dash for visual progress guide */
+    @keyframes progressDash {
       0% { stroke-dashoffset: 24; }
       100% { stroke-dashoffset: 0; }
     }
-    .animated-flow-path {
-      stroke-dasharray: 8, 4;
-      animation: flowLine 2s linear infinite;
+    .animated-progress-line {
+      stroke-dasharray: 6, 4;
+      animation: progressDash 2.5s linear infinite;
     }
 
-    /* Scrollbar Styling */
+    /* Comforting custom scrollbars */
     ::-webkit-scrollbar {
       width: 6px;
       height: 6px;
@@ -82,346 +82,548 @@
     const { useState, useEffect, useRef } = React;
 
     // ==========================================
-    // STANDALONE CUSTOM INLINE SVG ICONSET
+    // INLINE SVG ICONS (Reassuring and Simple)
     // ==========================================
-    const Compass = ({ className }) => (
-      <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+    const SearchIcon = ({ className }) => (
+      <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
     );
 
-    const Shield = ({ className }) => (
+    const ShieldIcon = ({ className }) => (
       <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
     );
 
-    const Settings = ({ className }) => (
-      <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-    );
-
-    const Sun = ({ className }) => (
+    const SunIcon = ({ className }) => (
       <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
     );
 
-    const Moon = ({ className }) => (
+    const MoonIcon = ({ className }) => (
       <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
     );
 
-    const ArrowRight = ({ className }) => (
+    const ArrowRightIcon = ({ className }) => (
       <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     );
 
-    const Languages = ({ className }) => (
+    const LanguageIcon = ({ className }) => (
       <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 8l6 6"/><path d="M4 14l6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="M22 22l-5-10-5 10"/><path d="M14 18h6"/></svg>
     );
 
-    const Sparkles = ({ className }) => (
+    const SparklesIcon = ({ className }) => (
       <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
     );
 
-    const Check = ({ className }) => (
-      <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-    );
-
-    const ChevronDown = ({ className }) => (
+    const ChevronDownIcon = ({ className }) => (
       <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
     );
 
-    const Plus = ({ className }) => (
-      <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-    );
-
-    const Send = ({ className }) => (
+    const SendIcon = ({ className }) => (
       <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
     );
 
-    const Clipboard = ({ className }) => (
-      <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+    const CopyIcon = ({ className }) => (
+      <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
     );
 
-    const CheckSquare = ({ className }) => (
-      <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+    const InfoIcon = ({ className }) => (
+      <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
     );
 
-    const FileText = ({ className }) => (
-      <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-    );
-
-    const AlertTriangle = ({ className }) => (
-      <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-    );
-
-    const ExternalLink = ({ className }) => (
-      <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    );
-
-    const Menu = ({ className }) => (
+    const MenuIcon = ({ className }) => (
       <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     );
 
-    const X = ({ className }) => (
+    const CloseIcon = ({ className }) => (
       <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     );
 
 
     // ==========================================
-    // MULTILINGUAL DICTIONARY MATRIX
+    // MULTILINGUAL GENTLE TRANSLATION SYSTEM
     // ==========================================
-    const MULTI_LANG_DATA = {
+    const TRANSLATION_STRINGS = {
       en: {
         brand: "Smart Bharat",
-        tagline: "AI Civic Companion",
-        title: "Official Citizen Assistance Gateway",
-        subtitle: "A digital inclusion initiative simplifying how you interact with public services, discover state schemes, update documents, and draft structured municipal grievances.",
-        chatHeading: "Smart Bharat National AI Router",
-        chatSub: "Indian Languages Context Engine Active",
-        placeholderInput: "Ask in English or your native language...",
-        apiHeader: "Gemini AI Connection Settings",
-        apiKeyLabel: "Paste Gemini API Key:",
-        apiKeySave: "Connect Key",
-        apiStatusConnected: "Live Gemini API Active",
-        apiStatusOffline: "Local Knowledge Base Active",
-        aboutTitle: "About Smart Bharat",
-        aboutText: "Smart Bharat is an autonomous digital sandbox designed in alignment with Digital India benchmarks. We leverage secure generative models to break bureaucratic language barriers, providing transparent guides and structured formats directly to your device.",
-        servicesHeading: "Interactive Services & Registry",
-        servicesSub: "Select a department to view requirements, download checklists, and explore AI eligibility checks.",
-        myComplaintsHeading: "My Complaints & Resolution Ledger",
-        myComplaintsSub: "Verify dispatch details and trace filed grievances across decentralized ward indices.",
-        trackingTitle: "Grievance Ledger Tracking",
-        flowchartTitle: "Integrated Resolution Flowchart",
-        flowchartSub: "Visualizing the telemetry journey from local input to formal public grievance registration.",
-        step1: "1. Citizen Intake",
-        step1Desc: "You detail a grievance or document request in any Indian dialect.",
-        step2: "2. AI Context Mapping",
-        step2Desc: "Smart Bharat translates, geolocates, and structures standard administrative text.",
-        step3: "3. Decentralized Route",
-        step3Desc: "Drafts are formatted for CPGRAMS, Municipal portals, or state databases.",
-        step4: "4. Status Token",
-        step4Desc: "A cryptographic token tracks resolution steps transparently.",
-        copyright: "© 2026 Smart Bharat. Independent Citizen Auxiliary Portal.",
-        complaintDrafted: "Drafted Complaint copied!",
-        copierText: "Copy Draft",
-        suggestedTitle: "Suggested Scenarios:"
+        tagline: "Your Helpful Civic Friend",
+        title: "Simple & Friendly Citizen Support",
+        subtitle: "A digital helper to make it easy for you to find government services, understand state schemes, get card updates, and write clear municipal complaint letters.",
+        chatHeading: "Smart Bharat Helpful Assistant",
+        chatSub: "Ready to help in your preferred language",
+        placeholderInput: "Ask me a question or tell me what you need help with...",
+        aboutTitle: "Our Helpful Mission",
+        aboutText: "Smart Bharat is a warm, community-focused initiative built to help citizens easily talk with local public offices. We use gentle, smart helper technology to remove confusing paperwork barriers, delivering clear step-by-step checklists and simple letters ready for you to send.",
+        servicesHeading: "Our Services Directory",
+        servicesSub: "Select a topic below to see what documents you need, how to qualify, or to ask our assistant for help.",
+        myComplaintsHeading: "Check My Complaint Status",
+        myComplaintsSub: "Easily find and track the progress of your submitted public issues to see which local officer is helping.",
+        trackingTitle: "Simple Status Lookup",
+        flowchartTitle: "How We Help You Resolve Issues",
+        flowchartSub: "A simple visual path showing how your question goes from a friendly conversation to a structured letter.",
+        step1: "1. Tell Us Your Need",
+        step1Desc: "You explain a local problem or ask about a welfare scheme in your own language.",
+        step2: "2. We Make It Simple",
+        step2Desc: "Our assistant translates, reviews, and organizes it into a clean, formal letter format.",
+        step3: "3. Ready to Send",
+        step3Desc: "You copy your structured letter and easily upload it directly to municipal portals.",
+        step4: "4. Gentle Tracking",
+        step4Desc: "We provide easy updates so you can see where your request stands.",
+        copyright: "© 2026 Smart Bharat. A citizens' service initiative.",
+        complaintDrafted: "Copied successfully! You can paste this now.",
+        suggestedTitle: "Click to quickly ask about:"
       },
       hi: {
         brand: "स्मार्ट भारत",
-        tagline: "एआई नागरिक साथी",
-        title: "आधिकारिक नागरिक सहायता पोर्टल",
-        subtitle: "एक डिजिटल समावेशन पहल जो सरकारी सेवाओं के साथ संवाद करने, राज्य की योजनाओं की खोज करने, दस्तावेजों को अपडेट करने और शिकायतें तैयार करने को सरल बनाती है।",
-        chatHeading: "स्मार्ट भारत राष्ट्रीय एआई राउटर",
-        chatSub: "भारतीय भाषा संदर्भ इंजन सक्रिय है",
-        placeholderInput: "अपनी भाषा या हिंदी में पूछें...",
-        apiHeader: "जेमिनी एआई कनेक्शन सेटिंग्स",
-        apiKeyLabel: "जेमिनी एपीआई कुंजी डालें:",
-        apiKeySave: "कुंजी सहेजें",
-        apiStatusConnected: "लाइव जेमिनी एआई सक्रिय",
-        apiStatusOffline: "स्थानीय ज्ञानकोश सक्रिय",
-        aboutTitle: "स्मार्ट भारत के बारे में",
-        aboutText: "स्मार्ट भारत डिजिटल इंडिया मानकों के अनुरूप विकसित एक स्वायत्त डिजिटल सैंडबॉक्स है। हम प्रशासनिक भाषा की बाधाओं को तोड़ने, और आपके फोन पर सीधे पारदर्शी गाइड और संरचित प्रारूप प्रदान करने के लिए जेनेरेटिव एआई का उपयोग करते हैं।",
-        servicesHeading: "इंटरएक्टिव सेवाएं एवं रजिस्ट्री",
-        servicesSub: "आवश्यकताएं देखने, चेकलिस्ट डाउनलोड करने और एआई पात्रता जांच का पता लगाने के लिए विभाग चुनें।",
-        myComplaintsHeading: "मेरी शिकायतें एवं समाधान बही",
-        myComplaintsSub: "प्रेषण विवरण सत्यापित करें और विकेंद्रीकृत वार्ड अनुक्रमणिकाओं में दर्ज शिकायतों को ट्रैक करें।",
-        trackingTitle: "शिकायत ट्रैकिंग बही",
-        flowchartTitle: "एकीकृत शिकायत निवारण प्रवाह",
-        flowchartSub: "स्थानीय इनपुट से लेकर औपचारिक सार्वजनिक शिकायत पंजीकरण तक की टेलीमेट्री यात्रा का चित्रण।",
-        step1: "1. नागरिक इनपुट",
-        step1Desc: "आप किसी भी भारतीय बोली में शिकायत या दस्तावेज़ अनुरोध दर्ज करते हैं।",
-        step2: "2. एआई संदर्भ मैपिंग",
-        step2Desc: "स्मार्ट भारत अनुवाद करता है, जियोलोकेट करता है और मानक प्रशासनिक पाठ तैयार करता है।",
-        step3: "3. विकेंद्रीकृत मार्ग",
-        step3Desc: "मसौदे सीपीजीआरएएमएस (CPGRAMS) या राज्य डेटाबेस के लिए प्रारूपित किए जाते हैं।",
-        step4: "4. स्थिति टोकन",
-        step4Desc: "एक क्रिप्टोग्राफिक टोकन समाधान चरणों को पारदर्शी रूप से ट्रैक करता है।",
-        copyright: "© 2026 स्मार्ट भारत। स्वतंत्र नागरिक सहायक पोर्टल।",
-        complaintDrafted: "शिकायत का मसौदा कॉपी किया गया!",
-        copierText: "मसौदा कॉपी करें",
-        suggestedTitle: "सुझाए गए परिदृश्य:"
+        tagline: "आपका मददगार नागरिक साथी",
+        title: "सरल और सुलभ नागरिक सहायता",
+        subtitle: "एक डिजिटल सहायक जो आपके लिए सरकारी सेवाओं को खोजना, सरकारी योजनाओं को समझना, दस्तावेजों को अपडेट करना और शिकायत पत्र लिखना आसान बनाता है।",
+        chatHeading: "स्मार्ट भारत मददगार सहायक",
+        chatSub: "आपकी अपनी भाषा में मदद के लिए तैयार",
+        placeholderInput: "मुझसे कोई भी प्रश्न पूछें या बताएं कि आपको क्या मदद चाहिए...",
+        aboutTitle: "हमारा मुख्य उद्देश्य",
+        aboutText: "स्मार्ट भारत एक नागरिक-केंद्रित पहल है जो सरकारी कार्यों को आसान बनाने के लिए बनाई गई है। हम तकनीक का उपयोग कठिन कागजी कार्रवाई की बाधाओं को हटाने, और आपके लिए सीधे उपयोगी दिशा-निर्देश और पत्र तैयार करने के लिए करते हैं।",
+        servicesHeading: "हमारी मुख्य सेवाएं",
+        servicesSub: "दस्तावेजों की सूची देखने, पात्रता की जांच करने या हमारे सहायक से सीधे बात करने के लिए नीचे एक विषय चुनें।",
+        myComplaintsHeading: "अपनी शिकायत की स्थिति जानें",
+        myComplaintsSub: "अपनी दर्ज शिकायतों की प्रगति को आसानी से ट्रैक करें और देखें कि कौन से स्थानीय अधिकारी आपकी मदद कर रहे हैं।",
+        trackingTitle: "सरल स्थिति जांच",
+        flowchartTitle: "शिकायत समाधान की आसान प्रक्रिया",
+        flowchartSub: "एक सरल प्रक्रिया जो दर्शाती है कि आपकी बात कैसे एक औपचारिक पत्र में बदलती है।",
+        step1: "1. अपनी समस्या बताएं",
+        step1Desc: "आप किसी भी स्थानीय समस्या या योजना के बारे में अपनी भाषा में हमें बताते हैं।",
+        step2: "2. हम इसे सरल बनाते हैं",
+        step2Desc: "हमारा सहायक आपकी बात को समझकर एक स्पष्ट और औपचारिक शिकायत पत्र तैयार करता है।",
+        step3: "3. भेजने के लिए तैयार",
+        step3Desc: "आप इस तैयार पत्र को कॉपी करके नगर निगम के पोर्टल पर अपलोड कर सकते हैं।",
+        step4: "4. आसान ट्रैकिंग",
+        step4Desc: "आप आसानी से देख सकते हैं कि आपकी शिकायत पर क्या कार्रवाई हुई है।",
+        copyright: "© 2026 स्मार्ट भारत। एक नागरिक सेवा पहल।",
+        complaintDrafted: "सफलतापूर्वक कॉपी किया गया! अब आप इसे पेस्ट कर सकते हैं।",
+        suggestedTitle: "त्वरित सहायता के लिए क्लिक करें:"
       },
       bn: {
         brand: "Smart Bharat",
-        tagline: "এআই নাগরিক সহযোগী",
-        title: "অফিসিয়াল নাগরিক সহায়তা গেটওয়ে",
-        subtitle: "একটি ডিজিটাল অন্তর্ভুক্তি উদ্যোগ যা আপনার সরকারি পরিষেবাগুলির সাথে ইন্টারঅ্যাক্ট করার, রাজ্য প্রকল্পগুলি আবিষ্কার করার এবং অভিযোগের খসড়া তৈরি করার প্রক্রিয়াকে সহজ করে তোলে।",
-        chatHeading: "স্মার্ট ভারত জাতীয় এআই রাউটার",
-        chatSub: "ভারতীয় ভাষা কনটেক্সট ইঞ্জিন সক্রিয়",
-        placeholderInput: "ইংরেজি বা আপনার নিজস্ব ভাষায় জিজ্ঞাসা করুন...",
-        apiHeader: "Gemini এআই সংযোগ সেটিংস",
-        apiKeyLabel: "Gemini এআই চাবি পেস্ট করুন:",
-        apiKeySave: "সংযোগ করুন",
-        apiStatusConnected: "লাইভ Gemini এআই সক্রিয়",
-        apiStatusOffline: "স্থানীয় তথ্যভাণ্ডার সক্রিয়",
-        aboutTitle: "স্মার্ট ভারত সম্পর্কে",
-        aboutText: "স্মার্ট ভারত হল ডিজিটাল ইন্ডিয়ার নির্দেশিকা অনুযায়ী তৈরি একটি স্বায়ত্তশাসিত নাগরিক পোর্টাল। আমরা আমলাতান্ত্রিক ভাষার বাধা দূর করতে জেনারেটিভ এআই ব্যবহার করি এবং সরাসরি আপনার ডিভাইসে সঠিক চেকলিস্ট সরবরাহ করি।",
-        servicesHeading: "ইন্টারেক্টিভ পরিষেবা এবং রেজিস্ট্রি",
-        servicesSub: "প্রয়োজনীয় কাগজপত্র দেখতে এবং এআই যোগ্যতা যাচাই করতে আপনার বিভাগ নির্বাচন করুন।",
-        myComplaintsHeading: "আমার অভিযোগ এবং সমাধান লেজার",
-        myComplaintsSub: "অভিযোগের বিবরণ যাচাই করুন এবং বিভিন্ন ওয়ার্ড পোর্টাল জুড়ে ট্র্যাকিং ট্র্যাক করুন।",
-        trackingTitle: "অভিযোগ লেজার ট্র্যাকিং",
-        flowchartTitle: "সমন্বিত সমাধান ফ্লোচার্ট",
-        flowchartSub: "স্থানীয় প্রশ্ন থেকে শুরু করে সরাসরি সমাধান পর্যন্ত পুরো প্রক্রিয়াটির চিত্রায়ণ।",
-        step1: "১. নাগরিক গ্রহণ",
-        step1Desc: "আপনি যেকোনো আঞ্চলিক ভাষায় অভিযোগ বা কোনো নথির নির্দেশিকা চান।",
-        step2: "২. এআই বিশ্লেষণ",
-        step2Desc: "স্মার্ট ভারত স্বয়ংক্রিয় অনুবাদ করে সঠিক আইনি ফর্ম্যাটে অভিযোগ সাজায়।",
-        step3: "৩. সঠিক পথ নির্বাচন",
-        step3Desc: "খসড়াগুলি সরাসরি সিপিজিআরএএমএস বা স্থানীয় পৌরসভা দপ্তরে পাঠানো হয়।",
-        step4: "৪. ট্র্যাকিং টোকেন",
-        step4Desc: "একটি ক্রিপ্টোগ্রাফিক টোকেন দিয়ে স্বচ্ছভাবে কাজের অগ্রগতি দেখা যায়।",
-        copyright: "© 2026 স্মার্ট ভারত। স্বাধীন নাগরিক সহায়ক পোর্টাল।",
-        complaintDrafted: "অভিযোগের খসড়াটি কপি করা হয়েছে!",
-        copierText: "খসড়া কপি করুন",
-        suggestedTitle: "প্রস্তাবিত পরিস্থিতি:"
+        tagline: "আপনার সহায়ক নাগরিক বন্ধু",
+        title: "সহজ ও বন্ধুত্বপূর্ণ নাগরিক সাহায্য",
+        subtitle: "একটি ডিজিটাল সহকারী যা আপনার জন্য সরকারি সুযোগ-সুবিধা খুঁজে নেওয়া, বিভিন্ন প্রকল্প বোঝা এবং সহজ ভাষায় অভিযোগ পত্র লেখা সহজ করে তোলে।",
+        chatHeading: "স্মার্ট ভারত সহায়তাকারী বন্ধু",
+        chatSub: "আপনার নিজের ভাষায় সাহায্য করতে প্রস্তুত",
+        aboutTitle: "আমাদের লক্ষ্য",
+        aboutText: "স্মার্ট ভারত হল সাধারণ মানুষের জন্য তৈরি একটি উদ্যোগ যাতে আপনি সহজেই আপনার সমস্যা নিয়ে স্থানীয় দপ্তরে কথা বলতে পারেন। আমরা কঠিন আইনি ভাষা সহজ করে সরাসরি আপনার ফোনে চেকলিস্ট এবং চিঠি তৈরি করে দিই।",
+        servicesHeading: "আমাদের সেবাসমূহ",
+        servicesSub: "প্রয়োজনীয় নথির তালিকা দেখতে এবং আমাদের সহকারীর সাহায্য পেতে নিচে একটি বিষয় নির্বাচন করুন।",
+        myComplaintsHeading: "অভিযোগের অগ্রগতি দেখুন",
+        myComplaintsSub: "আপনার অভিযোগের বর্তমান অবস্থা সহজে পরীক্ষা করুন এবং দেখুন কোন অফিসার কাজ করছেন।",
+        trackingTitle: "সহজ ট্র্যাকিং পদ্ধতি",
+        flowchartTitle: "আমরা যেভাবে সাহায্য করি",
+        flowchartSub: "সহজ চিত্রের মাধ্যমে দেখুন কীভাবে আপনার মুখের কথা সরাসরি একটি চিঠির আকার নেয়।",
+        step1: "১. আপনার প্রয়োজন জানান",
+        step1Desc: "আপনি যেকোনো আঞ্চলিক ভাষায় আপনার সমস্যা বা কোনো প্রকল্পের বিষয়ে আমাদের জানান।",
+        step2: "২. আমরা সহজ করে তুলি",
+        step2Desc: "আমাদের সহকারী বিষয়টিকে অনুবাদ করে সঠিক ও সুন্দর ভাষায় একটি চিঠি তৈরি করে দেয়।",
+        step3: "৩. পাঠানোর জন্য প্রস্তুত",
+        step3Desc: "আপনি এই চিঠিটি কপি করে সরাসরি সরকারি বা পৌরসভা পোর্টালে আপলোড করতে পারেন।",
+        step4: "৪. সহজ অগ্রগতি খোঁজ",
+        step4Desc: "একটি সহজ নম্বরের সাহায্যে আপনার কাজের অগ্রগতি ট্র্যাক করুন।",
+        copyright: "© 2026 স্মার্ট ভারত। সাধারণ মানুষের সেবার জন্য একটি উদ্যোগ।",
+        complaintDrafted: "কপি করা হয়েছে! আপনি এখন এটি পেস্ট করতে পারেন।",
+        suggestedTitle: "দ্রুত সাহায্যের জন্য নিচে ক্লিক করুন:"
       },
       ta: {
         brand: "Smart Bharat",
-        tagline: "AI குடிமைத் துணை",
-        title: "அதிகாரப்பூர்வ குடிமக்கள் உதவி வாயில்",
-        subtitle: "அரசு சேவைகளை எளிதாக்கவும், திட்டங்களைக் கண்டறியவும், ஆவணங்களை புதுப்பிக்கவும் மற்றும் நகராட்சி குறை தீர்ப்பு கடிதங்களை வடிவமைக்கவும் ஒரு டிஜிட்டல் முயற்சி.",
-        chatHeading: "ஸ்மார்ட் பாரத் தேசிய AI ரூட்டர்",
-        chatSub: "இந்திய மொழிகள் மொழிபெயர்ப்பு இயந்திரம் செயலில் உள்ளது",
-        placeholderInput: "ஆங்கிலம் அல்லது உங்கள் தாய்மொழியில் கேட்கவும்...",
-        apiHeader: "Gemini AI இணைப்பு அமைப்புகள்",
-        apiKeyLabel: "Gemini API குறியீட்டை உள்ளிடவும்:",
-        apiKeySave: "இணைப்பை சேமிக்கவும்",
-        apiStatusConnected: "லைவ் Gemini AI செயலில் உள்ளது",
-        apiStatusOffline: "உள்ளூர் தரவுத்தளம் செயலில் உள்ளது",
-        aboutTitle: "ஸ்மார্ট பாரத் பற்றி",
-        aboutText: "ஸ்மார்ட் பாரத் என்பது டிஜிட்டல் இந்தியா தரநிலைகளின்படி வடிவமைக்கப்பட்ட ஒரு குடிமக்கள் தளமாகும். அரசு அலுவலக ஆவணங்களின் மொழி தடைகளை உடைத்து நேரடியாக உங்கள் கைபேசியில் தேவையான வழிகாட்டல்களை வழங்குகிறோம்.",
-        servicesHeading: "ஊடாடும் சேவைகள் & பதிவேடு",
-        servicesSub: "தேவைகளை பார்க்கவும் மற்றும் AI தகுதி சரிபார்ப்பை ஆராயவும் ஒரு துறையைத் தேர்ந்தெடுக்கவும்.",
-        myComplaintsHeading: "என் புகார்கள் & தீர்வு பதிவேடு",
-        myComplaintsSub: "புகார் சமர்ப்பிப்புகளை சரிபார்த்து வார்டு வாரியாக அவற்றின் நிலையை கண்காணிக்கவும்.",
-        trackingTitle: "புகார் கண்காணிப்பு பதிவேடு",
-        flowchartTitle: "ஒருங்கிணைந்த தீர்வு வரைபடம்",
-        flowchartSub: "உள்ளூர் புகார்கள் முதல் அரசு பதிவேட்டில் பதியப்படும் வரையிலான செயல்முறை வரைபடம்.",
-        step1: "1. குடிமக்கள் உள்ளீடு",
-        step1Desc: "ஏதேனும் இந்திய மொழியில் உங்களது புகாரை அல்லது ஆவண வழிகாட்டுதலை கேட்கிறீர்கள்.",
-        step2: "2. AI தரவு பகுப்பாய்வு",
-        step2Desc: "ஸ்மார்ட் பாரத் மொழிபெயர்த்து புகார்களை அதிகாரப்பூர்வ கடித வடிவில் சீரமைக்கிறது.",
-        step3: "3. பரவலாக்கப்பட்ட வழித்தடம்",
-        step3Desc: "இந்த வரைவுகள் CPGRAMS அல்லது மாநகராட்சி கணினிக்கு நேரடியாக அனுப்பப்படுகிறது.",
-        step4: "4. நிலைக் குறியீடு",
-        step4Desc: "ஒரு தனிப்பட்ட குறியீடு மூலம் புகாரின் தற்போதைய நிலையை வெளிப்படையாக அறியலாம்.",
-        copyright: "© 2026 ஸ்மார்ட் பாரத். சுதந்திர குடிமக்கள் உதவிப் பிரிவு.",
-        complaintDrafted: "புகார் வரைவு நகலெடுக்கப்பட்டது!",
-        copierText: "வரைவை நகலெடு",
-        suggestedTitle: "பரிந்துரைக்கப்பட்ட கேள்விகள்:"
+        tagline: "உங்களின் அன்பான குடிமைத் தோழன்",
+        title: "எளிமையான குடிமக்கள் உதவி மையம்",
+        subtitle: "அரசு திட்டங்கள், அடையாள ஆவணங்களின் தேவைகள் மற்றும் நகராட்சி குறை தீர்ப்பு கடிதங்கள் எழுதுவதை எளிதாக்கும் உங்களின் டிஜிட்டல் நண்பன்.",
+        chatHeading: "ஸ்மார்ட் பாரத் உதவித் தோழன்",
+        chatSub: "உங்களுக்குப் பிடித்த மொழியில் உதவக் காத்திருக்கிறது",
+        aboutTitle: "எங்கள் நோக்கம்",
+        aboutText: "ஸ்மார்ட் பாரத் என்பது மக்கள் தங்களின் உள்ளூர் அரசு அலுவலகங்களை எளிதில் அணுக உருவாக்கப்பட்டுள்ள ஒரு எளிய தளமாகும். கடினமான ஆவணத் தடைகளைத் தகர்த்து உங்களுக்குத் தேவையான எளிய வழிகாட்டல்களையும் கடிதங்களையும் இது உடனுக்குடன் வழங்குகிறது.",
+        servicesHeading: "எங்கள் சேவைகள்",
+        servicesSub: "உங்களுக்குத் தேவையான ஆவணப் பட்டியல்கள் அல்லது வழிகாட்டல்களைப் பெற கீழே ஒரு பிரிவைத் தேர்ந்தெடுக்கவும்.",
+        myComplaintsHeading: "உங்கள் புகாரின் நிலை",
+        myComplaintsSub: "நீங்கள் சமர்ப்பித்த புகாரை எளிதாகக் கண்காணித்து அதன் தற்போதைய நிலையைத் தெரிந்துகொள்ளுங்கள்.",
+        trackingTitle: "எளிய முறையில் நிலையைச் சரிபார்க்கவும்",
+        flowchartTitle: "நாங்கள் எப்படி உதவுகிறோம்?",
+        flowchartSub: "உங்கள் கேள்விகள் எவ்வாறு எளிய முறையில் அரசுப் புகார் கடிதமாக மாறுகிறது என்பதற்கான வரைபடம்.",
+        step1: "1. உங்களின் தேவையைச் சொல்லுங்கள்",
+        step1Desc: "ஏதேனும் உள்ளூர் பிரச்சனை அல்லது அரசு திட்டங்கள் குறித்து உங்களது சொந்த மொழியில் கேளுங்கள்.",
+        step2: "2. நாங்கள் எளிதாக்குகிறோம்",
+        step2Desc: "எங்கள் தளம் உங்கள் கோரிக்கையைப் பகுப்பாய்வு செய்து முறையான கடிதமாக மாற்றுகிறது.",
+        step3: "3. அனுப்பத் தயார்",
+        step3Desc: "இந்தக் கடிதத்தை அப்படியே நகலெடுத்து (Copy) உங்களது உள்ளூர் நகராட்சி இணையதளத்தில் சமர்ப்பிக்கலாம்.",
+        step4: "4. எளிய கண்காணிப்பு",
+        step4Desc: "உங்கள் புகார் மீதான நடவடிக்கைகளை எளிய முறையில் எப்போது வேண்டுமானாலும் சரிபார்க்கலாம்.",
+        copyright: "© 2026 ஸ்மார்ட் பாரத். மக்கள் சேவைக்கான ஒரு எளிய தளம்.",
+        complaintDrafted: "நகலெடுக்கப்பட்டது! இப்போது நீங்கள் இதனைப் பயன்படுத்தலாம்.",
+        suggestedTitle: "உடனடி பதில்களைப் பெற கிளிக் செய்க:"
       },
       te: {
         brand: "Smart Bharat",
-        tagline: "AI సివిక్ కంపానియన్",
-        title: "అధికారిక పౌర సహాయ గేట్‌వే",
-        subtitle: "ప్రభుత్వ సేవలతో వ్యవహరించడం, పథకాలను కనుగొనడం, పత్రాలను నవీకరించడం మరియు మునిసిపల్ ఫిర్యాదులను సిద్ధం చేయడాన్ని సులభతరం చేసే డిజిటల్ చొరవ.",
-        chatHeading: "స్మార్ట్ భారత్ నేషనల్ AI రూటర్",
-        chatSub: "భారతీయ భాషల కాంటెక్స్ట్ ఇంజిన్ సక్రియంగా ఉంది",
-        placeholderInput: "తెలుగు లేదా ఇతర భాషల్లో అడగండి...",
-        apiHeader: "Gemini AI కనెక్షన్ సెట్టింగులు",
-        apiKeyLabel: "Gemini API కీని నమోదు చేయండి:",
-        apiKeySave: "కీని సేవ్ చేయి",
-        apiStatusConnected: "లైవ్ Gemini AI సక్రియంగా ఉంది",
-        apiStatusOffline: "స్థానిక డేటాబేస్ సక్రియంగా ఉంది",
-        aboutTitle: "స్మార్ట్ భారత్ గురించి",
-        aboutText: "స్మార్ట్ భారత్ అనేది డిజిటల్ ఇండియా ప్రమాణాలకు అనుగుణంగా రూపొందించబడిన ఒక పౌర వేదిక. మేము పరిపాలనా భాషా అడ్డంకులను తొలగించడానికి మరియు నేరుగా మీ మొబైల్‌లో పారదర్శక మార్గదర్శకాలను అందించడానికి జనరేటివ్ AIని ఉపయోగిస్తాము.",
-        servicesHeading: "ఇంటరాక్టివ్ సేవలు & రిజిస్ట్రీ",
-        servicesSub: "అవసరాలను చూడటానికి మరియు AI అర్హతను తనిఖీ చేయడానికి తగిన విభాగాన్ని ఎంచుకోండి.",
-        myComplaintsHeading: "నా ఫిర్యాదులు & పరిష్కారాల లెడ్జర్",
-        myComplaintsSub: "సమర్పించిన ఫిర్యాదు వివరాలను ధృవీకరించండి మరియు వివిధ వార్డుల పరిధిలో ట్రాక్ చేయండి.",
-        trackingTitle: "ఫిర్యాదు ట్రాకింగ్ లెడ్జర్",
-        flowchartTitle: "సమన్వయ పరిష్కార ప్రవాహ పటం",
-        flowchartSub: "స్థానిక ప్రశ్నల నుండి నేరుగా పరిష్కారం వరకు మొత్తం ప్రక్రియ యొక్క విజువలైజేషన్.",
-        step1: "1. పౌరుల ఇన్పుట్",
-        step1Desc: "మీరు ఏదైనా భారతీయ భాషలో ఫిర్యాదును లేదా డాక్యుమెంట్ గైడ్‌ను అడుగుతారు.",
-        step2: "2. AI విశ్లేషణ",
-        step2Desc: "స్మార్ట్ భారత్ స్వయంచాలక అనువాదం చేసి ఫిర్యాదులను క్రమబద్ధీకరిస్తుంది.",
-        step3: "3. వికేంద్రీకృత మార్గం",
-        step3Desc: "సిద్ధం చేసిన ముసాయిదాలు నేరుగా CPGRAMS లేదా మునిసిపల్ పోర్టల్‌కు పంపబడతాయి.",
-        step4: "4. ట్రాకింగ్ టోకెన్",
-        step4Desc: "ఒక ప్రత్యేక టోకెన్ ద్వారా పారదర్శకంగా ఫిర్యాదుల పరిష్కార ప్రక్రియను ట్రాక్ చేయవచ్చు.",
-        copyright: "© 2026 స్మార్ట్ భారత్. స్వతంత్ర పౌర సహాయక పోర్టల్.",
-        complaintDrafted: "ఫిర్యాదు ముసాయిదా కాపీ చేయబడింది!",
-        copierText: "ముసాయిదా కాపీ చేయి",
-        suggestedTitle: "సూచించబడిన ప్రశ్నలు:"
+        tagline: "మీ స్నేహపూర్వక పౌర సహాయకుడు",
+        title: "సులభమైన పౌర సహాయ కేంద్రం",
+        subtitle: "ప్రభుత్వ సేవలను కనుగొనడం, పథకాలను అర్థం చేసుకోవడం మరియు మునిసిపల్ అధికారులకు సులభంగా లేఖలు రాయడం వంటి విషయాలలో మీ డిజిటల్ స్నేహితుడు.",
+        chatHeading: "స్మార్ట్ భారత్ సహాయకుడు",
+        chatSub: "మీకు నచ్చిన భాషలో సహాయం చేయడానికి సిద్ధంగా ఉంది",
+        aboutTitle: "మా ముఖ్య ఉద్దేశ్యం",
+        aboutText: "స్మార్ట్ భారత్ అనేది పౌరులు తమ సమస్యలను సులభంగా ప్రభుత్వ అధికారుల దృష్టికి తీసుకెళ్లేందుకు రూపొందించబడిన ఒక సేవా వేదిక. మేము ఎలాంటి కఠినమైన సాంకేతిక పదాలు లేకుండా, సాధారణ భాషలో మీకు అవసరమైన సమాచారాన్ని అందిస్తాము.",
+        servicesHeading: "మా సేవల విభాగం",
+        servicesSub: "కావలసిన పత్రాల వివరాలు చూడటానికి లేదా మా సహాయకుడితో మాట్లాడటానికి క్రింది అంశాలలో ఒకటి ఎంచుకోండి.",
+        myComplaintsHeading: "మీ సమస్యల పరిష్కార స్థితి",
+        myComplaintsSub: "మీరు సమర్పించిన ఫిర్యాదులపై అధికారులు ఎంతవరకు చర్యలు తీసుకున్నారో ఇక్కడ సులభంగా తెలుసుకోండి.",
+        trackingTitle: "సులభంగా తనిఖీ చేయండి",
+        flowchartTitle: "సమస్యల పరిష్కార సులభ ప్రయాణం",
+        flowchartSub: "మీ సమస్యపై అధికారులకు ఒక చక్కటి లేఖను సిద్ధం చేసే సాధారణ విధానం.",
+        step1: "1. మీ అవసరాన్ని తెలపండి",
+        step1Desc: "స్థానిక సమస్యలు లేదా ప్రభుత్వ పథకాల గురించి మీ స్వంత భాషలో మాకు తెలియజేయండి.",
+        step2: "2. మేము సులభతరం చేస్తాము",
+        step2Desc: "మా సహాయకుడు మీ కోరికను ఒక చక్కటి అధికారిక లేఖ రూపంలోకి మారుస్తాడు.",
+        step3: "3. పంపడానికి సిద్ధం",
+        step3Desc: "ఈ లేఖను కాపీ చేసి మీ స్థానిక మునిసిపల్ పోర్టల్‌లో సులభంగా అప్‌లోడ్ చేయవచ్చు.",
+        step4: "4. నిరంతర నిఘా",
+        step4Desc: "మీ అభ్యర్థనపై చర్యలు ఏ స్థాయిలో ఉన్నాయో ఎప్పటికప్పుడు తెలుసుకోవచ్చు.",
+        copyright: "© 2026 స్మార్ట్ భారత్. ప్రజల సేవ కొరకు ఒక చిన్న ప్రయత్నం.",
+        complaintDrafted: "కాపీ చేయబడింది! మీరు దీనిని ఉపయోగించుకోవచ్చు.",
+        suggestedTitle: "సహాయం కోసం వీటిపై క్లిక్ చేయండి:"
       }
     };
 
 
     // ==========================================
-    // STANDALONE HIGH-FIDELITY OFFLINE KNOWLEDGE BASE
+    // EXTENSIVE SCHEME, CIVIC & DOCUMENT DATABASE
     // ==========================================
     const LOCAL_KNOWLEDGE_BASE = {
       en: {
-        welcome: "Namaste! 🙏 I am your **Smart Bharat AI Companion**. I am specialized in navigating government schemes, document protocols, and writing standard administrative drafts. You can enter an API Key in the settings panel above for a fully connected live model experience, or search directly!",
-        scheme_trigger: ["scheme", "yojana", "farmers", "pm-kisan", "pm kisan", "money", "crop", "pension"],
-        scheme_response: `🏛️ **PM-Kisan Samman Nidhi Yojana**\n\n**Direct Support Structure:** ₹6,000 yearly delivered in three equal direct bank deposits of ₹2,000.\n\n**Eligibility Criteria Checklist:**\n- ✅ Must be an Indian citizen possessing cultivable land titles under active mutation.\n- ❌ Excludes institutional landowners, current/former income tax payers, high-salaried govt employees, or medical/engineering professionals.\n\n**Prerequisites Checklist:**\n1. Valid Landholding Mutation Registry records.\n2. Aadhaar Card (Must be biologically verified and active).\n3. Bank Account linked securely with Aadhaar for DBT (Direct Benefit Transfer).\n4. Mobile number registered on the PM-Kisan portal for OTP authentication.`,
-        document_trigger: ["aadhaar", "address", "update", "card", "document", "pan", "passport", "identity"],
-        document_response: `📄 **Aadhaar Address Update Protocol**\n\nUpdates can be authorized entirely online via the secure UIDAI MyAadhaar SSUP interface.\n\n**Accepted Proof of Address (POA) Docs:**\n- 🏠 Electricity/Water/Piped Gas Bills (Not older than 3 months).\n- 🏠 Certified Scheduled Bank Passbook containing photo and seal.\n- 🏠 Standard Registered Rent Agreement or Property Sale Deed.\n- 🏠 Official Passport or Driving License.\n\n**Step-by-Step Directions:**\n1. Access the official UIDAI SSUP MyAadhaar portal online.\n2. Sign in utilizing your 12-digit Aadhaar Number and OTP validation.\n3. Click on **'Update Address Online'** and append the modified credentials.\n4. Upload high-contrast scans of acceptable Proof of Address documents.\n5. Remit the online processing fee (₹50) and retain the generated 14-digit Service Request Number (SRN).`,
-        complaint_trigger: ["pothole", "road", "complaint", "trash", "water", "drainage", "leak", "light", "street"],
-        complaint_response: `⚠️ **Public Grievance Blueprint: Pothole & Street Repair**\n\nI have automatically formatted an official municipal ward grievance letter based on typical CPGRAMS requirements.\n\n**Ward Telemetry Matrix:**\n- **Category:** Municipal Road Infrastructure\n- **Location Coordinates:** \`28.6139° N, 77.2090° E\` (Sample Ward Centroid)\n- **Urgency Metric:** High Hazard Level\n\n**Generated Draft (Ready to copy):**\n> To,\n> The Executive Ward Engineer / Joint Commissioner,\n> Urban Development & Municipal Works Department.\n>\n> **Subject:** Immediate Restoration Request for Severe Road Depressions and Potholes in Ward Segment.\n>\n> This is to register a formal public safety complaint regarding deep, dangerous potholes that have manifested in our local ward area. These cavities present a direct risk to passing two-wheelers and emergency services. Despite constant heavy transit, no preventive patching has been administered. Please record this under standard civic code metrics for immediate ward restoration.\n\n*Copy this draft and upload it to the municipal gateway.*`
+        welcome: "Hello and welcome! 🙏 I am your **Smart Bharat Assistant**. I'm here to help you understand government support schemes, find out what papers you need for applications, or help you write a polite, formal letter to report a problem in your street. Ask me anything in plain English or your own language!",
+        scheme_trigger: ["scheme", "yojana", "benefit", "farmer", "agriculture", "healthcare", "ayushman", "awas", "house", "pension", "money", "poor"],
+        scheme_response: `🏥 **Ayushman Bharat Yojana (Free Healthcare)**
+- **What it is:** Free healthcare support of up to ₹5 Lakhs per family every year for hospital stays and serious treatments.
+- **Who can apply:** Families listed in the economic survey, low-income households, and daily wage workers.
+- **Papers you need:**
+  1. Aadhaar Card of all family members.
+  2. Ration Card.
+  3. Mobile number linked to Aadhaar.
+
+🌾 **PM-Kisan Scheme (Farmer Support)**
+- **What it is:** A financial gift of ₹6,000 every year, sent directly to your bank account in three portions of ₹2,000.
+- **Who can apply:** Families who own farming land.
+- **Papers you need:**
+  1. Land ownership papers (Patta or land tax receipt).
+  2. Aadhaar Card.
+  3. Bank account book linked to Aadhaar.
+
+🏠 **Pradhan Mantri Awas Yojana (Housing Support)**
+- **What it is:** Financial help or lower interest rates to build or buy a simple, safe home.
+- **Who can apply:** Families with low income who do not own a concrete house.
+- **Papers you need:**
+  1. Aadhaar Card.
+  2. Income Certificate or wage receipt.
+  3. Bank account details.`,
+        document_trigger: ["aadhaar", "address", "update", "card", "pan", "voter", "passport", "change", "papers", "identity"],
+        document_response: `📄 **Aadhaar Card Address Update Guide**
+You can update your home address online easily by yourself:
+- **Accepted papers (Any one):**
+  - Electricity bill or Water bill (not older than 3 months)
+  - Bank statement or Post office passbook with your photo
+  - Registered Rent Agreement or Land Sale Deed
+  - Voter ID or Passport
+
+- **Simple Steps to Update Online:**
+  1. Open the official MyAadhaar website.
+  2. Log in with your Aadhaar number and the SMS code sent to your phone.
+  3. Click **'Update Address Online'** and type your correct address.
+  4. Upload a clear photo of your proof of address.
+  5. Pay a simple process fee of ₹50 online and save your receipt.`,
+        complaint_trigger: ["pothole", "road", "complaint", "trash", "garbage", "water", "drainage", "leak", "light", "street", "pipe", "clean"],
+        complaint_response: `✍️ **Your Municipal Complaint Letter Draft**
+I have written a polite, clear letter for you. You can copy this and send it to your local ward office:
+
+> **To,**
+> **The Ward Officer / Municipal Commissioner,**
+> **Local Municipal Ward Office.**
+>
+> **Subject:** Request to repair dangerous potholes and damaged road on our street.
+>
+> Respected Sir/Madam,
+> I am writing to politely bring to your notice the bad condition of the road in our residential area. There are several deep and dangerous potholes that make it very risky for elderly citizens to walk and for children to ride cycles. We have also had minor falls during the rainy evenings due to poor visibility.
+>
+> We request you to kindly send a repair team to patch these potholes at the earliest to ensure our neighborhood stays safe.
+>
+> Thanking you,
+> **Residents of the Neighborhood**
+
+*Click the copy button in the top right of this letter box to use this text.*`
       },
       hi: {
-        welcome: "नमस्ते! 🙏 मैं आपका **स्मार्ट भारत एआई साथी** हूँ। मैं सरकारी योजनाओं, सरकारी दस्तावेजों के नियमों और शिकायत पत्रों के मसौदे तैयार करने में आपकी मदद कर सकता हूँ। आप पूर्ण लाइव अनुभव के लिए ऊपर सेटिंग्स पैनल में अपनी जेमिनी कुंजी जोड़ सकते हैं!",
-        scheme_trigger: ["योजना", "किसान", "पैसा", "खेती", "पेंशन", "पीएम किसान"],
-        scheme_response: `🏛️ **पीएम-किसान सम्मान निधि योजना**\n\n**सहायता राशि:** प्रति वर्ष ₹6,000 की वित्तीय सहायता, ₹2,000 की तीन समान किश्तों में सीधे बैंक खातों में भेजी जाती है।\n\n**पात्रता नियम:**\n- ✅ आवेदक के नाम पर कृषि योग्य भूमि के स्वामित्व दस्तावेज होने चाहिए।\n- ❌ सरकारी नौकरी करने वाले, आयकरदाता या उच्च पेंशन भोगी इसके पात्र नहीं हैं।\n\n**आवश्यक चेकलिस्ट:**\n1. भूमि मालिकाना दस्तावेज (खतौनी/जमीन की पर्ची)।\n2. आधार कार्ड (बैंक खाते से लिंक होना अनिवार्य)।\n3. डीबीटी (DBT) चालू वाला बैंक खाता।\n4. आधार से लिंक मोबाइल नंबर।`,
-        document_trigger: ["आधार", "अपडेट", "दस्तावेज", "कार्ड", "पहचान पत्र", "पता", "बदलना"],
-        document_response: `📄 **आधार कार्ड पता अपडेट गाइड**\n\nआप UIDAI SSUP पोर्टल के जरिए पूरी तरह से ऑनलाइन अपने आधार का पता बदल सकते हैं।\n\n**स्वीकार्य पते के प्रमाण दस्तावेज:**\n- 🏠 बिजली, पानी या गैस का बिल (3 महीने से पुराना न हो)।\n- 🏠 फोटो और बैंक की मुहर के साथ पासबुक।\n- 🏠 पंजीकृत रेंट एग्रीमेंट या रजिस्ट्री दस्तावेज।\n- 🏠 पासपोर्ट या ड्राइविंग लाइसेंस।\n\n**ऑनलाइन आवेदन करने के चरण:**\n1. आधिकारिक UIDAI SSUP पोर्टल खोलें।\n2. अपना 12 अंकों का आधार नंबर डालें और मोबाइल पर आए ओटीपी से लॉग इन करें।\n3. **'Update Address Online'** विकल्प पर क्लिक करें और नया पता भरें।\n4. अपने पते के प्रमाण दस्तावेज की साफ स्कैन कॉपी अपलोड करें।\n5. ₹50 की फीस जमा करें और मिलने वाली 14 अंकों की सेवा अनुरोध संख्या (SRN) संभाल कर रखें।`,
-        complaint_trigger: ["सड़क", "गड्ढा", "शिकायत", "नगर निगम", "कचरा", "पानी", "बिजली", "नाली"],
-        complaint_response: `⚠️ **सार्वजनिक शिकायत मसौदा: सड़क मरम्मत और गड्ढे**\n\nमैंने नगर निगम और CPGRAMS के नियमों के अनुसार एक आधिकारिक शिकायत पत्र का प्रारूप तैयार किया है।\n\n**वार्ड शिकायत विवरण:**\n- **श्रेणी:** नगर निगम बुनियादी ढांचा / सड़कें\n- **जीपीएस निर्देशांक:** \`28.6139° N, 77.2090° E\` (वार्ड शिकायत स्थल)\n- **प्राथमिकता:** अति आवश्यक श्रेणी\n\n**तैयार किया गया मसौदा (कॉपी करने के लिए तैयार):**\n> सेवा में,\n> मुख्य कार्यकारी अभियंता / वार्ड कमिश्नर,\n> नगर निगम विकास विभाग।\n>\n> **विषय:** वार्ड मुख्य मार्ग पर गहरे गड्ढों की तत्काल मरम्मत का अनुरोध।\n>\n> इस पत्र के माध्यम से मैं आपका ध्यान हमारे क्षेत्र की मुख्य सड़क पर बने गहरे और खतरनाक गड्ढों की ओर आकर्षित करना चाहता हूँ। इन गड्ढों के कारण अक्सर दुर्घटनाएं हो रही हैं, विशेष रूप से दोपहिया वाहनों और बुजुर्गों के लिए यहां से निकलना अत्यंत जोखिम भरा हो गया है। आपसे विनम्र अनुरोध है कि इस शिकायत को प्राथमिकता पर दर्ज कर सड़क की जल्द से जल्द मरम्मत करवाने की कृपा करें।\n\n*आप इस मसौदे को कॉपी कर नगर निगम पोर्टल पर अपलोड कर सकते हैं।*`
+        welcome: "नमस्ते! 🙏 मैं आपका **स्मार्ट भारत सहायक** हूँ। मैं सरकारी योजनाओं को समझने, दस्तावेजों के लिए जरूरी कागजात पता करने, और स्थानीय समस्याओं के लिए सीधे शिकायत पत्र लिखने में आपकी मदद कर सकता हूँ। मुझसे बेझिझक अपनी भाषा में पूछें!",
+        scheme_trigger: ["योजना", "लाभ", "किसान", "खेती", "अस्पताल", "मुफ्त", "इलाज", "घर", "आवास", "पेंशन", "गरीब"],
+        scheme_response: `🏥 **आयुष्मान भारत योजना (मुफ्त इलाज)**
+- **यह क्या है:** अस्पताल में भर्ती होने और गंभीर बीमारियों के मुफ्त इलाज के लिए हर साल प्रति परिवार ₹5 लाख तक की मदद।
+- **कौन आवेदन कर सकता है:** आर्थिक रूप से कमजोर परिवार और दैनिक वेतन भोगी।
+- **जरूरी कागजात:**
+  1. परिवार के सभी सदस्यों का आधार कार्ड।
+  2. राशन कार्ड।
+  3. आधार से जुड़ा मोबाइल नंबर।
+
+🌾 **पीएम-किसान योजना (किसान सहायता)**
+- **यह क्या है:** खेती करने वाले परिवारों को हर साल ₹6,000 की वित्तीय सहायता, जो ₹2,000 की तीन किश्तों में सीधे बैंक खाते में भेजी जाती है।
+- **कौन आवेदन कर सकता है:** जिनके नाम पर कृषि योग्य भूमि है।
+- **जरूरी कागजात:**
+  1. जमीन के कागजात (पट्टा या लगान रसीद)।
+  2. आधार कार्ड।
+  3. आधार से लिंक बैंक खाता।
+
+🏠 **प्रधानमंत्री आवास योजना (घर बनाने की योजना)**
+- **यह क्या है:** पक्का और सुरक्षित घर बनाने या खरीदने के लिए सरकार की तरफ से मदद या सस्ते ब्याज पर लोन।
+- **कौन आवेदन कर सकता है:** ऐसे परिवार जिनके पास पक्का मकान नहीं है और आमदनी कम है।
+- **जरूरी कागजात:**
+  1. आधार कार्ड।
+  2. आय प्रमाण पत्र या वेतन की रसीद।
+  3. बैंक खाते की पासबुक।`,
+        document_trigger: ["आधार", "पता", "बदलना", "कार्ड", "कागज", "दस्तावेज", "वोटर आईडी", "पहचान पत्र"],
+        document_response: `📄 **आधार कार्ड में पता बदलने का आसान तरीका**
+आप घर बैठे ऑनलाइन अपने आधार का पता बदल सकते हैं:
+- **स्वीकार्य कागजात (कोई भी एक):**
+  - बिजली या पानी का बिल (3 महीने से पुराना न हो)
+  - फोटो के साथ बैंक की पासबुक
+  - पंजीकृत रेंट एग्रीमेंट या मकान की रजिस्ट्री
+  - वोटर आईडी या पासपोर्ट
+
+- **ऑनलाइन अपडेट करने के सरल चरण:**
+  1. आधिकारिक MyAadhaar वेबसाइट खोलें।
+  2. अपना आधार नंबर डालें और मोबाइल पर आए ओटीपी से लॉग इन करें।
+  3. **'Update Address Online'** विकल्प पर क्लिक करें और नया पता भरें।
+  4. अपने पते के प्रमाण दस्तावेज की साफ फोटो अपलोड करें।
+  5. ₹50 की फीस का भुगतान करें और रसीद संभाल कर रखें।`,
+        complaint_trigger: ["सड़क", "गड्ढा", "शिकायत", "कचरा", "नाली", "पानी", "बिजली", "सफाई", "लाइट"],
+        complaint_response: `✍️ **तैयार किया गया शिकायत पत्र का प्रारूप**
+मैंने आपके लिए एक सरल और स्पष्ट शिकायत पत्र तैयार किया है। आप इसे कॉपी करके अपने नगर निगम या वार्ड कार्यालय में दे सकते हैं:
+
+> **सेवा में,**
+> **वार्ड अधिकारी / मुख्य नगर आयुक्त,**
+> **स्थानीय नगर निगम कार्यालय।**
+>
+> **विषय:** हमारे क्षेत्र में सड़क के गहरे गड्ढों की मरम्मत का अनुरोध।
+>
+> आदरणीय महोदय / महोदया,
+> मैं इस पत्र के माध्यम से हमारे क्षेत्र की मुख्य सड़क की खराब स्थिति की ओर आपका ध्यान आकर्षित करना चाहता हूँ। हमारी सड़क पर कई गहरे गड्ढे हो गए हैं, जिससे बुजुर्गों को चलने और बच्चों को साइकिल चलाने में बहुत खतरा रहता है। बारिश के मौसम में पानी भरने के कारण अक्सर दुर्घटनाएं होने का डर बना रहता है।
+>
+> आपसे विनम्र निवेदन है कि हमारी सुरक्षा को ध्यान में रखते हुए सड़क की जल्द मरम्मत कराने की कृपा करें।
+>
+> धन्यवाद,
+> **क्षेत्र के निवासी**
+
+*इस लेटर बॉक्स के ऊपर दाईं ओर दिए गए कॉपी बटन पर क्लिक करके आप इसे उपयोग कर सकते हैं।*`
       },
       bn: {
-        welcome: "নমস্কার! 🙏 আমি আপনার **স্মার্ট ভারত এআই সাথী**। আমি সরকারি প্রকল্প, প্রয়োজনীয় নথিপত্রের নির্দেশিকা এবং অভিযোগের খসড়া তৈরিতে সাহায্য করব। সম্পূর্ণ লাইভ এআই অভিজ্ঞতার জন্য উপরোক্ত সেটিংসে গিয়ে আপনার Gemini চাবি যুক্ত করুন!",
-        scheme_trigger: ["প্রকল্প", "কৃষক", "টাকা", "যোজনা", "চাষ", "পিএম কিষাণ"],
-        scheme_response: `🏛️ **পিএম-কিষাণ সম্মান নিধি যোজনো**\n\n**আর্থিক সহায়তা:** প্রতি বছর মোট ₹৬,০০০ টাকা সরাসরি ব্যাঙ্ক অ্যাকাউন্টে পাঠানো হয় (₹২,০০০ করে ৩টি সমান কিস্তিতে)।\n\n**যোগ্যতার শর্তাবলী:**\n- ✅ অবশ্যই নিজের নামে চাষযোগ্য জমির রেকর্ড থাকতে হবে।\n- ❌ সরকারি কর্মচারী, আয়করদাতা বা উচ্চ পেনশনভোগীরা এই প্রকল্পের যোগ্য নন।\n\n**প্রয়োজনীয় কাগজপত্র চেকলিস্ট:**\n১. জমির পর্চা বা মিউটেশন শংসাপত্র।\n২. আধার কার্ড (ব্যাঙ্ক অ্যাকাউন্টের সাথে লিংক থাকা বাধ্যতামূলক)।\n৩. ডিবিটি (DBT) সক্রিয় ব্যাঙ্ক অ্যাকাউন্ট।\n৪. ওটিপি আথেনটিকেশনের জন্য নথিভুক্ত মোবাইল নম্বর।`,
-        document_trigger: ["আধার", "ঠিকানা", "আপডেট", "কার্ড", "পরিচয়পত্র", "নথি", "পরিবর্তন"],
-        document_response: `📄 **আধার কার্ডের ঠিকানা পরিবর্তন নির্দেশিকা**\n\nঅনলাইনে UIDAI SSUP পোর্টালের মাধ্যমে খুব সহজেই আধার কার্ডের ঠিকানা পরিবর্তন করা যায়।\n\n**ঠিকানার প্রমাণপত্র হিসেবে গ্রহণযোগ্য নথিপত্র:**\n- 🏠 বিদ্যুৎ, জল বা গ্যাস সংযোগের বিল (৩ মাসের বেশি পুরানো নয়)।\n- 🏠 ছবি এবং ব্যাঙ্কের সীলমোহর সহ পাসবুক।\n- 🏠 রেজিস্টার্ড বাড়িভাড়া চুক্তি বা ক্রয়ের দলিল।\n- 🏠 পাসপোর্ট বা ড্রাইভিং লাইসেন্স।\n\n**পরিবর্তন করার পদ্ধতি:**\n১. UIDAI SSUP পোর্টালে যান।\n২. ১২ সংখ্যার আধার নম্বর এবং ওটিপি (OTP) দিয়ে সাইন-ইন করুন।\n৩. **'Update Address Online'** এ ক্লিক করে নতুন ঠিকানাটি লিখুন।\n৪. আপনার ঠিকানার প্রমাণপত্রের স্ক্যান কপি আপলোড করুন।\n৫. ₹৫০ অনলাইন ফি পেমেন্ট করুন এবং ১৪ সংখ্যার সার্ভিস রিকোয়েস্ট নম্বর (SRN) লিখে রাখুন।`,
-        complaint_trigger: ["রাস্তা", "গর্ত", "অভিযোগ", "পৌরসভা", "জল", "ড্রেন", "আবর্জনা", "লাইট"],
-        complaint_response: `⚠️ **জনস্বার্থ অভিযোগের খসড়া: ভাঙা রাস্তা ও গর্ত মেরামত**\n\nআমি স্থানীয় পৌরসভা বা CPGRAMS পোর্টালে জমা দেওয়ার মতো একটি খসড়া অভিযোগ পত্র তৈরি করেছি।\n\n**অভিযোগ বিবরণী:**\n- **বিভাগ:** সড়ক ও পুর পরিকাঠামো\n- **লোকেশন স্থানাঙ্ক:** \`28.6139° N, 77.2090° E\` (স্থানীয় ওয়ার্ড কেন্দ্র)\n- **জরুরি স্তর:** উচ্চ ঝুঁকি\n\n**প্রস্তুত খসড়া অভিযোগ পত্র:**\n> প্রতি,\n> নির্বাহী ওয়ার্ড প্রকৌশলী / পৌর কমিশনার,\n> পৌরসংস্থা উন্নয়ন দপ্তর।\n>\n> **বিষয়:** স্থানীয় প্রধান সড়কের মারাত্মক গর্তগুলি অবিলম্বে মেরামতের আবেদন।\n>\n> এই পত্রের মাধ্যমে আমি আপনার দৃষ্টি আকর্ষণ করছি আমাদের এলাকার মূল রাস্তায় তৈরি হওয়া গভীর ও বিপজ্জনক গর্তগুলির দিকে। এই বেহাল রাস্তার কারণে প্রতিনিয়ত ছোট-বড় দুর্ঘটনা ঘটছে, বিশেষ করে মোটরসাইকেল আরোহীদের জন্য এটি অত্যন্ত বিপজ্জনক। জনস্বার্থে এই বিষয়টি নথিভুক্ত করে দ্রুত রাস্তাটি মেরামতের ব্যবস্থা নেওয়ার জন্য আপনাকে বিশেষভাবে অনুরোধ করছি।\n\n*এই খসড়াটি কপি করে সরাসরি আপনার স্থানীয় পুর পোর্টালে জমা দিতে পারেন।*`
+        welcome: "নমস্কার! 🙏 আমি আপনার **স্মার্ট ভারত সহকারী**। আমি আপনাকে বিভিন্ন সরকারি সুযোগ-সুবিধা বুঝতে, দরকারি নথিপত্র জোগাড় করতে, অথবা আপনার এলাকার কোনো সমস্যার জন্য চিঠি লিখতে সাহায্য করব। আপনার নিজের ভাষায় যেকোনো প্রশ্ন করুন!",
+        scheme_trigger: ["প্রকল্প", "টাকা", "কৃষক", "চাষ", "হাসপাতাল", "চিকিৎসা", "ঘর", "বাড়ি", "পেনশন", "গরিব"],
+        scheme_response: `🏥 **আয়ুষ্মান ভারত যোজনা (বিনামূল্যে চিকিৎসা)**
+- **সুবিধা:** হাসপাতালে ভর্তি ও চিকিৎসার জন্য প্রতি পরিবারকে বছরে ₹৫ লক্ষ টাকা পর্যন্ত বিনামূল্যে চিকিৎসা সহায়তা।
+- **কারা পাবেন:** আর্থিকভাবে দুর্বল পরিবার এবং দিনমজুর মানুষ।
+- **দরকারি কাগজপত্র:**
+  ১. পরিবারের সবার আধার কার্ড।
+  ২. রেশন কার্ড।
+  ৩. আধারের সাথে যুক্ত মোবাইল নম্বর।
+
+🌾 **পিএম-কিষাণ প্রকল্প (চাষীদের জন্য সাহায্য)**
+- **সুবিধা:** চাষী পরিবারগুলিকে বছরে মোট ₹৬,০০০ টাকা সাহায্য, যা সরাসরি ব্যাঙ্ক অ্যাকাউন্টে ৩টি কিস্তিতে (₹২,০০০ করে) পাঠানো হয়।
+- **কারা পাবেন:** যাদের নিজেদের নামে চাষযোগ্য জমি রয়েছে।
+- **দরকারি কাগজপত্র:**
+  ১. জমির খতিয়ান বা পর্চা।
+  ২. আধার কার্ড।
+  ৩. আধারের সাথে যুক্ত ব্যাঙ্ক অ্যাকাউন্ট।
+
+🏠 **প্রধানমন্ত্রী আবাস যোজনা (পাকা বাড়ি তৈরির প্রকল্প)**
+- **সুবিধা:** একটি নিরাপদ পাকা বাড়ি তৈরি করতে বা কিনতে সরকারের পক্ষ থেকে সরাসরি টাকা বা কম সুদে ঋণের সুবিধা।
+- **কারা পাবেন:** যাদের নিজস্ব পাকা বাড়ি নেই এবং বার্ষিক আয় কম।
+- **দরকারি কাগজপত্র:**
+  ১. আধার কার্ড।
+  ২. আয়ের শংসাপত্র বা ইনকাম সার্টিফিকেট।
+  ৩. ব্যাঙ্ক অ্যাকাউন্টের বিবরণী।`,
+        document_trigger: ["আধার", "ঠিকানা", "পরিবর্তন", "কার্ড", "নথিপত্র", "ভোটার আইডি", "পাসপোর্ট"],
+        document_response: `📄 **আধার কার্ডের ঠিকানা পরিবর্তন করার সহজ গাইড**
+আপনি নিজেই অনলাইনে আপনার আধার কার্ডের ঠিকানা পরিবর্তন করতে পারেন:
+- **গ্রহণযোগ্য কাগজপত্র (যেকোনো একটি):**
+  - বিদ্যুৎ বিল বা জলের বিল (৩ মাসের বেশি পুরানো নয়)
+  - ছবি সহ ব্যাঙ্ক পাসবুক
+  - রেজিস্টার্ড ভাড়া চুক্তি বা জমির দলিল
+  - ভোটার কার্ড বা পাসপোর্ট
+
+- **অনলাইন পরিবর্তনের সহজ ধাপ:**
+  ১. UIDAI-এর MyAadhaar ওয়েবসাইটে যান।
+  ২. আধার নম্বর দিয়ে ফোনে আসা ওটিপি (OTP) দিয়ে লগ-ইন করুন।
+  ৩. **'Update Address Online'** এ ক্লিক করে নতুন ঠিকানাটি লিখুন।
+  ৪. আপনার ঠিকানার প্রমাণের একটি পরিষ্কার ছবি আপলোড করুন।
+  ৫. অনলাইনে ₹৫০ ফি দিয়ে রশিদটি ডাউনলোড করে রাখুন।`,
+        complaint_trigger: ["রাস্তা", "গর্ত", "অভিযোগ", "ময়লা", "ড্রেন", "জল", "আলো", "পরিষ্কার", "পাইপ"],
+        complaint_response: `✍️ **অভিযোগ পত্রের খসড়া চিঠি**
+আমি আপনার জন্য একটি স্পষ্ট ও সুন্দর চিঠি তৈরি করেছি। এটি কপি করে আপনার স্থানীয় ওয়ার্ড বা পৌরসভা দপ্তরে জমা দিতে পারেন:
+
+> **প্রতি,**
+> **ওয়ার্ড অফিসার / পৌর কমিশনার,**
+> **স্থানীয় পৌরসভা কার্যালয়।**
+>
+> **বিষয়:** আমাদের এলাকার ভাঙা রাস্তা ও বিপজ্জনক গর্ত মেরামতের আবেদন।
+>
+> শ্রদ্ধেয় মহাশয় / মহাশয়া,
+> আমি আমাদের এলাকার রাস্তার বেহাল অবস্থার কথা আপনার নজরে আনার জন্য এই চিঠিটি লিখছি। রাস্তায় প্রচুর বিপজ্জনক গর্ত তৈরি হয়েছে যার ফলে প্রবীণ মানুষদের হাঁটতে এবং ছোট শিশুদের যাতায়াত করতে খুবই অসুবিধা হচ্ছে। বর্ষাকালে জল জমে দুর্ঘটনা ঘটার আশঙ্কা আরও বেড়ে যায়।
+>
+> জনস্বার্থে আমাদের এই রাস্তাটি দ্রুত সংস্কার করার ব্যবস্থা নিলে আমরা বিশেষভাবে বাধিত হব।
+>
+> ধন্যবাদান্তে,
+> **এলাকাবাসী**
+
+*চিঠিটির বক্সের ডানদিকের কোণায় থাকা কপি বোতামে ক্লিক করে আপনি এই টেক্সটটি ব্যবহার করতে পারেন।*`
       },
       ta: {
-        welcome: "வணக்கம்! 🙏 நான் உங்களது **ஸ்மார்ட் பாரத் AI துணைவன்**. அரசு திட்டங்கள், ஆவணங்களின் விதிமுறைகள் மற்றும் குறை தீர்ப்பு கடிதங்கள் வடிவமைப்பதில் நான் உங்களுக்கு உதவுவேன். முழுமையான அனுபவத்திற்கு மேலே உள்ள அமைப்புகளில் Gemini API விசையைச் சேர்க்கவும்!",
-        scheme_trigger: ["திட்டம்", "விவசாயி", "பணம்", "பயிர்", "நெல்", "உதவி", "யோஜனா"],
-        scheme_response: `🏛️ **பிரதம மந்திரி கிசான் சம்மன் நிதி யோஜனா**\n\n**நிதியுதவி:** ஆண்டுக்கு ₹6,000 நிதியுதவி, மூன்று தவணைகளாக தலா ₹2,000 வீதம் நேரடியாக விவசாயிகளின் வங்கி கணக்குகளில் செலுத்தப்படுகிறது.\n\n**தகுதி வரம்புகள்:**\n- ✅ தங்களது பெயரில் சொந்தமாக விவசாய நிலம் வைத்திருக்கும் இந்திய குடிமகனாக இருக்க வேண்டும்.\n- ❌ அரசு ஊழியர்கள், வருமான வரி செலுத்துபவர்கள் மற்றும் ஓய்வூதியம் பெறுபவர்களுக்கு தகுதி இல்லை.\n\n**தேவையான ஆவணங்கள்:**\n1. நில உரிமைப் பத்திரங்கள் (பட்டா/சிட்டா நகல்).\n2. ஆதார் அட்டை (வங்கி கணக்குடன் இணைக்கப்பட்டது).\n3. DBT செயல்படுத்தப்பட்ட வங்கி கணக்கு புத்தகம்.\n4. மொபைல் எண் (ஆதாருடன் இணைக்கப்பட்டது).`,
-        document_trigger: ["ஆதார்", "முகவரி", "மாற்றம்", "அட்டை", "சான்றிதழ்", "புதுப்பித்தல்", "ஆவணம்"],
-        document_response: `📄 **ஆதார் முகவரி புதுப்பிப்பு வழிகாட்டி**\n\nUIDAI SSUP போர்ட்டல் மூலம் உங்கள் வீட்டு முகவரியை எளிதாக ஆன்லைனில் மாற்றிக்கொள்ளலாம்.\n\n**முகவரி சான்றாக ஏற்றுக்கொள்ளப்படும் ஆவணங்கள்:**\n- 🏠 மின்சாரக் கட்டணம், தண்ணீர் அல்லது எரிவாயு பில் (3 மாதங்களுக்குள் இருக்க வேண்டும்).\n- 🏠 புகைப்படத்துடன் கூடிய வங்கி கணக்குப் புத்தகம்.\n- 🏠 பதிவு செய்யப்பட்ட வாடகை ஒப்பந்தம் அல்லது சொத்து பத்திரம்.\n- 🏠 கடவுச்சீட்டு (Passport) அல்லது ஓட்டுநர் உரிமம்.\n\n**செய்ய வேண்டிய படிமுறைகள்:**\n1. UIDAI SSUP போர்ட்டலுக்குச் செல்லவும்.\n2. 12-இலக்க ஆதார் எண் மற்றும் மொபைல் OTP மூலம் உள்நுழையவும்.\n3. **'Update Address Online'** என்பதைத் தேர்ந்தெடுத்து புதிய முகவரியை உள்ளிடவும்.\n4. உங்கள் முகவரி சான்றின் வண்ண நகலை பதிவேற்றவும்.\n5. ஆன்லைன் செயலாக்கக் கட்டணம் ₹50 செலுத்தி, 14-இலக்க SRN எண்ணைக் குறித்துக்கொள்ளவும்.`,
-        complaint_trigger: ["சாலை", "பள்ளம்", "புகார்", "நகராட்சி", "கழிவுநீர்", "குப்பை", "மின்சாரம்"],
-        complaint_response: `⚠️ **நகராட்சி புகார் கடித வரைவு: சாலைப் பள்ளங்கள் சீரமைப்பு**\n\nமாநகராட்சி குறை தீர்ப்பு அமைப்பிற்கு தேவையான புகார் கடித வரைவை நான் வடிவமைத்துள்ளேன்.\n\n**புகார் விவரங்கள்:**\n- **வகை:** வார்டு உள்கட்டமைப்பு / சாலைகள்\n- **இருப்பிடம்:** \`28.6139° N, 77.2090° E\` (புகார் இருப்பிடம்)\n- **முன்னுரிமை:** அவசரம்\n\n**புகார் கடித வரைவு (நகலெடுக்கத் தயார்):**\n> பெறுநர்,\n> வார்டு பொறியாளர் / மாநகராட்சி ஆணையர்,\n> நகராட்சி நிர்வாகத் துறை.\n>\n> **பொருள்:** வார்டு முதன்மைச் சாலையில் உள்ள ஆழமான பள்ளங்களை உடனடியாக சீரமைக்கக் கோருதல்.\n>\n> எங்களது வார்டு பகுதி முதன்மைச் சாலையில் ஏற்பட்டுள்ள ஆழமான பள்ளங்கள் குறித்து தங்களின் கவனத்திற்கு கொண்டு வருகிறேன். இப்பள்ளங்களால் இருசக்கர வாகன ஓட்டிகள் பெரும் சிரமத்திற்கு உள்ளாவதோடு விபத்துக்களும் ஏற்படுகின்றன. குறிப்பாக இரவு நேரங்களில் மக்கள் அச்சத்துடன் பயணிக்கும் நிலை உள்ளது. எனவே, பொதுமக்கள் நலன் கருதி சாலையை உடனடியாக சீரமைக்க நடவடிக்கை எடுக்குமாறு கேட்டுக்கொள்கிறேன்.\n\n*இந்த வரைவை நகலெடுத்து உங்கள் நகராட்சி குறைதீர்க்கும் போர்ட்டலில் சமர்ப்பிக்கலாம்.*`
+        welcome: "வணக்கம்! 🙏 நான் உங்களது **ஸ்மார்ட் பாரத் உதவித் தோழன்**. அரசு திட்டங்கள், தேவையான அடையாள ஆவணங்கள் மற்றும் உள்ளூர் பிரச்சனைகளுக்கான புகார் கடிதங்களை எளிதாக உருவாக்க நான் உங்களுக்கு உதவ முடியும். உங்களது சொந்த மொழியில் கேளுங்கள்!",
+        scheme_trigger: ["திட்டம்", "விவசாயி", "நெல்", "உதவி", "பணம்", "மருத்துவம்", "அஸ்பத்திரி", "இலவச", "வீடு", "ஓய்வூதியம்"],
+        scheme_response: `🏥 **ஆயுஷ்மான் பாரத் திட்டம் (இலவச மருத்துவம்)**
+- **நோக்கம்:** மருத்துவமனைச் செலவுகள் மற்றும் பெரிய சிகிச்சைகளுக்காக ஒவ்வொரு குடும்பத்திற்கும் ஆண்டுக்கு ₹5 லட்சம் வரை இலவச மருத்துவ உதவி.
+- **யார் விண்ணப்பிக்கலாம்:** ஏழை எளிய குடும்பங்கள் மற்றும் தினசரி கூலித் தொழிலாளர்கள்.
+- **தேவையான ஆவணங்கள்:**
+  1. குடும்ப உறுப்பினர்கள் அனைவரின் ஆதார் அட்டை.
+  2. ரேஷன் கார்டு.
+  3. ஆதாருடன் இணைக்கப்பட்ட மொபைல் எண்.
+
+🌾 **பிரதம மந்திரி கிசான் திட்டம் (விவசாயிகள் உதவி)**
+- **நோக்கம்:** விவசாயக் குடும்பங்களுக்கு ஆண்டுக்கு ₹6,000 நேரடி உதவித்தொகை. இது ₹2,000 வீதம் மூன்று தவணைகளாக நேரடியாக வங்கிக் கணக்கில் செலுத்தப்படும்.
+- **யார் விண்ணப்பிக்கலாம்:** சொந்தமாக விவசாய நிலம் வைத்திருக்கும் விவசாயிகள்.
+- **தேவையான ஆவணங்கள்:**
+  1. நிலப் பட்டா அல்லது நில வரி ரசீது.
+  2. ஆதார் அட்டை.
+  3. ஆதாருடன் இணைக்கப்பட்ட வங்கிக் கணக்கு புத்தகம்.
+
+🏠 **பிரதம மந்திரி அவாஸ் யோஜனா (இலவச வீடு திட்டம்)**
+- **நோக்கம்:** பாதுகாப்பான சொந்தப் பக்கா வீடு கட்டுவதற்கு அல்லது வாங்குவதற்கு அரசாங்கத்தின் நேரடி நிதியுதவி அல்லது வட்டி சலுகை.
+- **யார் விண்ணப்பிக்கலாம்:** சொந்தமாகப் பக்கா வீடு இல்லாத ஏழைக் குடும்பங்கள்.
+- **தேவையான ஆவணங்கள்:**
+  1. ஆதார் அட்டை.
+  2. வருமானச் சான்றிதழ்.
+  3. வங்கிக் கணக்கு விவரங்கள்.`,
+        document_trigger: ["ஆதார்", "முகவரி", "மாற்றம்", "அட்டை", "ஆவணம்", "வோட்டர் আইডি", "கடவுச்சீட்டு"],
+        document_response: `📄 **ஆதார் அட்டை முகவரி மாற்ற எளிய வழிகாட்டி**
+உங்கள் முகவரியை நீங்களே ஆன்லைனில் எளிதாக மாற்றிக்கொள்ளலாம்:
+- **ஏற்றுக்கொள்ளப்படும் ஆவணங்கள் (ஏதேனும் ஒன்று):**
+  - மின்சாரக் கட்டணம் அல்லது தண்ணீர் கட்டண ரசீது (3 மாதத்திற்குள் இருக்க வேண்டும்)
+  - புகைப்படத்துடன் கூடிய வங்கிக் கணக்கு புத்தகம்
+  - பதிவு செய்யப்பட்ட வாடகை ஒப்பந்தப் பத்திரம்
+  - வாக்காளர் அடையாள அட்டை அல்லது பாஸ்போர்ட்
+
+- **முகவரி மாற்ற எளிய வழிமுறைகள்:**
+  1. அதிகாரப்பூர்வ MyAadhaar இணையதளத்தைத் திறக்கவும்.
+  2. உங்கள் ஆதார் எண் மற்றும் உங்கள் மொபைலுக்கு வரும் OTP மூலம் உள்ளே நுழையவும்.
+  3. **'Update Address Online'** என்பதைத் தேர்ந்தெடுத்து புதிய முகவரியைப் பதியவும்.
+  4. உங்களது முகவரி சான்றை ஒரு தெளிவான புகைப்படமாக எடுத்து பதிவேற்றவும்.
+  5. ஆன்லைன் கட்டணம் ₹50 செலுத்தி, அதற்கான ரசீதைச் சேமித்துக் கொள்ளவும்.`,
+        complaint_trigger: ["சாலை", "பள்ளம்", "புகார்", "குப்பை", "கழிவுநீர்", "தண்ணீர்", "மின்சாரம்", "தெருவிளக்கு", "சுத்தம்"],
+        complaint_response: `✍️ **உங்களுக்காகத் தயாரிக்கப்பட்ட புகார் கடித வரைவு**
+நகராட்சி வார்டு அலுவலகத்தில் சமர்ப்பிப்பதற்காக ஒரு எளிய கடிதத்தை நான் தயார் செய்துள்ளேன். நகலெடுத்துப் பயன்படுத்திக் கொள்ளலாம்:
+
+> **பெறுநர்,**
+> **வார்டு அதிகாரி / நகராட்சி ஆணையர்,**
+> **உள்ளூர் நகராட்சி அலுவலகம்.**
+>
+> **பொருள்:** எங்கள் தெருவிலுள்ள சாலைப் பள்ளங்களைச் சீரமைக்கக் கோருதல்.
+>
+> மதிப்பிற்குரிய ஐயா / அம்மா,
+> எங்களது குடியிருப்புப் பகுதியில் மிகவும் மோசமாக உள்ள சாலையை உங்களின் கவனத்திற்குக் கொண்டுவர விரும்புகிறேன். தெருவில் ஆழமான பள்ளங்கள் விழுந்துள்ளதால் முதியவர்கள் நடப்பதற்கும், சிறுவர்கள் சைக்கிள் ஓட்டுவதற்கும் பெரும் சிரமமாக உள்ளது. இரவு நேரங்களில் பலரும் தவறி விழுந்து காயம் அடைந்துள்ளனர்.
+>
+> பொதுமக்கள் நலன் கருதி சாலையை விரைவில் சீரமைத்துத் தருமாறு மிகவும் பணிவுடன் கேட்டுக்கொள்கிறேன்.
+>
+> நன்றியுடன்,
+> **குடியிருப்பு மக்கள்**
+
+*இந்தக் கடிதப் பெட்டியின் மேலே வலது புறமுள்ள நகல் (Copy) பொத்தானைப் பயன்படுத்தி இதனைப் பெற்றுக்கொள்ளலாம்.*`
       },
       te: {
-        welcome: "నమస్తే! 🙏 నేను మీ **స్మార్ట్ భారత్ AI సివిక్ కంపానియన్**. ప్రభుత్వ పథకాలు, పత్రాల నవీకరణ మరియు ఫిర్యాదుల ముసాయిదా తయారీలో నేను మీకు సహాయం చేస్తాను. మెరుగైన సేవల కోసం పైన ఉన్న సెట్టింగుల ప్యానల్‌లో మీ Gemini API కీని నమోదు చేయండి!",
-        scheme_trigger: ["పథకం", "రైతు", "డబ్బులు", "పంట", "పెన్షన్", "యోజన", "పీఎం కిసాన్"],
-        scheme_response: `🏛️ **పీఎం-కిసాన్ సమ్మాన్ నిధి యోజన**\n\n**సహాయం:** రైతు కుటుంబాలకు సంవత్సరానికి ₹6,000 ఆర్థిక సహాయం, మూడు విడతలలో విడతకు ₹2,000 చొప్పున నేరుగా బ్యాంక్ ఖాతాల్లో జమ చేయబడుతుంది.\n\n**అర్హత నిబంధనలు:**\n- ✅ తమ పేరుతో సాగు భూమి కలిగిన భారతీయ పౌరుడై ఉండాలి.\n- ❌ ఆదాయపు పన్ను చెల్లింపుదారులు, ప్రభుత్వ ఉద్యోగులు దీనికి అర్హులు కారు.\n\n**కావలసిన పత్రాల చెక్‌లిస్ట్:**\n1. భూ యాజమాన్య పత్రాలు (పట్టాదారు పాస్ బుక్/ఖతౌనీ).\n2. ఆధార్ కార్డ్ (ఖాతాకు లింక్ చేయబడి ఉండాలి).\n3. DBT ఎనేబుల్ చేయబడిన బ్యాంక్ ఖాతా.\n4. ఆధార్‌తో అనుసంధానించబడిన మొబైల్ నంబర్.`,
-        document_trigger: ["ఆధార్", "చిరునామా", "అప్‌డేట్", "కార్డు", "డాక్యుమెంట్", "గుర్తింపు కార్డు", "మార్పు"],
-        document_response: `📄 **ఆధార్ చిరునామా మార్పు గైడ్**\n\nమీరు UIDAI SSUP పోర్టల్ ద్వారా ఆన్‌లైన్‌లో మీ చిరునామాను సులభంగా మార్చుకోవచ్చు.\n\n**చిరునామా రుజువుగా ఆమోదించబడే పత్రాలు:**\n- 🏠 విద్యుత్, నీరు లేదా గ్యాస్ బిల్లు (3 నెలల కంటే పాతది కాకూడదు).\n- 🏠 ఫోటో మరియు బ్యాంక్ ముద్రతో ఉన్న బ్యాంక్ పాస్‌బుక్.\n- 🏠 రిజిస్టర్డ్ రెంట్ అగ్రిమెంట్ లేదా సేల్ డీడ్.\n- 🏠 పాస్‌పోర్ట్ లేదా డ్రైవింగ్ లైసెన్స్.\n\n**ఆన్‌లైన్ దరఖాస్తు విధానం:**\n1. అధికారిక UIDAI SSUP పోర్టల్ ఓపెన్ చేయండి.\n2. మీ 12 అంకెల ఆధార్ నంబర్ నమోదు చేసి, మొబైల్‌కు వచ్చే OTPతో లాగిన్ అవ్వండి.\n3. **'Update Address Online'** క్లిక్ చేసి మీ కొత్త చిరునామా నమోదు చేయండి.\n4. మీ చిరునామా రుజువు పత్రం యొక్క స్కాన్ చేసిన కాపీని అప్‌లోడ్ చేయండి.\n5. ఆన్‌లైన్ రుసుము ₹50 చెల్లించి, 14 అంకెల SRN నంబర్‌ను భద్రపరుచుకోండి.`,
-        complaint_trigger: ["రోడ్డు", "గుంతలు", "ఫిర్యాదు", "మునిసిపల్", "నీరు", "డ్రైనేజీ", "చెత్త", "కరెంట్"],
-        complaint_response: `⚠️ **మున్సిపల్ ఫిర్యాదు ముసాయిదా: రహదారి మరమ్మతులు మరియు గుంతలు**\n\nనేను మునిసిపల్ మరియు CPGRAMS నిబంధనల ప్రకారం అధికారిక ఫిర్యాదు పత్రాన్ని సిద్ధం చేశాను.\n\n**వార్డు ఫిర్యాదు వివరాలు:**\n- **వర్గం:** మున్సిపల్ మౌలిక సదుపాయాలు / రోడ్లు\n- **లొకేషన్ కోఆర్డినేట్స్:** \`28.6139° N, 77.2090° E\` (వార్డు కేంద్రం)\n- **ప్రాధాన్యత:** అత్యవసరం\n\n**సిద్ధం చేసిన ముసాయిదా (కాపీ చేయడానికి సిద్ధంగా ఉంది):**\n> గౌరవనీయులైన వార్డు ఇంజనీర్ గారికి,\n> మునిసిపల్ కార్పొరేషన్ కార్యాలయం.\n>\n> **విషయం:** వార్డు ప్రధాన రహదారిలో తీవ్రమైన గుంతల తక్షణ మరమ్మతు అభ్యర్థన.\n>\n> మా ప్రాంతంలోని ప్రధాన రహదారిపై ఏర్పడిన లోతైన మరియు ప్రమాదకరమైన గుంతల గురించి మీ దృష్టికి తీసుకురావడానికి ఈ ఫిర్యాదును నమోదు చేస్తున్నాను. ఈ గుంతల వల్ల నిత్యం ప్రమాదాలు జరుగుతున్నాయి, ముఖ్యంగా ద్విచక్ర వాహనదారులు తీవ్ర ఇబ్బందులు పడుతున్నారు. దయచేసి ప్రజా ప్రయోజనాల దృష్ట్యా ఈ సమస్యను వెంటనే పరిష్కరించి రోడ్డు మరమ్మతులు చేపట్టాల్సిందిగా కోరుతున్నాను.\n\n*ఈ ముసాయిదాను కాపీ చేసి మీ మున్సిపల్ పోర్టల్ లేదా CPGRAMS వెబ్‌సైట్‌లో దాఖలు చేయవచ్చు.*`
+        welcome: "నమస్తే! 🙏 నేను మీ **స్మార్ట్ భారత్ సహాయకుడిని**. నేను మీకు ప్రభుత్వ సంక్షేమ పథకాలను అర్థం చేసుకోవడానికి, దరఖాస్తులకు కావలసిన పత్రాలను తెలుసుకోవడానికి, మరియు మీ వీధి సమస్యలపై అధికారులకు చక్కని లేఖ రాయడానికి సహాయం చేస్తాను. మీ స్వంత భాషలో అడగండి!",
+        scheme_trigger: ["పథకం", "లాభం", "రైతు", "వ్యవసాయం", "ఉచిత", "వైద్యం", "ఇల్లు", "ఆవాస్", "పెన్షన్", "పేదలు"],
+        scheme_response: `🏥 **ఆయుష్మాన్ భారత్ యోజన (ఉచిత వైద్య సహాయం)**
+- **ప్రయోజనం:** తీవ్రమైన అనారోగ్యాలు మరియు ఆసుపత్రి ఖర్చుల కోసం ప్రతి కుటుంబానికి సంవత్సరానికి ₹5 లక్షల వరకు ఉచిత వైద్య సేవలు.
+- **ఎవరు అర్హులు:** ఆర్థికంగా వెనుకబడిన కుటుంబాలు మరియు రోజువారీ కూలీలు.
+- **కావలసిన పత్రాలు:**
+  1. కుటుంబ సభ్యులందరి ఆధార్ కార్డులు.
+  2. రేషన్ కార్డు.
+  3. ఆధార్‌తో అనుసంధానించబడిన మొబైల్ నంబర్.
+
+🌾 **పీఎం-కిసాన్ పథకం (రైతు సంక్షేమం)**
+- **ప్రయోజనం:** భూమి ఉన్న రైతు కుటుంబాలకు సంవత్సరానికి ₹6,000 సహాయం. ఇది ₹2,000 చొప్పున మూడు వాయిదాలలో నేరుగా బ్యాంక్ ఖాతాల్లో జమ చేయబడుతుంది.
+- **ఎవరు అర్హులు:** సాగు భూమి కలిగిన రైతులు.
+- **కావలసిన పత్రాలు:**
+  1. భూ యాజమాన్య పత్రాలు (పట్టాదారు పాస్ బుక్).
+  2. ఆధార్ కార్డు.
+  3. ఆధార్‌తో అనుసంధానించబడిన బ్యాంక్ ఖాతా.
+
+🏠 **ప్రధాన మంత్రి ఆవాస్ యోజన (ఇంటి నిర్మాణం)**
+- **ప్రయోజనం:** సొంత పక్కా ఇల్లు నిర్మించుకోవడానికి లేదా కొనడానికి ప్రభుత్వం నుండి నేరుగా డబ్బు సహాయం లేదా తక్కువ వడ్డీతో రుణాలు.
+- **ఎవరు అర్హులు:** పక్కా ఇల్లు లేని పేద కుటుంబాలు.
+- **కావలసిన పత్రాలు:**
+  1. ఆధార్ కార్డు.
+  2. ఆదాయ ధృవీకరణ పత్రం.
+  3. బ్యాంక్ ఖాతా పుస్తకం.`,
+        document_trigger: ["ఆధార్", "చిరునామా", "మార్పు", "కార్డు", "పత్రాలు", "ఓటర్ ఐడి", "పాస్‌పోర్ట్"],
+        document_response: `📄 **ఆధార్ కార్డు చిరునామా మార్పు సులభ గైడ్**
+మీరు ఆన్‌లైన్‌లో మీ చిరునామాను సులభంగా మార్చుకోవచ్చు:
+- **ఆమోదించబడే పత్రాలు (ఏదైనా ఒకటి):**
+  - కరెంట్ బిల్లు లేదా నీటి బిల్లు (3 నెలల కంటే పాతది కాకూడదు)
+  - ఫోటో ఉన్న బ్యాంక్ పాస్ బుక్
+  - రిజిస్టర్డ్ రెంట్ అగ్రిమెంట్ లేదా ఇంటి రిజిస్ట్రేషన్ పత్రాలు
+  - ఓటర్ ఐడి లేదా పాస్‌పోర్ట్
+
+- **చిరునామా మార్పు సాధారణ దశలు:**
+  1. అధికారిక MyAadhaar వెబ్‌సైట్ ఓపెన్ చేయండి.
+  2. మీ ఆధార్ నంబర్ నమోదు చేసి, మొబైల్‌కు వచ్చే OTPతో లాగిన్ అవ్వండి.
+  3. **'Update Address Online'** క్లిక్ చేసి మీ కొత్త చిరునామా నమోదు చేయండి.
+  4. మీ చిరునామా రుజువు పత్రం యొక్క స్పష్టమైన ఫోటోను అప్‌లోడ్ చేయండి.
+  5. ఆన్‌లైన్ రుసుము ₹50 చెల్లించి, రసీదు భద్రపరుచుకోండి.`,
+        complaint_trigger: ["రోడ్డు", "గుంతలు", "ఫిర్యాదు", "చెత్త", "నాళాలు", "నీరు", "కరెంట్", "లైట్లు", "సఫాయి"],
+        complaint_response: `✍️ **మీ కోసం సిద్ధం చేసిన ఫిర్యాదు లేఖ**
+మున్సిపల్ అధికారులకు సమర్పించడానికి నేను ఒక చక్కటి లేఖను సిద్ధం చేశాను. మీరు దీనిని కాపీ చేసి ఉపయోగించుకోవచ్చు:
+
+> **గౌరవనీయులైన వార్డు అధికారి గారికి,**
+> **మున్సిపల్ కార్పొరేషన్ కార్యాలయం,**
+> **స్థానిక మున్సిపల్ కార్యాలయం.**
+>
+> **విషయం:** మా వీధిలోని ప్రమాదకరమైన గుంతల రోడ్డును మరమ్మతు చేయవలసిందిగా అభ్యర్థన.
+>
+> అయ్యా / అమ్మ,
+> మా నివాస ప్రాంతంలోని రోడ్డు చాలా అధ్వాన్నంగా ఉన్నందున ప్రజా ప్రయోజనాలను దృష్టిలో ఉంచుకుని ఈ లేఖను వ్రాస్తున్నాను. రోడ్డుపై లోతైన గుంతలు పడడం వల్ల ముసలివారు నడవడానికి మరియు చిన్నపిల్లలు సైకిళ్ళు తొక్కడానికి తీవ్ర ఇబ్బంది పడుతున్నారు. రాత్రి వేళల్లో చిన్నచిన్న ప్రమాదాలు కూడా జరిగాయి.
+>
+> దయచేసి మా సమస్యను అర్థం చేసుకుని వీలైనంత త్వరగా రోడ్డు మరమ్మతులు చేయిస్తారని ఆశిస్తున్నాము.
+>
+> ధన్యవాదాలు,
+> **స్థానిక నివాసితులు**
+
+*లేఖ ఉన్న బాక్స్ పైభాగాన ఉన్న కాపీ బటన్ పై క్లిక్ చేసి మీరు దీనిని ఉపయోగించవచ్చు.*`
       }
     };
 
 
+    // ==========================================
+    // MAIN APP COMPONENT
+    // ==========================================
     function App() {
       // DEFAULT THEME IS LIGHT MODE
       const [isDark, setIsDark] = useState(false);
       const [lang, setLang] = useState('en');
       const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-      const [apiPanelOpen, setApiPanelOpen] = useState(false);
-      const [apiKey, setApiKey] = useState(() => localStorage.getItem('smart_bharat_gemini_key') || '');
-      const [isKeySaved, setIsKeySaved] = useState(!!localStorage.getItem('smart_bharat_gemini_key'));
-      const [apiKeyInput, setApiKeyInput] = useState(localStorage.getItem('smart_bharat_gemini_key') || '');
       
-      // Accordion UI State
-      const [activeAccordion, setActiveAccordion] = useState(null);
+      // Interactive Services Dropdown State
+      const [activeCategory, setActiveCategory] = useState(null);
       
-      // Grievance tracking mock ledger state
-      const [trackerToken, setTrackerToken] = useState("");
-      const [trackingResult, setTrackingResult] = useState(null);
+      // Request tracking status
+      const [trackCode, setTrackCode] = useState("");
+      const [trackInfo, setTrackInfo] = useState(null);
 
-      // Alert Toast State
+      // Heartwarming Toast Notifications
       const [toastMessage, setToastMessage] = useState("");
 
-      // Chat Simulator State
+      // Chat Logs
       const [messages, setMessages] = useState([]);
       const [inputVal, setInputVal] = useState("");
       const [isTyping, setIsTyping] = useState(false);
       const chatEndRef = useRef(null);
 
-      // Trigger standard welcome on lang change
+      // Populate warm welcome based on language choice
       useEffect(() => {
         const selectedText = LOCAL_KNOWLEDGE_BASE[lang] || LOCAL_KNOWLEDGE_BASE.en;
         setMessages([
@@ -433,53 +635,34 @@
         ]);
       }, [lang]);
 
-      // Initialize defaults on component mount
+      // Scroll view on new comments
       useEffect(() => {
         chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
       }, [messages, isTyping]);
 
       const triggerToast = (msg) => {
         setToastMessage(msg);
-        setTimeout(() => setToastMessage(""), 4000);
+        setTimeout(() => setToastMessage(""), 3500);
       };
 
-      const handleSaveApiKey = () => {
-        if (apiKeyInput.trim()) {
-          localStorage.setItem('smart_bharat_gemini_key', apiKeyInput.trim());
-          setApiKey(apiKeyInput.trim());
-          setIsKeySaved(true);
-          setApiPanelOpen(false);
-          triggerToast("Gemini Live API Key Linked Successfully!");
-        } else {
-          localStorage.removeItem('smart_bharat_gemini_key');
-          setApiKey('');
-          setIsKeySaved(false);
-          triggerToast("API Key Removed. Switched to offline knowledge base.");
-        }
-      };
-
-      const handleClearApiKey = () => {
-        localStorage.removeItem('smart_bharat_gemini_key');
-        setApiKey('');
-        setApiKeyInput('');
-        setIsKeySaved(false);
-        triggerToast("API Connection Reset.");
-      };
-
-      // Real Gemini API Calling mechanism
-      const callGeminiAPI = async (userPrompt, currentLang) => {
+      // Call central secure Vercel API `/api/chat`
+      const callBackendAPI = async (userPrompt, chatHistory) => {
         try {
-          const apiEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
-          const systemContext = `You are the official Smart Bharat Civic Companion AI, a public utility platform helping Indian citizens interface with government agencies. 
-          Provide accurate, clean, step-by-step assistance in ${currentLang === 'en' ? 'English' : currentLang === 'hi' ? 'Hindi' : currentLang === 'bn' ? 'Bengali' : currentLang === 'ta' ? 'Tamil' : 'Telugu'}. 
-          If drafting a complaint, write a clear, formal administrative draft letter that the user can copy. 
-          Focus on public welfare, direct schemes eligibility, document rules, and direct municipal grievances. Be polite, objective, structured, and extremely supportive. Never mention commercial, SaaS, or pricing terms.`;
+          const apiEndpoint = `/api/chat`;
+          
+          const systemContext = `You are a warm, highly empathetic, and comforting citizen companion called the Smart Bharat Assistant. 
+          Your goal is to help Indian citizens access government services, understand welfare schemes, understand card document rules, and write clear municipal complaints. 
+          Use very simple, comforting, and everyday language. DO NOT use technical jargon, administrative codes, or robotic speech. Be warm, kind, objective, and extremely supportive.
+          Provide your step-by-step guidance in ${lang === 'en' ? 'English' : lang === 'hi' ? 'Hindi' : lang === 'bn' ? 'Bengali' : lang === 'ta' ? 'Tamil' : 'Telugu'}. 
+          If writing a letter, write it clearly inside a block so they can easily copy and send it.`;
 
           const payload = {
-            contents: [{ parts: [{ text: userPrompt }] }],
-            systemInstruction: {
-              parts: [{ text: systemContext }]
-            }
+            message: userPrompt,
+            messages: chatHistory.map(m => ({
+              role: m.sender === 'user' ? 'user' : 'assistant',
+              content: m.text
+            })),
+            systemInstruction: systemContext
           };
 
           const response = await fetch(apiEndpoint, {
@@ -489,126 +672,140 @@
           });
 
           if (!response.ok) {
-            throw new Error(`API Status Code: ${response.status}`);
+            throw new Error(`Server returned code: ${response.status}`);
           }
 
           const result = await response.json();
-          const botReply = result?.candidates?.[0]?.content?.parts?.[0]?.text;
-          if (botReply) {
-            return botReply;
-          } else {
-            return "My telemetry received an empty packet. Please verify your query structure or retry.";
-          }
+          return result?.text || result?.choices?.[0]?.message?.content || result?.content;
         } catch (err) {
-          console.error("Gemini Live API error:", err);
-          return `⚠️ **API Gateway Transit Error**: Unable to establish secure live connection. Please check your internet connectivity or confirm if your key matches the \`gemini-3-flash-preview\` subscription standard.`;
+          console.warn("Vercel route failed. Processing query with safe offline local registry support...", err);
+          return null; // Return null to fallback to deep local lookup smoothly
         }
       };
 
-      // Handle message sending
+      // Process and trigger chat messages
       const handleSendMessage = async (customText) => {
         const activeText = customText || inputVal;
         if (!activeText.trim()) return;
 
         const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        setMessages(prev => [...prev, { sender: 'user', text: activeText, timestamp }]);
+        
+        // Append user voice message
+        const updatedHistory = [...messages, { sender: 'user', text: activeText, timestamp }];
+        setMessages(updatedHistory);
         setInputVal("");
         setIsTyping(true);
 
-        if (isKeySaved && apiKey) {
-          const botResponse = await callGeminiAPI(activeText, lang);
-          setMessages(prev => [...prev, { sender: 'bot', text: botResponse, timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }]);
+        // Attempt live API resolution first
+        const apiReply = await callBackendAPI(activeText, updatedHistory);
+        
+        if (apiReply) {
+          setMessages(prev => [...prev, { 
+            sender: 'bot', 
+            text: apiReply, 
+            timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) 
+          }]);
           setIsTyping(false);
         } else {
-          await new Promise(resolve => setTimeout(resolve, 900));
+          // Robust comforting local offline response
+          await new Promise(resolve => setTimeout(resolve, 800));
           const normalizedInput = activeText.toLowerCase();
           const targetKb = LOCAL_KNOWLEDGE_BASE[lang] || LOCAL_KNOWLEDGE_BASE.en;
           
-          let matchedResponse = "";
+          let responseText = "";
           
           if (targetKb.scheme_trigger.some(t => normalizedInput.includes(t))) {
-            matchedResponse = targetKb.scheme_response;
+            responseText = targetKb.scheme_response;
           } else if (targetKb.document_trigger.some(t => normalizedInput.includes(t))) {
-            matchedResponse = targetKb.document_response;
+            responseText = targetKb.document_response;
           } else if (targetKb.complaint_trigger.some(t => normalizedInput.includes(t))) {
-            matchedResponse = targetKb.complaint_response;
+            responseText = targetKb.complaint_response;
           } else {
-            // Dynamic helpful fallback
-            const fallbacks = {
-              en: `🔍 I searched the direct database for "${activeText}". To get customized, dynamically updated answers for this specific inquiry, please **insert your Gemini API Key in the settings panel above**! \n\nOtherwise, try querying standard topics like **"PM-Kisan Scheme"**, **"Aadhaar Update guidelines"**, or **"Report street pothole"**.`,
-              hi: `🔍 मैंने "${activeText}" के लिए स्थानीय डेटाबेस में खोज की। इस विशिष्ट प्रश्न के सटीक और गतिशील उत्तर पाने के लिए कृपया **ऊपर सेटिंग्स में जेमिनी एपीआई कुंजी दर्ज करें**। \n\nवैकल्पिक रूप से, आप **"पीएम-किसान योजना"**, **"आधार कार्ड पता बदलना"**, या **"सड़क के गड्ढे की शिकायत"** जैसे मानक विषयों के बारे में पूछ सकते हैं।`,
-              bn: `🔍 আমি স্থানীয় তথ্যভাণ্ডারে "${activeText}" এর সন্ধান করেছি। আপনার এই নির্দিষ্ট প্রশ্নের জন্য সরাসরি এবং গতিশীল উত্তর পেতে দয়া করে **উপরের সেটিংসে গিয়ে আপনার Gemini API চাবিটি লিঙ্ক করুন**। \n\nঅন্যথায় আপনি স্ট্যান্ডার্ড বিষয়সমূহ যেমন **"পিএম কিষাণ প্রকল্প"**, **"আধার কার্ডের ঠিকানা পরিবর্তন"**, বা **"রাস্তা মেরামতের অভিযোগ"** লিখে সার্চ করতে পারেন।`,
-              ta: `🔍 உள்ளூர் தரவுத்தளத்தில் "${activeText}" என்று தேடினேன். உங்கள் கேள்விக்கான பிரத்யேகமான நேரடி பதிலைப் பெற தயவுசெய்து **மேலே உள்ள அமைப்பில் உங்களது Gemini API விசையை இணைக்கவும்**! \n\nஇல்லையெனில், **"பிஎம்-கிசான் திட்டம்"**, **"ஆதார் முகவரி மாற்றம்"** அல்லது **"சாலைப் பள்ளம் புகார்"** போன்ற பொதுவான கேள்விகளைக் கேட்கலாம்.`,
-              te: `🔍 నేను స్థానిక డేటాబేస్ లో "${activeText}" కోసం వెతికాను. మీ నిర్దిష్ట ప్రశ్నకు ఖచ్చితమైన మరియు డైనమిక్ సమాధానం పొందడానికి దయచేసి **పైన ఉన్న సెట్టింగులలో జెమిని API కీని నమోదు చేయండి**! \n\nలేకపోతే, మీరు **"పీఎం-కిసాన్ పథకం"**, **"ఆధార్ కార్డు మార్పులు"**, లేదా **"రోడ్డు గుంతల ఫిర్యాదు"** వంటి ప్రాథమిక అంశాల గురించి అడగవచ్చు.`
+            // Empathetic comforting failure explanation
+            const comfortFallbacks = {
+              en: `🔍 I've searched our local guide lists for "${activeText}". If you can describe it as a **"government scheme"**, **"Aadhaar card update"**, or ask me to **"report street damage"**, I can help you instantly with step-by-step guidance!`,
+              hi: `🔍 मैंने आपकी खोज "${activeText}" के लिए हमारी सूची में देखा। यदि आप मुझे **"सरकारी योजना"**, **"आधार कार्ड सुधार"**, या **"सड़क की समस्या"** के रूप में बताएंगे, तो मैं तुरंत आपकी मदद कर पाऊंगा!`,
+              bn: `🔍 আমি আপনার খোঁজা বিষয় "${activeText}" সম্পর্কে আমাদের সাহায্য তালিকায় খুঁজেছি। আপনি যদি আমাকে কোনো **"সরকারি প্রকল্প"**, **"আধার কার্ড পরিবর্তন"**, বা **"রাস্তা মেরামতের আবেদন"** নিয়ে জিজ্ঞাসা করেন, আমি এখনই সঠিক তথ্য দিয়ে সাহায্য করতে পারব!`,
+              ta: `🔍 உங்களது கேள்வி "${activeText}" குறித்து எங்கள் ஆவணங்களில் தேடினேன். ஏதேனும் **"அரசு திட்டம்"**, **"ஆதார் முகவரி மாற்றம்"** அல்லது **"சாலைப் பள்ளம் புகார்"** பற்றி கேட்டால் என்னால் உங்களுக்கு மிகச் சிறந்த எளிய கடிதத்தை எழுதிக் கொடுக்க முடியும்!`,
+              te: `🔍 నేను మీ ప్రశ్న "${activeText}" గురించి మన మార్గదర్శకాలలో వెతికాను. మీరు ఏదైనా **"ప్రభుత్వ పథకం"**, **"ఆధార్ కార్డు మార్పులు"**, లేదా **"రోడ్డు సమస్య ఫిర్యాదు"** గురించి అడిగితే నేను మీకు వెంటనే సహాయం చేయగలను!`
             };
-            matchedResponse = fallbacks[lang] || fallbacks.en;
+            responseText = comfortFallbacks[lang] || comfortFallbacks.en;
           }
 
           setMessages(prev => [...prev, {
             sender: 'bot',
-            text: matchedResponse,
+            text: responseText,
             timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
           }]);
           setIsTyping(false);
         }
       };
 
-      // Formatted text block parser to render lists and bold headings gracefully
-      const parseMarkdownText = (raw) => {
+      // Empathetic text parser supporting clean display of bold parameters and letter boxes
+      const parseFriendlyMarkdown = (raw) => {
         if (!raw) return '';
         return raw.split('\n').map((line, idx) => {
-          let renderedLine = line;
+          let lineContent = line;
           
-          // Match bold markers **text**
+          // Render comforting bold parameters
           const boldRegex = /\*\*([^*]+)\*\*/g;
-          const parts = [];
-          let lastIndex = 0;
+          const segments = [];
+          let lastIdx = 0;
           let match;
           
           while ((match = boldRegex.exec(line)) !== null) {
-            if (match.index > lastIndex) {
-              parts.push(line.substring(lastIndex, match.index));
+            if (match.index > lastIdx) {
+              segments.push(line.substring(lastIdx, match.index));
             }
-            parts.push(<strong key={match.index} className="font-bold text-orange-600 dark:text-orange-400">{match[1]}</strong>);
-            lastIndex = boldRegex.lastIndex;
+            segments.push(<strong key={match.index} className="font-bold text-orange-600 dark:text-orange-400">{match[1]}</strong>);
+            lastIdx = boldRegex.lastIdx;
           }
-          if (lastIndex < line.length) {
-            parts.push(line.substring(lastIndex));
+          if (lastIdx < line.length) {
+            segments.push(line.substring(lastIdx));
           }
 
-          const hasFormatting = parts.length > 0;
+          const hasFormatting = segments.length > 0;
 
-          // Check if line is blockquote
+          // Render copyable letter boxes
           if (line.trim().startsWith('>')) {
+            const letterText = line.replace(/^>\s*/, '');
             return (
-              <blockquote key={idx} className="border-l-4 border-orange-500 pl-4 py-2 my-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-r-lg font-mono text-[11px] leading-relaxed relative">
-                {hasFormatting ? parts : line.replace(/^>\s*/, '')}
+              <blockquote key={idx} className="border-l-4 border-orange-500 pl-4 py-2.5 my-2.5 bg-slate-50 dark:bg-slate-850 text-slate-700 dark:text-slate-300 rounded-r-xl relative group transition-all">
+                {hasFormatting ? segments : letterText}
                 <button 
                   onClick={() => {
                     const textToCopy = line.replace(/^>\s*/, '').trim();
-                    document.execCommand('copy') || navigator.clipboard.writeText(textToCopy);
+                    if (navigator.clipboard) {
+                      navigator.clipboard.writeText(textToCopy);
+                    } else {
+                      const tempElement = document.createElement('textarea');
+                      tempElement.value = textToCopy;
+                      document.body.appendChild(tempElement);
+                      tempElement.select();
+                      document.execCommand('copy');
+                      document.body.removeChild(tempElement);
+                    }
                     triggerToast(currentText.complaintDrafted);
                   }} 
-                  className="absolute top-2 right-2 p-1 rounded bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 text-slate-500 hover:text-slate-800 dark:hover:text-white transition-all"
-                  title="Copy Draft"
+                  className="absolute top-2 right-2 p-1.5 rounded-lg bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-500 hover:text-orange-500 hover:border-orange-500/30 transition-all shadow-sm"
+                  title="Copy Letter"
                 >
-                  <Clipboard className="w-3.5 h-3.5" />
+                  <CopyIcon className="w-3.5 h-3.5" />
                 </button>
               </blockquote>
             );
           }
 
-          // standard line render
           return (
             <span key={idx} className="block min-h-[0.5rem]">
-              {hasFormatting ? parts : line}
+              {hasFormatting ? segments : line}
             </span>
           );
         });
       };
 
-      // Smooth scrolling navigator
-      const handleScrollTo = (sectionId) => {
+      // Simple navigation scrolling helper
+      const scrollToView = (sectionId) => {
         const element = document.getElementById(sectionId);
         if (element) {
           element.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -616,26 +813,24 @@
         setMobileMenuOpen(false);
       };
 
-      // Mock Grievance tracking dispatch lookup
-      const handleTrackGrievance = (e) => {
+      // Reassuring simple lookup matching realistic milestones
+      const handleTrackComplaint = (e) => {
         e.preventDefault();
-        if (!trackerToken.trim()) return;
+        if (!trackCode.trim()) return;
         
-        const tokenHash = trackerToken.trim().toUpperCase();
-        const statuses = [
-          { status: "Registered", color: "text-blue-500 bg-blue-500/10 border-blue-500/20", progress: 25, stage: "Ward Intake Received", date: "July 04, 2026", desc: "Your formal municipal file has been acknowledged and placed on the central CPGRAMS dispatch docket." },
-          { status: "Assigned", color: "text-amber-500 bg-amber-500/10 border-amber-500/20", progress: 50, stage: "Assigned to Ward Engineer", date: "July 05, 2026", desc: "Assigned to Ward 14 Sanitation and Infrastructure engineer. Pre-inspections authorized." },
-          { status: "In Progress", color: "text-purple-500 bg-purple-500/10 border-purple-500/20", progress: 75, stage: "Site Inspections Authorized", date: "July 06, 2026", desc: "Patching crew dispatched. Raw aggregate materials designated for transit. Heavy repairs set to initiate." },
-          { status: "Resolved", color: "text-emerald-500 bg-emerald-500/10 border-emerald-500/20", progress: 100, stage: "Ward Restoration Approved", date: "July 07, 2026", desc: "Asphalt patching finalized. High-contrast site completion photograph dispatched back to citizen registry ledger." }
+        const key = trackCode.trim().toUpperCase();
+        const comfortingSteps = [
+          { status: "Received", badge: "text-blue-600 bg-blue-50 dark:bg-blue-900/10 border-blue-100", milestone: "Received at Office", date: "Today", desc: "Your helpful letter has been received at the central office and registered. It is safe in our files." },
+          { status: "Under Review", badge: "text-amber-600 bg-amber-50 dark:bg-amber-900/10 border-amber-100", milestone: "Officer Appointed", date: "Ongoing", desc: "A local officer has been chosen to look after your request and verify the location." },
+          { status: "Action Taken", badge: "text-green-600 bg-green-50 dark:bg-green-900/10 border-green-100", milestone: "Repair Team Dispatched", date: "Soon", desc: "A local repair crew has been instructed to fix the street issue. We are tracking this closely." }
         ];
         
-        // Select deterministic status based on string length or first char code
-        const index = Math.abs(tokenHash.charCodeAt(0) || 0) % statuses.length;
-        setTrackingResult(statuses[index]);
-        triggerToast("Ledger telemetry synchronized successfully.");
+        const index = Math.abs(key.charCodeAt(0) || 0) % comfortingSteps.length;
+        setTrackInfo(comfortingSteps[index]);
+        triggerToast("Details updated.");
       };
 
-      const currentText = MULTI_LANG_DATA[lang] || MULTI_LANG_DATA.en;
+      const currentText = TRANSLATION_STRINGS[lang] || TRANSLATION_STRINGS.en;
 
       return (
         <div className={`min-h-screen transition-colors duration-300 relative overflow-x-hidden selection:bg-orange-500/20 selection:text-orange-700 ${
@@ -643,37 +838,37 @@
         }`}>
 
           {/* ==========================================
-              TRICOLOR BLURRED AURAS (Official Tricolor Aura)
+              TRICOLOR BACKGROUND (Reassuring Warm Light Accents)
               ========================================== */}
-          <div className="absolute top-0 left-0 w-full h-[800px] pointer-events-none overflow-hidden z-0">
-            {/* Dynamic Saffron Aura */}
-            <div className="absolute top-[-10%] left-[-15%] w-[55%] h-[55%] rounded-full bg-orange-500/10 dark:bg-orange-600/5 blur-[120px] animate-aura-saffron"></div>
-            {/* Dynamic Green Aura */}
+          <div className="absolute top-0 left-0 w-full h-[850px] pointer-events-none overflow-hidden z-0">
+            {/* Saffron Aura representing warm guidance */}
+            <div className="absolute top-[-10%] left-[-15%] w-[55%] h-[55%] rounded-full bg-orange-500/10 dark:bg-orange-600/5 blur-[120px] animate-aura-orange"></div>
+            {/* Gentle Green Aura representing safety & hope */}
             <div className="absolute top-[20%] right-[-15%] w-[55%] h-[55%] rounded-full bg-emerald-500/10 dark:bg-emerald-600/5 blur-[120px] animate-aura-green"></div>
             
-            {/* Elegant Ashok Chakra Grid Lines Backdrop */}
-            <div className="absolute top-[15%] left-[50%] -translate-x-1/2 w-[600px] h-[600px] rounded-full border border-slate-200/50 dark:border-slate-800/20 flex items-center justify-center opacity-70">
-              <div className="w-[540px] h-[540px] rounded-full border border-dashed border-slate-300/40 dark:border-slate-800/10 animate-chakra-spin"></div>
+            {/* The Emblem Circle Design */}
+            <div className="absolute top-[15%] left-[50%] -translate-x-1/2 w-[600px] h-[600px] rounded-full border border-slate-200/50 dark:border-slate-800/15 flex items-center justify-center opacity-60">
+              <div className="w-[540px] h-[540px] rounded-full border border-dashed border-slate-300/30 dark:border-slate-800/10 animate-wheel-rotation"></div>
             </div>
           </div>
 
           {/* ==========================================
-              NAVBAR UTILITIES
+              TOP NAVIGATION HEADER
               ========================================== */}
           <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b ${
             isDark 
-              ? 'bg-slate-950/85 backdrop-blur-md border-slate-900 py-3' 
-              : 'bg-white/85 backdrop-blur-md border-slate-200 py-3'
+              ? 'bg-slate-950/90 backdrop-blur-md border-slate-900 py-3.5' 
+              : 'bg-white/90 backdrop-blur-md border-slate-200/80 py-3.5'
           }`}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex items-center justify-between">
                 
-                {/* Official Branding Logo Layout */}
-                <div className="flex items-center space-x-3 cursor-pointer" onClick={() => handleScrollTo('main')}>
-                  <div className="relative w-9 h-9 rounded-xl bg-orange-500/10 border border-orange-500/30 flex items-center justify-center shadow-sm">
-                    {/* Tiny Ashok Chakra Emblem */}
-                    <div className="w-6 h-6 rounded-full border-2 border-dashed border-blue-800 dark:border-blue-400 flex items-center justify-center animate-spin [animation-duration:180s]">
-                      <div className="w-1.5 h-1.5 rounded-full bg-blue-800 dark:bg-blue-400"></div>
+                {/* Brand Footprint Logo Group */}
+                <div className="flex items-center space-x-3 cursor-pointer" onClick={() => scrollToView('main-section')}>
+                  <div className="relative w-9.5 h-9.5 rounded-xl bg-orange-500/10 border border-orange-500/30 flex items-center justify-center shadow-sm">
+                    {/* Reassuring Indian Wheel emblem representation */}
+                    <div className="w-6 h-6 rounded-full border-2 border-dashed border-blue-700 dark:border-blue-400 flex items-center justify-center animate-spin [animation-duration:120s]">
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-700 dark:bg-blue-400"></div>
                     </div>
                   </div>
                   <div>
@@ -686,849 +881,56 @@
                   </div>
                 </div>
 
-                {/* Center Navigation Links */}
-                <div className="hidden md:flex items-center space-x-8">
-                  <button onClick={() => handleScrollTo('main')} className="text-xs font-bold uppercase tracking-wider hover:text-orange-500 dark:hover:text-orange-400 transition-colors">Main</button>
-                  <button onClick={() => handleScrollTo('services')} className="text-xs font-bold uppercase tracking-wider hover:text-orange-500 dark:hover:text-orange-400 transition-colors">Services</button>
-                  <button onClick={() => handleScrollTo('flowchart')} className="text-xs font-bold uppercase tracking-wider hover:text-orange-500 dark:hover:text-orange-400 transition-colors">Resolution Flow</button>
-                  <button onClick={() => handleScrollTo('my-complaints')} className="text-xs font-bold uppercase tracking-wider hover:text-orange-500 dark:hover:text-orange-400 transition-colors">My Complaints</button>
-                  <button onClick={() => handleScrollTo('about')} className="text-xs font-bold uppercase tracking-wider hover:text-orange-500 dark:hover:text-orange-400 transition-colors">About</button>
+                {/* Clean, Simple Navigation Options */}
+                <div className="hidden md:flex items-center space-x-7">
+                  <button onClick={() => scrollToView('main-section')} className="text-xs font-bold uppercase tracking-wider text-slate-500 hover:text-orange-500 dark:text-slate-400 dark:hover:text-orange-400 transition-colors">Main</button>
+                  <button onClick={() => scrollToView('services')} className="text-xs font-bold uppercase tracking-wider text-slate-500 hover:text-orange-500 dark:text-slate-400 dark:hover:text-orange-400 transition-colors">Services Directory</button>
+                  <button onClick={() => scrollToView('my-complaints')} className="text-xs font-bold uppercase tracking-wider text-slate-500 hover:text-orange-500 dark:text-slate-400 dark:hover:text-orange-400 transition-colors">My Complaints</button>
+                  <button onClick={() => scrollToView('resource-links')} className="text-xs font-bold uppercase tracking-wider text-slate-500 hover:text-orange-500 dark:text-slate-400 dark:hover:text-orange-400 transition-colors">Resources</button>
+                  <button onClick={() => scrollToView('about')} className="text-xs font-bold uppercase tracking-wider text-slate-500 hover:text-orange-500 dark:text-slate-400 dark:hover:text-orange-400 transition-colors">About Us</button>
                 </div>
 
-                {/* Right Utilities Control Group */}
-                <div className="hidden md:flex items-center space-x-4">
+                {/* Theme & Language Controls */}
+                <div className="hidden md:flex items-center space-x-3.5">
                   
-                  {/* Settings / API Key Button */}
-                  <button 
-                    onClick={() => setApiPanelOpen(!apiPanelOpen)}
-                    className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-xl border text-xs font-semibold transition-all ${
-                      isKeySaved 
-                        ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' 
-                        : 'border-slate-300 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400'
-                    }`}
-                    title="Gemini API Key Connection"
-                  >
-                    <Settings className={`w-3.5 h-3.5 ${isTyping ? 'animate-spin' : ''}`} />
-                    <span>{isKeySaved ? 'API Active' : 'API Settings'}</span>
-                  </button>
-
-                  {/* Multilingual Selector Dropdown */}
+                  {/* Comfortable Simple Language Dropdown Selector */}
                   <div className="relative group">
-                    <button className="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 text-xs font-bold transition-all hover:bg-slate-200 dark:hover:bg-slate-800 focus:outline-none">
-                      <Languages className="w-3.5 h-3.5 text-orange-500" />
+                    <button className="flex items-center space-x-2 px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-xs font-bold transition-all hover:bg-slate-100 dark:hover:bg-slate-800">
+                      <LanguageIcon className="w-3.5 h-3.5 text-orange-500" />
                       <span>{lang === 'en' ? 'English' : lang === 'hi' ? 'हिन्दी' : lang === 'bn' ? 'বাংলা' : lang === 'ta' ? 'தமிழ்' : 'తెలుగు'}</span>
-                      <ChevronDown className="w-3 h-3 text-slate-400" />
+                      <ChevronDownIcon className="w-3 h-3 text-slate-400" />
                     </button>
-                    <div className="absolute right-0 mt-2 w-40 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 shadow-xl py-1 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 z-50">
-                      <button onClick={() => setLang('en')} className="w-full px-4 py-2 text-left text-xs text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-900 font-medium">English</button>
-                      <button onClick={() => setLang('hi')} className="w-full px-4 py-2 text-left text-xs text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-900 font-medium">हिन्दी (Hindi)</button>
-                      <button onClick={() => setLang('bn')} className="w-full px-4 py-2 text-left text-xs text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-900 font-medium">বাংলা (Bengali)</button>
-                      <button onClick={() => setLang('ta')} className="w-full px-4 py-2 text-left text-xs text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-900 font-medium">தமிழ் (Tamil)</button>
-                      <button onClick={() => setLang('te')} className="w-full px-4 py-2 text-left text-xs text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-900 font-medium">తెలుగు (Telugu)</button>
+                    <div className="absolute right-0 mt-1.5 w-40 rounded-xl border border-slate-150 dark:border-slate-800 bg-white dark:bg-slate-950 shadow-xl py-1 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-250 z-50">
+                      <button onClick={() => setLang('en')} className="w-full px-4 py-2 text-left text-xs text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 font-semibold">English</button>
+                      <button onClick={() => setLang('hi')} className="w-full px-4 py-2 text-left text-xs text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 font-semibold">हिन्दी (Hindi)</button>
+                      <button onClick={() => setLang('bn')} className="w-full px-4 py-2 text-left text-xs text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 font-semibold">বাংলা (Bengali)</button>
+                      <button onClick={() => setLang('ta')} className="w-full px-4 py-2 text-left text-xs text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 font-semibold">தமிழ் (Tamil)</button>
+                      <button onClick={() => setLang('te')} className="w-full px-4 py-2 text-left text-xs text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 font-semibold">తెలుగు (Telugu)</button>
                     </div>
                   </div>
 
-                  {/* Dark Mode Theme Switcher */}
+                  {/* Comforting Theme Switcher */}
                   <button 
                     onClick={() => setIsDark(!isDark)}
-                    className="p-2 rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 transition-all"
-                    aria-label="Toggle Theme"
+                    className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-all"
+                    aria-label="Switch colors"
                   >
-                    {isDark ? <Sun className="w-4 h-4 text-orange-400" /> : <Moon className="w-4 h-4 text-slate-600" />}
+                    {isDark ? <SunIcon className="w-4 h-4 text-orange-400" /> : <MoonIcon className="w-4 h-4 text-slate-500" />}
                   </button>
 
                 </div>
 
-                {/* Mobile Menu Toggle Button */}
+                {/* Mobile Navigation Trigger */}
                 <div className="md:hidden flex items-center space-x-2">
                   <button 
                     onClick={() => setIsDark(!isDark)}
-                    className="p-1.5 rounded-lg border border-slate-300 dark:border-slate-800 text-slate-600 dark:text-slate-300"
+                    className="p-2 rounded-lg border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300"
                   >
-                    {isDark ? <Sun className="w-4 h-4 text-orange-400" /> : <Moon className="w-4 h-4" />}
+                    {isDark ? <SunIcon className="w-4 h-4 text-orange-400" /> : <MoonIcon className="w-4 h-4" />}
                   </button>
                   <button 
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                    className="p-1.5 rounded-lg border border-slate-300 dark:border-slate-800 text-slate-600 dark:text-slate-300"
+                    className="p-2 rounded-lg border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300"
                   >
-                    {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                    {mobileMenuOpen ? <CloseIcon className="w-5 h-5" /> : <MenuIcon className="w-5 h-5" />}
                   </button>
-                </div>
-
-              </div>
-            </div>
-
-            {/* Mobile Expandable Menu Panel */}
-            {mobileMenuOpen && (
-              <div className={`md:hidden px-4 pt-2 pb-4 space-y-2 border-t mt-2 ${
-                isDark ? 'bg-slate-950 border-slate-900' : 'bg-white border-slate-200'
-              }`}>
-                <button onClick={() => handleScrollTo('main')} className="block w-full text-left py-2 text-xs font-bold uppercase tracking-wider">Main</button>
-                <button onClick={() => handleScrollTo('services')} className="block w-full text-left py-2 text-xs font-bold uppercase tracking-wider">Services</button>
-                <button onClick={() => handleScrollTo('flowchart')} className="block w-full text-left py-2 text-xs font-bold uppercase tracking-wider">Resolution Flow</button>
-                <button onClick={() => handleScrollTo('my-complaints')} className="block w-full text-left py-2 text-xs font-bold uppercase tracking-wider">My Complaints</button>
-                <button onClick={() => handleScrollTo('about')} className="block w-full text-left py-2 text-xs font-bold uppercase tracking-wider">About</button>
-                <div className="pt-2 border-t border-slate-800 flex items-center justify-between">
-                  <select 
-                    value={lang} 
-                    onChange={(e) => setLang(e.target.value)}
-                    className="bg-transparent text-xs font-bold text-slate-700 dark:text-slate-200 border-none focus:outline-none"
-                  >
-                    <option value="en" className="text-slate-900">English</option>
-                    <option value="hi" className="text-slate-900">हिन्दी (Hindi)</option>
-                    <option value="bn" className="text-slate-900">বাংলা (Bengali)</option>
-                    <option value="ta" className="text-slate-900">தமிழ் (Tamil)</option>
-                    <option value="te" className="text-slate-900">తెలుగు (Telugu)</option>
-                  </select>
-                  <button 
-                    onClick={() => { setApiPanelOpen(true); setMobileMenuOpen(false); }}
-                    className="text-xs font-semibold text-orange-500"
-                  >
-                    API Settings
-                  </button>
-                </div>
-              </div>
-            )}
-          </nav>
-
-          {/* ==========================================
-              MODAL: API GATEWAY KEY CONFIGURATION
-              ========================================== */}
-          {apiPanelOpen && (
-            <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-              <div className={`w-full max-w-md rounded-3xl p-6 border shadow-2xl relative ${
-                isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'
-              }`}>
-                <button 
-                  onClick={() => setApiPanelOpen(false)}
-                  className="absolute top-4 right-4 p-1 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-slate-600 transition-colors"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-                <h3 className="text-sm font-extrabold uppercase tracking-wider text-orange-500 mb-2 flex items-center gap-1.5">
-                  <Settings className="w-4 h-4 animate-spin [animation-duration:10s]" />
-                  {currentText.apiHeader}
-                </h3>
-                <p className="text-xs text-slate-500 dark:text-slate-400 mb-4 leading-relaxed">
-                  Provide an optional personal Gemini API Key to unlock real-time, personalized AI routing. Your token is preserved fully on-device within client local storage.
-                </p>
-                
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-xs font-bold text-slate-400 mb-1.5">{currentText.apiKeyLabel}</label>
-                    <input 
-                      type="password" 
-                      placeholder="AIzaSy..." 
-                      value={apiKeyInput}
-                      onChange={(e) => setApiKeyInput(e.target.value)}
-                      className={`w-full text-xs font-mono py-2.5 px-3 rounded-xl border outline-none focus:ring-1 focus:ring-orange-500 ${
-                        isDark ? 'bg-slate-950 border-slate-800 text-slate-200' : 'bg-slate-100 border-slate-300 text-slate-850'
-                      }`}
-                    />
-                  </div>
-                  
-                  <div className="flex items-center gap-2">
-                    <button 
-                      onClick={handleSaveApiKey}
-                      className="flex-1 py-2.5 bg-orange-600 hover:bg-orange-500 text-white font-extrabold text-xs rounded-xl transition-all"
-                    >
-                      {currentText.apiKeySave}
-                    </button>
-                    {isKeySaved && (
-                      <button 
-                        onClick={handleClearApiKey}
-                        className="py-2.5 px-3 bg-red-600/10 hover:bg-red-600/20 text-red-600 dark:text-red-400 border border-red-500/10 font-bold text-xs rounded-xl transition-all"
-                      >
-                        Disconnect
-                      </button>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* ==========================================
-              MAIN / HERO SPLIT GRID CONTAINER (AI FIRST)
-              ========================================== */}
-          <section id="main" className="relative pt-24 pb-12 overflow-hidden z-10">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              
-              {/* Trust Badge Aux banner */}
-              <div className="flex justify-center mb-6">
-                <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 dark:border-orange-500/30">
-                  <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span>
-                  <span className="text-[10px] font-extrabold tracking-wider uppercase text-orange-600 dark:text-orange-400">
-                    A Next-Generation Initiative for Digital India
-                  </span>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-                
-                {/* Hero welcoming left text panel */}
-                <div className="lg:col-span-5 flex flex-col justify-center space-y-6">
-                  <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight tracking-tight">
-                    <span className="bg-gradient-to-r from-orange-500 via-slate-700 dark:via-white to-emerald-600 bg-clip-text text-transparent block">
-                      {currentText.title}
-                    </span>
-                  </h1>
-
-                  <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
-                    {currentText.subtitle}
-                  </p>
-
-                  {/* API Key Status Indicator Tag */}
-                  <div className={`p-4 rounded-2xl border ${
-                    isDark ? 'bg-slate-900 border-slate-850' : 'bg-white border-slate-200'
-                  }`}>
-                    <div className="flex items-start gap-3">
-                      <div className={`w-2.5 h-2.5 rounded-full mt-1 ${isKeySaved ? 'bg-emerald-500 animate-pulse' : 'bg-orange-500'}`}></div>
-                      <div>
-                        <span className="block text-xs font-bold tracking-tight">
-                          {isKeySaved ? currentText.apiStatusConnected : currentText.apiStatusOffline}
-                        </span>
-                        <span className="block text-[11px] text-slate-500 dark:text-slate-400 mt-1">
-                          {isKeySaved 
-                            ? 'Your connection to the dynamic AI context engine is live. Query standard or custom municipal guidelines.'
-                            : 'Access immediate pre-configured information. To enable raw dynamic question analysis, link your key.'
-                          }
-                        </span>
-                        {!isKeySaved && (
-                          <button 
-                            onClick={() => setApiPanelOpen(true)}
-                            className="text-xs font-bold text-orange-500 hover:text-orange-600 underline mt-2 transition-all block text-left"
-                          >
-                            Link API Key Now
-                          </button>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* fast navigation prompt */}
-                  <div className="flex items-center gap-2 pt-2">
-                    <button 
-                      onClick={() => handleScrollTo('services')}
-                      className="text-xs font-extrabold text-orange-500 hover:text-orange-600 transition-all flex items-center gap-1"
-                    >
-                      <span>Explore Accordion Services</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
-                </div>
-
-                {/* CENTRAL COMPANION BOX (Highlight of this project) */}
-                <div className="lg:col-span-7 flex flex-col justify-stretch">
-                  
-                  {/* Premium Dashboard Frame */}
-                  <div className={`flex flex-col flex-1 border rounded-3xl shadow-xl overflow-hidden transition-all relative ${
-                    isDark ? 'bg-slate-900 border-slate-850' : 'bg-white border-slate-200'
-                  }`}>
-                    
-                    {/* Chat Header Console */}
-                    <div className={`px-4 py-3.5 border-b flex items-center justify-between ${
-                      isDark ? 'bg-slate-950/40 border-slate-850' : 'bg-slate-50 border-slate-200'
-                    }`}>
-                      <div className="flex items-center space-x-2.5">
-                        <div className="relative">
-                          <span className="w-2.5 h-2.5 bg-emerald-500 rounded-full block animate-pulse"></span>
-                          <span className="w-2.5 h-2.5 bg-emerald-500/40 rounded-full block animate-ping absolute inset-0"></span>
-                        </div>
-                        <div>
-                          <p className="text-xs font-extrabold">{currentText.chatHeading}</p>
-                          <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">{currentText.chatSub}</p>
-                        </div>
-                      </div>
-                      
-                      <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 text-slate-500">
-                        CPGRAMS Ready
-                      </span>
-                    </div>
-
-                    {/* Chat Messages Output Console Area */}
-                    <div className={`flex-1 h-80 overflow-y-auto p-4 space-y-4 text-xs scrollbar-light ${
-                      isDark ? 'scrollbar-dark bg-slate-950/20' : 'scrollbar-light bg-slate-50/50'
-                    }`}>
-                      {messages.map((m, idx) => (
-                        <div key={idx} className={`flex flex-col ${m.sender === 'user' ? 'items-end' : 'items-start'}`}>
-                          <div className={`max-w-[90%] rounded-2xl px-4 py-3.5 leading-relaxed text-xs shadow-sm ${
-                            m.sender === 'user' 
-                              ? 'bg-orange-600 text-white rounded-tr-none font-medium' 
-                              : isDark 
-                                ? 'bg-slate-900/90 text-slate-200 border border-slate-800 rounded-tl-none' 
-                                : 'bg-white text-slate-850 border border-slate-200 rounded-tl-none'
-                          }`}>
-                            {parseMarkdownText(m.text)}
-                          </div>
-                          <span className="text-[9px] font-bold text-slate-400 mt-1 px-1.5">{m.timestamp}</span>
-                        </div>
-                      ))}
-
-                      {/* AI Typing Loader */}
-                      {isTyping && (
-                        <div className="flex flex-col items-start">
-                          <div className={`rounded-2xl rounded-tl-none p-3 flex items-center space-x-1.5 border ${
-                            isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'
-                          }`}>
-                            <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-bounce"></span>
-                            <span className="w-1.5 h-1.5 rounded-full bg-slate-400 animate-bounce [animation-delay:0.2s]"></span>
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-bounce [animation-delay:0.4s]"></span>
-                          </div>
-                        </div>
-                      )}
-
-                      <div ref={chatEndRef} />
-                    </div>
-
-                    {/* Fast Suggested Prompt Scenario buttons */}
-                    <div className={`p-3 border-t ${
-                      isDark ? 'bg-slate-950/30 border-slate-850' : 'bg-slate-50/40 border-slate-200'
-                    }`}>
-                      <p className="text-[10px] font-extrabold text-slate-400 mb-2 uppercase tracking-wide">
-                        {currentText.suggestedTitle}
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        <button 
-                          onClick={() => handleSendMessage("PM-Kisan Scheme Eligibility")}
-                          className={`text-[10.5px] font-semibold rounded-lg px-2.5 py-1 text-left border transition-all ${
-                            isDark ? 'bg-slate-900 hover:bg-slate-850 border-slate-800 text-slate-300' : 'bg-white hover:bg-slate-100 border-slate-200 text-slate-800'
-                          }`}
-                        >
-                          🌾 PM-Kisan Yojana
-                        </button>
-                        <button 
-                          onClick={() => handleSendMessage("Aadhaar Card Address Update Guide")}
-                          className={`text-[10.5px] font-semibold rounded-lg px-2.5 py-1 text-left border transition-all ${
-                            isDark ? 'bg-slate-900 hover:bg-slate-850 border-slate-800 text-slate-300' : 'bg-white hover:bg-slate-100 border-slate-200 text-slate-800'
-                          }`}
-                        >
-                          📄 Aadhaar Protocol
-                        </button>
-                        <button 
-                          onClick={() => handleSendMessage("Report ward pothole and street issue")}
-                          className={`text-[10.5px] font-semibold rounded-lg px-2.5 py-1 text-left border transition-all ${
-                            isDark ? 'bg-slate-900 hover:bg-slate-850 border-slate-800 text-slate-300' : 'bg-white hover:bg-slate-100 border-slate-200 text-slate-800'
-                          }`}
-                        >
-                          ⚠️ Ward Pothole Letter
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* Chat Input controls */}
-                    <div className={`p-3.5 border-t flex items-center space-x-2 ${
-                      isDark ? 'bg-slate-950/55 border-slate-850' : 'bg-white border-slate-200'
-                    }`}>
-                      <input 
-                        type="text" 
-                        value={inputVal}
-                        onChange={(e) => setInputVal(e.target.value)}
-                        onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
-                        placeholder={currentText.placeholderInput}
-                        className={`flex-1 text-xs py-3 px-3.5 rounded-xl border outline-none transition-all ${
-                          isDark 
-                            ? 'bg-slate-950 border-slate-800 text-slate-200 focus:border-slate-600 focus:bg-slate-900' 
-                            : 'bg-slate-50 border-slate-200 text-slate-850 focus:border-orange-500 focus:bg-white'
-                        }`}
-                      />
-                      <button 
-                        onClick={() => handleSendMessage()}
-                        className="p-3 bg-orange-600 hover:bg-orange-500 text-white rounded-xl transition-all transform active:scale-95 shadow-md shadow-orange-500/10"
-                        aria-label="Send Query"
-                      >
-                        <Send className="w-4 h-4" />
-                      </button>
-                    </div>
-
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </section>
-
-          {/* ==========================================
-              INTERACTIVE SERVICES Showcase Accordion UI
-              ========================================== */}
-          <section id="services" className={`py-16 border-t ${
-            isDark ? 'border-slate-900' : 'border-slate-200'
-          }`}>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              
-              <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
-                <h2 className="text-2xl sm:text-3xl font-black tracking-tight">
-                  {currentText.servicesHeading}
-                </h2>
-                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-                  {currentText.servicesSub}
-                </p>
-              </div>
-
-              {/* Improved Accordion UI */}
-              <div className="max-w-3xl mx-auto space-y-3.5">
-                
-                {/* Category 1 */}
-                <div className={`rounded-2xl border transition-all overflow-hidden ${
-                  activeAccordion === 0 
-                    ? 'shadow-md shadow-orange-500/5 ' + (isDark ? 'bg-slate-900 border-orange-500/40' : 'bg-white border-orange-500/30')
-                    : (isDark ? 'bg-slate-900/50 border-slate-850' : 'bg-white border-slate-200')
-                }`}>
-                  <button 
-                    onClick={() => setActiveAccordion(activeAccordion === 0 ? null : 0)}
-                    className="w-full px-6 py-4.5 flex items-center justify-between text-left font-bold text-sm focus:outline-none"
-                  >
-                    <div className="flex items-center space-x-3">
-                      <div className="w-8 h-8 rounded-lg bg-orange-500/10 flex items-center justify-center text-orange-500">
-                        <Sparkles className="w-4 h-4" />
-                      </div>
-                      <span className="text-slate-800 dark:text-slate-200">🏛️ Central Agriculture & Farmer Welfare Schemes</span>
-                    </div>
-                    <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-300 ${activeAccordion === 0 ? 'rotate-180' : ''}`} />
-                  </button>
-                  
-                  {activeAccordion === 0 && (
-                    <div className={`px-6 pb-5 pt-1 text-xs leading-relaxed space-y-3 border-t ${
-                      isDark ? 'border-slate-850 text-slate-300' : 'border-slate-200 text-slate-700'
-                    }`}>
-                      <p>Access structured requirements and fast track checklist validations for direct welfare schemes.</p>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
-                        <div className={`p-3 rounded-xl border ${isDark ? 'bg-slate-950/50 border-slate-800' : 'bg-slate-50 border-slate-300/60'}`}>
-                          <h4 className="font-extrabold text-orange-500 mb-1">PM-Kisan Eligibility</h4>
-                          <p className="text-[11px] text-slate-500">Requires verified land mutation titles and bank link for Direct Benefit Transfer.</p>
-                          <button 
-                            onClick={() => { handleSendMessage("What is the full eligibility checklist for PM-Kisan Yojana?"); handleScrollTo('main'); }}
-                            className="text-orange-500 hover:underline text-[11px] font-bold mt-2 inline-flex items-center gap-1"
-                          >
-                            Query AI Companion <ArrowRight className="w-3 h-3" />
-                          </button>
-                        </div>
-                        <div className={`p-3 rounded-xl border ${isDark ? 'bg-slate-950/50 border-slate-800' : 'bg-slate-50 border-slate-300/60'}`}>
-                          <h4 className="font-extrabold text-orange-500 mb-1">PM Krishi Sinchayee</h4>
-                          <p className="text-[11px] text-slate-500">Subsidies for localized micro-irrigation systems. Open to individual/group farmers.</p>
-                          <button 
-                            onClick={() => { handleSendMessage("PM Krishi Sinchayee Yojana Guidelines"); handleScrollTo('main'); }}
-                            className="text-orange-500 hover:underline text-[11px] font-bold mt-2 inline-flex items-center gap-1"
-                          >
-                            Query AI Companion <ArrowRight className="w-3 h-3" />
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* Category 2 */}
-                <div className={`rounded-2xl border transition-all overflow-hidden ${
-                  activeAccordion === 1 
-                    ? 'shadow-md shadow-orange-500/5 ' + (isDark ? 'bg-slate-900 border-orange-500/40' : 'bg-white border-orange-500/30')
-                    : (isDark ? 'bg-slate-900/50 border-slate-850' : 'bg-white border-slate-200')
-                }`}>
-                  <button 
-                    onClick={() => setActiveAccordion(activeAccordion === 1 ? null : 1)}
-                    className="w-full px-6 py-4.5 flex items-center justify-between text-left font-bold text-sm focus:outline-none"
-                  >
-                    <div className="flex items-center space-x-3">
-                      <div className="w-8 h-8 rounded-lg bg-orange-500/10 flex items-center justify-center text-orange-500">
-                        <FileText className="w-4 h-4" />
-                      </div>
-                      <span className="text-slate-800 dark:text-slate-200">📄 Official Identity Updates & Guidelines</span>
-                    </div>
-                    <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-300 ${activeAccordion === 1 ? 'rotate-180' : ''}`} />
-                  </button>
-                  
-                  {activeAccordion === 1 && (
-                    <div className={`px-6 pb-5 pt-1 text-xs leading-relaxed space-y-3 border-t ${
-                      isDark ? 'border-slate-850 text-slate-300' : 'border-slate-200 text-slate-700'
-                    }`}>
-                      <p>Avoid middlemen. Generate correct checklists and instructions to apply for identity document revisions.</p>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
-                        <div className={`p-3 rounded-xl border ${isDark ? 'bg-slate-950/50 border-slate-800' : 'bg-slate-50 border-slate-300/60'}`}>
-                          <h4 className="font-extrabold text-orange-500 mb-1">Aadhaar Portal Update</h4>
-                          <p className="text-[11px] text-slate-500">Step-by-step guidance for address updates, cellular synchronization, or bio lock procedures.</p>
-                          <button 
-                            onClick={() => { handleSendMessage("Aadhaar card address update step by step guide"); handleScrollTo('main'); }}
-                            className="text-orange-500 hover:underline text-[11px] font-bold mt-2 inline-flex items-center gap-1"
-                          >
-                            Query AI Companion <ArrowRight className="w-3 h-3" />
-                          </button>
-                        </div>
-                        <div className={`p-3 rounded-xl border ${isDark ? 'bg-slate-950/50 border-slate-800' : 'bg-slate-50 border-slate-300/60'}`}>
-                          <h4 className="font-extrabold text-orange-500 mb-1">PAN & Voter Registration</h4>
-                          <p className="text-[11px] text-slate-500">Linking mechanisms and standard requirements to correct name anomalies online.</p>
-                          <button 
-                            onClick={() => { handleSendMessage("How to link PAN card with Aadhaar card?"); handleScrollTo('main'); }}
-                            className="text-orange-500 hover:underline text-[11px] font-bold mt-2 inline-flex items-center gap-1"
-                          >
-                            Query AI Companion <ArrowRight className="w-3 h-3" />
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* Category 3 */}
-                <div className={`rounded-2xl border transition-all overflow-hidden ${
-                  activeAccordion === 2 
-                    ? 'shadow-md shadow-orange-500/5 ' + (isDark ? 'bg-slate-900 border-orange-500/40' : 'bg-white border-orange-500/30')
-                    : (isDark ? 'bg-slate-900/50 border-slate-850' : 'bg-white border-slate-200')
-                }`}>
-                  <button 
-                    onClick={() => setActiveAccordion(activeAccordion === 2 ? null : 2)}
-                    className="w-full px-6 py-4.5 flex items-center justify-between text-left font-bold text-sm focus:outline-none"
-                  >
-                    <div className="flex items-center space-x-3">
-                      <div className="w-8 h-8 rounded-lg bg-orange-500/10 flex items-center justify-center text-orange-500">
-                        <AlertTriangle className="w-4 h-4" />
-                      </div>
-                      <span className="text-slate-800 dark:text-slate-200">⚠️ Public Grievances & Ward Infrastructure Restoration</span>
-                    </div>
-                    <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-300 ${activeAccordion === 2 ? 'rotate-180' : ''}`} />
-                  </button>
-                  
-                  {activeAccordion === 2 && (
-                    <div className={`px-6 pb-5 pt-1 text-xs leading-relaxed space-y-3 border-t ${
-                      isDark ? 'border-slate-850 text-slate-300' : 'border-slate-200 text-slate-700'
-                    }`}>
-                      <p>Draft detailed, formal, geo-tagged complaint letters for street lights, deep potholes, or pipe leakages ready to be registered in standard CPGRAMS portals.</p>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
-                        <div className={`p-3 rounded-xl border ${isDark ? 'bg-slate-950/50 border-slate-800' : 'bg-slate-50 border-slate-300/60'}`}>
-                          <h4 className="font-extrabold text-orange-500 mb-1">Potholes and Road Damage</h4>
-                          <p className="text-[11px] text-slate-500">Prepare formal repair warnings containing automated GPS parameters for municipality ward engineers.</p>
-                          <button 
-                            onClick={() => { handleSendMessage("Draft a municipal grievance for dangerous potholes on primary ward transit street"); handleScrollTo('main'); }}
-                            className="text-orange-500 hover:underline text-[11px] font-bold mt-2 inline-flex items-center gap-1"
-                          >
-                            Query AI Companion <ArrowRight className="w-3 h-3" />
-                          </button>
-                        </div>
-                        <div className={`p-3 rounded-xl border ${isDark ? 'bg-slate-950/50 border-slate-800' : 'bg-slate-50 border-slate-300/60'}`}>
-                          <h4 className="font-extrabold text-orange-500 mb-1">Water Supply Contamination</h4>
-                          <p className="text-[11px] text-slate-500">Direct drafting tool for reporting localized contamination issues to municipal Jal Boards.</p>
-                          <button 
-                            onClick={() => { handleSendMessage("Formal complaint draft for municipal water contamination"); handleScrollTo('main'); }}
-                            className="text-orange-500 hover:underline text-[11px] font-bold mt-2 inline-flex items-center gap-1"
-                          >
-                            Query AI Companion <ArrowRight className="w-3 h-3" />
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-              </div>
-
-            </div>
-          </section>
-
-          {/* ==========================================
-              FLOWCHART UTILITIES (How it Works graphic)
-              ========================================== */}
-          <section id="flowchart" className={`py-16 border-t ${
-            isDark ? 'border-slate-900 bg-slate-950/20' : 'border-slate-200 bg-slate-100/50'
-          }`}>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              
-              <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-                <h2 className="text-2xl sm:text-3xl font-black tracking-tight">
-                  {currentText.flowchartTitle}
-                </h2>
-                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-                  {currentText.flowchartSub}
-                </p>
-              </div>
-
-              {/* FLOWCHART GRAPHIC */}
-              <div className="max-w-5xl mx-auto">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative items-start">
-                  
-                  {/* Decorative joining line (desktop only) */}
-                  <div className="hidden md:block absolute top-12 left-[10%] right-[10%] h-[2px] bg-slate-200 dark:bg-slate-800 z-0">
-                    <svg className="w-full h-1 overflow-visible" fill="none">
-                      <line 
-                        x1="0" y1="0" x2="100%" y2="0" 
-                        stroke="#FF9933" strokeWidth="2" 
-                        className="animated-flow-path" 
-                      />
-                    </svg>
-                  </div>
-
-                  {/* Flowchart Node 1 */}
-                  <div className="relative z-10 flex flex-col items-center text-center px-4 space-y-4 group">
-                    <div className="w-16 h-16 rounded-full bg-orange-500/10 border-2 border-orange-500 flex items-center justify-center text-orange-500 shadow-md group-hover:scale-110 transition-transform duration-300">
-                      <Languages className="w-6 h-6 animate-pulse" />
-                    </div>
-                    <div>
-                      <h3 className="text-xs font-black uppercase tracking-wider text-orange-500 mb-1.5">{currentText.step1}</h3>
-                      <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
-                        {currentText.step1Desc}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Flowchart Node 2 */}
-                  <div className="relative z-10 flex flex-col items-center text-center px-4 space-y-4 group">
-                    <div className="w-16 h-16 rounded-full bg-slate-100 dark:bg-slate-900 border-2 border-slate-300 dark:border-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-400 shadow-md group-hover:scale-110 transition-transform duration-300">
-                      <Sparkles className="w-6 h-6 animate-spin [animation-duration:8s]" />
-                    </div>
-                    <div>
-                      <h3 className="text-xs font-black uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">{currentText.step2}</h3>
-                      <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
-                        {currentText.step2Desc}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Flowchart Node 3 */}
-                  <div className="relative z-10 flex flex-col items-center text-center px-4 space-y-4 group">
-                    <div className="w-16 h-16 rounded-full bg-emerald-500/10 border-2 border-emerald-500 flex items-center justify-center text-emerald-500 shadow-md group-hover:scale-110 transition-transform duration-300">
-                      <FileText className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <h3 className="text-xs font-black uppercase tracking-wider text-emerald-500 mb-1.5">{currentText.step3}</h3>
-                      <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
-                        {currentText.step3Desc}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Flowchart Node 4 */}
-                  <div className="relative z-10 flex flex-col items-center text-center px-4 space-y-4 group">
-                    <div className="w-16 h-16 rounded-full bg-blue-500/10 border-2 border-blue-500 flex items-center justify-center text-blue-500 shadow-md group-hover:scale-110 transition-transform duration-300">
-                      <CheckSquare className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <h3 className="text-xs font-black uppercase tracking-wider text-blue-500 mb-1.5">{currentText.step4}</h3>
-                      <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
-                        {currentText.step4Desc}
-                      </p>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-
-            </div>
-          </section>
-
-          {/* ==========================================
-              COMPLAINTS & TRACKING LEDGER CONTAINER
-              ========================================== */}
-          <section id="my-complaints" className={`py-16 border-t ${
-            isDark ? 'border-slate-900 bg-slate-950/10' : 'border-slate-200 bg-white'
-          }`}>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
-                
-                {/* Ledger Description */}
-                <div className="lg:col-span-5 flex flex-col justify-center space-y-4">
-                  <span className="text-xs font-extrabold uppercase tracking-wider text-orange-500">
-                    Ledger Integration Gateway
-                  </span>
-                  <h2 className="text-2xl sm:text-3xl font-black tracking-tight leading-tight">
-                    {currentText.myComplaintsHeading}
-                  </h2>
-                  <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
-                    {currentText.myComplaintsSub}
-                  </p>
-                  
-                  <div className="pt-2 text-xs font-semibold text-slate-400 flex flex-col gap-2">
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-orange-500"></span>
-                      <span>Instant offline verification algorithm</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-                      <span>Secure client-side caching</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Ledger Input & Live Result Showcase */}
-                <div className="lg:col-span-7 flex flex-col justify-center">
-                  <div className={`p-6 rounded-3xl border ${
-                    isDark ? 'bg-slate-900 border-slate-850' : 'bg-slate-100/60 border-slate-200'
-                  }`}>
-                    <h3 className="text-xs font-extrabold uppercase tracking-wider text-orange-500 mb-4 flex items-center gap-1.5">
-                      <Compass className="w-4 h-4" />
-                      {currentText.trackingTitle}
-                    </h3>
-                    
-                    <form onSubmit={handleTrackGrievance} className="flex gap-2 mb-4">
-                      <input 
-                        type="text" 
-                        placeholder="Enter Tracker Token (e.g., SB-849-DEL)"
-                        value={trackerToken}
-                        onChange={(e) => setTrackerToken(e.target.value)}
-                        className={`flex-1 text-xs py-3 px-3.5 rounded-xl border outline-none transition-all ${
-                          isDark 
-                            ? 'bg-slate-950 border-slate-800 text-slate-200' 
-                            : 'bg-white border-slate-300 text-slate-850'
-                        }`}
-                      />
-                      <button 
-                        type="submit"
-                        className="py-3 px-5 bg-slate-900 hover:bg-slate-800 dark:bg-orange-600 dark:hover:bg-orange-500 text-white font-extrabold text-xs rounded-xl transition-all"
-                      >
-                        Track
-                      </button>
-                    </form>
-
-                    {/* Result Frame */}
-                    {trackingResult ? (
-                      <div className={`p-4 rounded-2xl border transition-all ${
-                        isDark ? 'bg-slate-950/80 border-slate-800' : 'bg-white border-slate-300/80'
-                      }`}>
-                        <div className="flex items-start justify-between mb-3">
-                          <div>
-                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Telemetry Stage</span>
-                            <h4 className="text-xs font-black text-slate-800 dark:text-slate-100 mt-0.5">{trackingResult.stage}</h4>
-                          </div>
-                          <span className={`text-[10px] px-2.5 py-0.5 rounded-full font-bold border ${trackingResult.color}`}>
-                            {trackingResult.status}
-                          </span>
-                        </div>
-                        
-                        <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed mb-4">
-                          {trackingResult.desc}
-                        </p>
-
-                        <div className="space-y-1.5 pt-2.5 border-t border-slate-200 dark:border-slate-900 flex items-center justify-between text-[10px] text-slate-400 font-bold">
-                          <span>Updated: {trackingResult.date}</span>
-                          <span className="text-orange-500">Secure Ward Signature verified ✓</span>
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="text-center py-6 text-xs text-slate-400 font-medium border border-dashed border-slate-300 dark:border-slate-800 rounded-2xl">
-                        Enter token code SB-100-IND or custom characters to inspect ward registry records.
-                      </div>
-                    )}
-
-                  </div>
-                </div>
-
-              </div>
-
-            </div>
-          </section>
-
-          {/* ==========================================
-              UTILITY RESOURCES & COMPENDIUM LINKS
-              ========================================== */}
-          <section className={`py-12 border-t ${
-            isDark ? 'border-slate-900 bg-slate-950/10' : 'border-slate-200 bg-slate-100/20'
-          }`}>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                
-                <a href="https://pgportal.gov.in/" target="_blank" rel="noreferrer" className={`p-4 rounded-2xl border text-center transition-all hover:-translate-y-1 ${
-                  isDark ? 'bg-slate-900 border-slate-850 hover:bg-slate-800' : 'bg-white border-slate-200 hover:bg-slate-50'
-                }`}>
-                  <h4 className="text-xs font-black text-orange-500 uppercase tracking-wide mb-1">CPGRAMS</h4>
-                  <p className="text-[10px] text-slate-500 leading-relaxed">Centralized Grievance Registry Gateway</p>
-                </a>
-
-                <a href="https://uidai.gov.in/" target="_blank" rel="noreferrer" className={`p-4 rounded-2xl border text-center transition-all hover:-translate-y-1 ${
-                  isDark ? 'bg-slate-900 border-slate-850 hover:bg-slate-800' : 'bg-white border-slate-200 hover:bg-slate-50'
-                }`}>
-                  <h4 className="text-xs font-black text-orange-500 uppercase tracking-wide mb-1">UIDAI</h4>
-                  <p className="text-[10px] text-slate-500 leading-relaxed">Aadhaar Document Protocols Registry</p>
-                </a>
-
-                <a href="https://pmkisan.gov.in/" target="_blank" rel="noreferrer" className={`p-4 rounded-2xl border text-center transition-all hover:-translate-y-1 ${
-                  isDark ? 'bg-slate-900 border-slate-850 hover:bg-slate-800' : 'bg-white border-slate-200 hover:bg-slate-50'
-                }`}>
-                  <h4 className="text-xs font-black text-orange-500 uppercase tracking-wide mb-1">PM-Kisan</h4>
-                  <p className="text-[10px] text-slate-500 leading-relaxed">Agriculture Scheme Distribution index</p>
-                </a>
-
-                <a href="https://www.digitalindia.gov.in/" target="_blank" rel="noreferrer" className={`p-4 rounded-2xl border text-center transition-all hover:-translate-y-1 ${
-                  isDark ? 'bg-slate-900 border-slate-850 hover:bg-slate-800' : 'bg-white border-slate-200 hover:bg-slate-50'
-                }`}>
-                  <h4 className="text-xs font-black text-orange-500 uppercase tracking-wide mb-1">Digital India</h4>
-                  <p className="text-[10px] text-slate-500 leading-relaxed">National Digital Empowerment Compendium</p>
-                </a>
-
-              </div>
-            </div>
-          </section>
-
-          {/* ==========================================
-              ABOUT SMART BHARAT SECTION
-              ========================================== */}
-          <section id="about" className={`py-16 border-t ${
-            isDark ? 'border-slate-900 bg-slate-950/20' : 'border-slate-200 bg-white'
-          }`}>
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-              <div className="inline-flex items-center justify-center p-3 rounded-2xl bg-orange-500/10 text-orange-500">
-                <Shield className="w-6 h-6 animate-pulse" />
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-black tracking-tight">{currentText.aboutTitle}</h2>
-              <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed max-w-2xl mx-auto">
-                {currentText.aboutText}
-              </p>
-            </div>
-          </section>
-
-          {/* ==========================================
-              FOOTER SECTION
-              ========================================== */}
-          <footer className={`border-t py-12 ${
-            isDark ? 'border-slate-900 bg-slate-950/40' : 'border-slate-200 bg-slate-100/50'
-          }`}>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              
-              <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-slate-450 font-medium">
-                
-                {/* Brand Footprint */}
-                <div className="flex items-center space-x-3">
-                  <div className="w-7 h-7 rounded-lg bg-orange-500/10 border border-orange-500/30 flex items-center justify-center">
-                    <div className="w-4 h-4 rounded-full border-2 border-dashed border-blue-800 dark:border-blue-400"></div>
-                  </div>
-                  <div>
-                    <span className="block text-xs font-extrabold tracking-tight">{currentText.brand}</span>
-                    <span className="block text-[10px] text-slate-500 dark:text-slate-400">Independent Citizens Sandbox Aux</span>
-                  </div>
-                </div>
-
-                {/* Right Links & Disclaimer */}
-                <div className="text-center md:text-right space-y-1">
-                  <p>{currentText.copyright}</p>
-                  <p className="text-[10px] text-slate-500 dark:text-slate-500 font-normal">
-                    This portal operates independently of official government servers to aid in CPGRAMS & UIDAI preparation.
-                  </p>
-                </div>
-
-              </div>
-
-            </div>
-          </footer>
-
-          {/* ==========================================
-              TOAST NOTIFICATION ENGINE
-              ========================================== */}
-          {toastMessage && (
-            <div className="fixed bottom-5 right-5 z-50 animate-bounce">
-              <div className={`py-3 px-5 rounded-2xl border text-xs font-bold shadow-xl flex items-center gap-2 ${
-                isDark ? 'bg-slate-900 border-slate-800 text-slate-200 shadow-slate-950/50' : 'bg-white border-slate-200 text-slate-850 shadow-slate-200/50'
-              }`}>
-                <div className="w-2 h-2 rounded-full bg-orange-500"></div>
-                <span>{toastMessage}</span>
-              </div>
-            </div>
-          )}
-
-        </div>
-      );
-    }
-
-    // React Mount Injection to DOM mount
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<App />);
-  </script>
-
-</body>
-</html>
