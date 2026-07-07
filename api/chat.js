@@ -1,5 +1,5 @@
 export default async function handler(req, res) {
-  // 1. Enable CORS for cross-origin preview environments
+  // 1. Enable CORS for cross-origin preview environments (e.g. Canvas previews)
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS,PATCH,DELETE,POST,PUT");
@@ -20,7 +20,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    // 2. Robust Body Parsing (fallback if Vercel hasn't parsed the body stream)
+    // 2. Body Parsing (handles pre-parsed JSON or raw stringified payloads)
     let body = req.body;
     if (typeof body === "string") {
       try {
@@ -72,11 +72,11 @@ Responsibilities:
       console.error("Missing Environment Variable: GROQ_API_KEY");
       return res.status(500).json({
         success: false,
-        message: "Backend configuration error: GROQ_API_KEY is not configured in Vercel environment variables.",
+        message: "Backend configuration error: GROQ_API_KEY environment variable is not configured on Vercel.",
       });
     }
 
-    // Call the Groq chat completions API securely
+    // Call the Groq chat completions API securely over native Node.js fetch
     const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -105,7 +105,7 @@ Responsibilities:
       console.error(`Groq API Error Response (${response.status}):`, errorText);
       return res.status(response.status).json({
         success: false,
-        message: `Groq API error: ${errorText || 'Failed to complete request.'}`,
+        message: `Groq API responded with error code ${response.status}`,
       });
     }
 
