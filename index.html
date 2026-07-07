@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Smart Bharat - Simple & Friendly Citizen Companion</title>
+  <title>Smart Bharat - Your Helpful Civic Friend</title>
   
   <!-- Tailwind CSS v3 CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -15,61 +15,61 @@
   <!-- Babel Standalone for live JSX compilation -->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-  <!-- Google Fonts - Inter for clear and comforting readability -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Google Fonts - Inter for warm and highly readable typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;950&display=swap" rel="stylesheet">
 
   <style>
     body {
       font-family: 'Inter', sans-serif;
     }
     
-    /* Gentle, reassuring background animation representing the tricolor theme */
-    @keyframes slowWave {
+    /* Elegant gentle wave background animations */
+    @keyframes gentleAura {
       0% { transform: translate(0, 0) scale(1); }
-      33% { transform: translate(20px, -30px) scale(1.05); }
+      33% { transform: translate(25px, -35px) scale(1.05); }
       66% { transform: translate(-15px, 15px) scale(0.98); }
       100% { transform: translate(0, 0) scale(1); }
     }
-    .animate-aura-orange {
-      animation: slowWave 15s ease-in-out infinite;
+    .animate-aura-saffron {
+      animation: gentleAura 20s ease-in-out infinite;
     }
     .animate-aura-green {
-      animation: slowWave 18s ease-in-out infinite;
+      animation: gentleAura 24s ease-in-out infinite;
     }
     
-    /* Gentle rotation for our symbolic wheel */
-    @keyframes gentleRotation {
+    /* Reassuring slow spin for symbol of progress */
+    @keyframes slowSymbolSpin {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
-    .animate-wheel-rotation {
-      animation: gentleRotation 160s linear infinite;
+    .animate-symbol-spin {
+      animation: slowSymbolSpin 150s linear infinite;
     }
 
-    /* Animated dash for visual progress guide */
-    @keyframes progressDash {
+    /* Soft dashed flow line for the citizen journey */
+    @keyframes journeyFlow {
       0% { stroke-dashoffset: 24; }
       100% { stroke-dashoffset: 0; }
     }
-    .animated-progress-line {
+    .animated-journey-path {
       stroke-dasharray: 6, 4;
-      animation: progressDash 2.5s linear infinite;
+      animation: journeyFlow 1.8s linear infinite;
     }
 
-    /* Comforting custom scrollbars */
+    /* Soft customized scrollbars for readability */
     ::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
+      width: 5px;
+      height: 5px;
     }
     ::-webkit-scrollbar-track {
       background: transparent;
     }
     .scrollbar-light::-webkit-scrollbar-thumb {
-      background: #cbd5e1;
+      background: #e2e8f0;
       border-radius: 9999px;
     }
     .scrollbar-dark::-webkit-scrollbar-thumb {
-      background: #334155;
+      background: #1e293b;
       border-radius: 9999px;
     }
   </style>
@@ -82,548 +82,582 @@
     const { useState, useEffect, useRef } = React;
 
     // ==========================================
-    // INLINE SVG ICONS (Reassuring and Simple)
+    // COMFORTING MULTILINGUAL USER INTERFACE TEXTS
     // ==========================================
-    const SearchIcon = ({ className }) => (
-      <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    );
-
-    const ShieldIcon = ({ className }) => (
-      <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-    );
-
-    const SunIcon = ({ className }) => (
-      <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-    );
-
-    const MoonIcon = ({ className }) => (
-      <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-    );
-
-    const ArrowRightIcon = ({ className }) => (
-      <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-    );
-
-    const LanguageIcon = ({ className }) => (
-      <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 8l6 6"/><path d="M4 14l6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="M22 22l-5-10-5 10"/><path d="M14 18h6"/></svg>
-    );
-
-    const SparklesIcon = ({ className }) => (
-      <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
-    );
-
-    const ChevronDownIcon = ({ className }) => (
-      <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-    );
-
-    const SendIcon = ({ className }) => (
-      <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-    );
-
-    const CopyIcon = ({ className }) => (
-      <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-    );
-
-    const InfoIcon = ({ className }) => (
-      <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-    );
-
-    const MenuIcon = ({ className }) => (
-      <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-    );
-
-    const CloseIcon = ({ className }) => (
-      <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    );
-
-
-    // ==========================================
-    // MULTILINGUAL GENTLE TRANSLATION SYSTEM
-    // ==========================================
-    const TRANSLATION_STRINGS = {
+    const CIVIC_TRANSLATIONS = {
       en: {
         brand: "Smart Bharat",
         tagline: "Your Helpful Civic Friend",
-        title: "Simple & Friendly Citizen Support",
-        subtitle: "A digital helper to make it easy for you to find government services, understand state schemes, get card updates, and write clear municipal complaint letters.",
-        chatHeading: "Smart Bharat Helpful Assistant",
-        chatSub: "Ready to help in your preferred language",
-        placeholderInput: "Ask me a question or tell me what you need help with...",
-        aboutTitle: "Our Helpful Mission",
-        aboutText: "Smart Bharat is a warm, community-focused initiative built to help citizens easily talk with local public offices. We use gentle, smart helper technology to remove confusing paperwork barriers, delivering clear step-by-step checklists and simple letters ready for you to send.",
-        servicesHeading: "Our Services Directory",
-        servicesSub: "Select a topic below to see what documents you need, how to qualify, or to ask our assistant for help.",
-        myComplaintsHeading: "Check My Complaint Status",
-        myComplaintsSub: "Easily find and track the progress of your submitted public issues to see which local officer is helping.",
-        trackingTitle: "Simple Status Lookup",
-        flowchartTitle: "How We Help You Resolve Issues",
-        flowchartSub: "A simple visual path showing how your question goes from a friendly conversation to a structured letter.",
-        step1: "1. Tell Us Your Need",
-        step1Desc: "You explain a local problem or ask about a welfare scheme in your own language.",
-        step2: "2. We Make It Simple",
-        step2Desc: "Our assistant translates, reviews, and organizes it into a clean, formal letter format.",
-        step3: "3. Ready to Send",
-        step3Desc: "You copy your structured letter and easily upload it directly to municipal portals.",
-        step4: "4. Gentle Tracking",
-        step4Desc: "We provide easy updates so you can see where your request stands.",
-        copyright: "© 2026 Smart Bharat. A citizens' service initiative.",
-        complaintDrafted: "Copied successfully! You can paste this now.",
-        suggestedTitle: "Click to quickly ask about:"
+        title: "Welcome to Your Citizen Support Portal",
+        subtitle: "We are here to help you easily understand government benefits, find correct document checklists, and write simple letters for local public issues.",
+        chatHeading: "Smart Bharat Help Desk",
+        chatSub: "Here to listen in your language",
+        placeholderInput: "Ask me a question in English or your own language...",
+        aboutTitle: "About Our Helpful Mission",
+        aboutText: "Smart Bharat is an independent citizen helper portal designed to make public services easy to understand. By using kind, simplified technology, we break down confusing government rules and help you create clearly structured letters for local improvements.",
+        servicesHeading: "Simplified Help Folders",
+        servicesSub: "Select a topic below to see what documents you need, how to qualify for benefits, or how to write an issue letter.",
+        myComplaintsHeading: "Track Your Filed Issues",
+        myComplaintsSub: "Enter your reference number below to check the current progress of your local ward repairs.",
+        trackingTitle: "Check Letter Status",
+        flowchartTitle: "How Your Issue Gets Resolved",
+        flowchartSub: "A simple visual path showing how your voice turns into a clearly structured request for local action.",
+        step1: "1. Share Your Concern",
+        step1Desc: "Tell your Civic Friend about a local problem or a scheme you want to apply for in any Indian language.",
+        step2: "2. Simple Formatting",
+        step2Desc: "Our system translates and structures your request into a clear, polite, and formal letter.",
+        step3: "3. Submission & Delivery",
+        step3Desc: "You can copy the structured draft to upload directly to local offices or the national portal.",
+        step4: "4. Regular Progress Updates",
+        step4Desc: "We provide you with a friendly tracking path to check the status of repairs in your neighborhood.",
+        copyright: "© 2026 Smart Bharat. Supporting citizens with care and transparency.",
+        complaintDrafted: "Drafted letter copied to clipboard!",
+        copierText: "Copy This Draft",
+        suggestedTitle: "Suggested Questions to Start:",
+        officialResources: "Official Helplines & Links"
       },
       hi: {
         brand: "स्मार्ट भारत",
         tagline: "आपका मददगार नागरिक साथी",
-        title: "सरल और सुलभ नागरिक सहायता",
-        subtitle: "एक डिजिटल सहायक जो आपके लिए सरकारी सेवाओं को खोजना, सरकारी योजनाओं को समझना, दस्तावेजों को अपडेट करना और शिकायत पत्र लिखना आसान बनाता है।",
-        chatHeading: "स्मार्ट भारत मददगार सहायक",
-        chatSub: "आपकी अपनी भाषा में मदद के लिए तैयार",
-        placeholderInput: "मुझसे कोई भी प्रश्न पूछें या बताएं कि आपको क्या मदद चाहिए...",
-        aboutTitle: "हमारा मुख्य उद्देश्य",
-        aboutText: "स्मार्ट भारत एक नागरिक-केंद्रित पहल है जो सरकारी कार्यों को आसान बनाने के लिए बनाई गई है। हम तकनीक का उपयोग कठिन कागजी कार्रवाई की बाधाओं को हटाने, और आपके लिए सीधे उपयोगी दिशा-निर्देश और पत्र तैयार करने के लिए करते हैं।",
-        servicesHeading: "हमारी मुख्य सेवाएं",
-        servicesSub: "दस्तावेजों की सूची देखने, पात्रता की जांच करने या हमारे सहायक से सीधे बात करने के लिए नीचे एक विषय चुनें।",
-        myComplaintsHeading: "अपनी शिकायत की स्थिति जानें",
-        myComplaintsSub: "अपनी दर्ज शिकायतों की प्रगति को आसानी से ट्रैक करें और देखें कि कौन से स्थानीय अधिकारी आपकी मदद कर रहे हैं।",
-        trackingTitle: "सरल स्थिति जांच",
-        flowchartTitle: "शिकायत समाधान की आसान प्रक्रिया",
-        flowchartSub: "एक सरल प्रक्रिया जो दर्शाती है कि आपकी बात कैसे एक औपचारिक पत्र में बदलती है।",
+        title: "आपके नागरिक सहायता केंद्र में आपका स्वागत है",
+        subtitle: "हम यहाँ सरकारी योजनाओं को आसानी से समझने, सही दस्तावेज़ों की सूची खोजने और स्थानीय समस्याओं के लिए सीधे आवेदन पत्र तैयार करने में आपकी मदद के लिए हैं।",
+        chatHeading: "स्मार्ट भारत सहायता केंद्र",
+        chatSub: "आपकी अपनी भाषा में सुनने के लिए तैयार",
+        placeholderInput: "मुझसे अंग्रेजी, हिंदी या अपनी भाषा में पूछें...",
+        aboutTitle: "हमारे सेवा अभियान के बारे में",
+        aboutText: "स्मार्ट भारत एक स्वतंत्र नागरिक सहायता वेबसाइट है जो सरकारी सेवाओं को सरल बनाने के लिए बनाई गई है। हम उलझाने वाले सरकारी नियमों को आसान शब्दों में समझाते हैं और स्थानीय सुधारों के लिए स्पष्ट आवेदन पत्र तैयार करने में आपकी मदद करते हैं।",
+        servicesHeading: "आसान सहायता फ़ोल्डर",
+        servicesSub: "नीचे दी गई श्रेणियों में से चुनें और देखें कि कौन से दस्तावेज़ आवश्यक हैं या पात्रता की जांच कैसे करें।",
+        myComplaintsHeading: "अपनी दर्ज समस्याओं की स्थिति जानें",
+        myComplaintsSub: "अपने क्षेत्र की मरम्मत या शिकायतों की प्रगति जानने के लिए नीचे अपना संदर्भ नंबर दर्ज करें।",
+        trackingTitle: "आवेदन की स्थिति जांचें",
+        flowchartTitle: "आपकी समस्या कैसे हल होती है",
+        flowchartSub: "एक आसान चित्र जो दिखाता है कि कैसे आपकी बात को एक स्पष्ट और औपचारिक पत्र का रूप देकर आगे बढ़ाया जाता है।",
         step1: "1. अपनी समस्या बताएं",
-        step1Desc: "आप किसी भी स्थानीय समस्या या योजना के बारे में अपनी भाषा में हमें बताते हैं।",
-        step2: "2. हम इसे सरल बनाते हैं",
-        step2Desc: "हमारा सहायक आपकी बात को समझकर एक स्पष्ट और औपचारिक शिकायत पत्र तैयार करता है।",
-        step3: "3. भेजने के लिए तैयार",
-        step3Desc: "आप इस तैयार पत्र को कॉपी करके नगर निगम के पोर्टल पर अपलोड कर सकते हैं।",
-        step4: "4. आसान ट्रैकिंग",
-        step4Desc: "आप आसानी से देख सकते हैं कि आपकी शिकायत पर क्या कार्रवाई हुई है।",
-        copyright: "© 2026 स्मार्ट भारत। एक नागरिक सेवा पहल।",
-        complaintDrafted: "सफलतापूर्वक कॉपी किया गया! अब आप इसे पेस्ट कर सकते हैं।",
-        suggestedTitle: "त्वरित सहायता के लिए क्लिक करें:"
+        step1Desc: "किसी भी भारतीय भाषा में अपने मददगार साथी को स्थानीय समस्या या योजना के बारे में बताएं।",
+        step2: "2. सरल प्रारूप में बदलना",
+        step2Desc: "हमारा सिस्टम आपकी बात को एक स्पष्ट, विनम्र और औपचारिक पत्र के रूप में व्यवस्थित कर देता है।",
+        step3: "3. सही जगह जमा करना",
+        step3Desc: "आप इस तैयार पत्र को कॉपी करके सीधे स्थानीय कार्यालय या शिकायत पोर्टल पर जमा कर सकते हैं।",
+        step4: "4. नियमित प्रगति अपडेट",
+        step4Desc: "हम आपको अपने पड़ोस के सुधार कार्यों की स्थिति जानने के लिए एक आसान ट्रैकर प्रदान करते हैं।",
+        copyright: "© 2026 स्मार्ट भारत। पूरी संवेदनशीलता और पारदर्शिता के साथ नागरिकों की सेवा में समर्पित।",
+        complaintDrafted: "तैयार किया गया आवेदन पत्र कॉपी हो गया है!",
+        copierText: "आवेदन पत्र कॉपी करें",
+        suggestedTitle: "शुरू करने के लिए कुछ सुझाव:",
+        officialResources: "आधिकारिक हेल्पलाइन और उपयोगी लिंक"
       },
       bn: {
         brand: "Smart Bharat",
-        tagline: "আপনার সহায়ক নাগরিক বন্ধু",
-        title: "সহজ ও বন্ধুত্বপূর্ণ নাগরিক সাহায্য",
-        subtitle: "একটি ডিজিটাল সহকারী যা আপনার জন্য সরকারি সুযোগ-সুবিধা খুঁজে নেওয়া, বিভিন্ন প্রকল্প বোঝা এবং সহজ ভাষায় অভিযোগ পত্র লেখা সহজ করে তোলে।",
-        chatHeading: "স্মার্ট ভারত সহায়তাকারী বন্ধু",
-        chatSub: "আপনার নিজের ভাষায় সাহায্য করতে প্রস্তুত",
-        aboutTitle: "আমাদের লক্ষ্য",
-        aboutText: "স্মার্ট ভারত হল সাধারণ মানুষের জন্য তৈরি একটি উদ্যোগ যাতে আপনি সহজেই আপনার সমস্যা নিয়ে স্থানীয় দপ্তরে কথা বলতে পারেন। আমরা কঠিন আইনি ভাষা সহজ করে সরাসরি আপনার ফোনে চেকলিস্ট এবং চিঠি তৈরি করে দিই।",
-        servicesHeading: "আমাদের সেবাসমূহ",
-        servicesSub: "প্রয়োজনীয় নথির তালিকা দেখতে এবং আমাদের সহকারীর সাহায্য পেতে নিচে একটি বিষয় নির্বাচন করুন।",
-        myComplaintsHeading: "অভিযোগের অগ্রগতি দেখুন",
-        myComplaintsSub: "আপনার অভিযোগের বর্তমান অবস্থা সহজে পরীক্ষা করুন এবং দেখুন কোন অফিসার কাজ করছেন।",
-        trackingTitle: "সহজ ট্র্যাকিং পদ্ধতি",
-        flowchartTitle: "আমরা যেভাবে সাহায্য করি",
-        flowchartSub: "সহজ চিত্রের মাধ্যমে দেখুন কীভাবে আপনার মুখের কথা সরাসরি একটি চিঠির আকার নেয়।",
-        step1: "১. আপনার প্রয়োজন জানান",
-        step1Desc: "আপনি যেকোনো আঞ্চলিক ভাষায় আপনার সমস্যা বা কোনো প্রকল্পের বিষয়ে আমাদের জানান।",
-        step2: "২. আমরা সহজ করে তুলি",
-        step2Desc: "আমাদের সহকারী বিষয়টিকে অনুবাদ করে সঠিক ও সুন্দর ভাষায় একটি চিঠি তৈরি করে দেয়।",
-        step3: "৩. পাঠানোর জন্য প্রস্তুত",
-        step3Desc: "আপনি এই চিঠিটি কপি করে সরাসরি সরকারি বা পৌরসভা পোর্টালে আপলোড করতে পারেন।",
-        step4: "৪. সহজ অগ্রগতি খোঁজ",
-        step4Desc: "একটি সহজ নম্বরের সাহায্যে আপনার কাজের অগ্রগতি ট্র্যাক করুন।",
-        copyright: "© 2026 স্মার্ট ভারত। সাধারণ মানুষের সেবার জন্য একটি উদ্যোগ।",
-        complaintDrafted: "কপি করা হয়েছে! আপনি এখন এটি পেস্ট করতে পারেন।",
-        suggestedTitle: "দ্রুত সাহায্যের জন্য নিচে ক্লিক করুন:"
+        tagline: "আপনার দয়ালু নাগরিক বন্ধু",
+        title: "নাগরিক সহায়তা পোর্টালে আপনাকে স্বাগত",
+        subtitle: "আমরা এখানে আপনাকে সহজে সরকারি সাহায্য বুঝতে, প্রয়োজনীয় কাগজের তালিকা পেতে এবং স্থানীয় সমস্যার জন্য সহজ চিঠি লিখতে সাহায্য করব।",
+        chatHeading: "স্মার্ট ভারত হেল্প ডেস্ক",
+        chatSub: "আপনার নিজের ভাষায় শোনার জন্য প্রস্তুত",
+        placeholderInput: "বাংলা, ইংরেজি বা আপনার নিজস্ব ভাষায় জিজ্ঞাসা করুন...",
+        aboutTitle: "আমাদের সহায়ক মিশন সম্পর্কে",
+        aboutText: "স্মার্ট ভারত একটি স্বাধীন নাগরিক সহায়তা ওয়েবসাইট যা সরকারি পরিষেবাগুলিকে সহজভাবে বোঝানোর জন্য তৈরি হয়েছে। আমরা জটিল নিয়মগুলিকে সহজ কথায় ভেঙে দিই যাতে আপনি নিজের অধিকারগুলি সহজে পান।",
+        servicesHeading: "সহজ সাহায্য ফোল্ডার",
+        servicesSub: "প্রয়োজনীয় নথিপত্র দেখতে বা সরকারি প্রকল্পগুলির জন্য কীভাবে আবেদন করতে হবে তা জানতে নিচে একটি বিষয় বেছে নিন।",
+        myComplaintsHeading: "অভিযোগের বর্তমান অবস্থা জানুন",
+        myComplaintsSub: "আপনার এলাকার মেরামতের কাজ কতটা এগোল তা দেখতে নিচে আপনার ট্র্যাকিং নাম্বারটি লিখুন।",
+        trackingTitle: "চিঠির অবস্থা পরীক্ষা করুন",
+        flowchartTitle: "আপনার সমস্যার সমাধান কীভাবে হয়",
+        flowchartSub: "একটি সহজ রেখাচিত্র যা দেখায় কীভাবে আপনার মুখের কথা একটি সুন্দর এবং স্পষ্ট আবেদনে পরিণত হয়।",
+        step1: "১. আপনার সমস্যা বলুন",
+        step1Desc: "যেকোনো আঞ্চলিক ভাষায় আপনার নাগরিক বন্ধুকে সমস্যার কথা অথবা কোনো স্কিম সম্পর্কে জানান।",
+        step2: "২. সহজ আবেদন তৈরি",
+        step2Desc: "আমাদের সিস্টেম আপনার বক্তব্যটিকে একটি স্পষ্ট, নম্র এবং চমৎকার আনুষ্ঠানিক চিঠিতে সাজিয়ে দেয়।",
+        step3: "৩. দপ্তরে জমা দিন",
+        step3Desc: "আপনি তৈরি খসড়াটি কপি করে সরাসরি স্থানীয় পঞ্চায়েত, পৌরসভা বা সরকারি পোর্টালে জমা করতে পারেন।",
+        step4: "৪. অগ্রগতির নিয়মিত খোঁজ",
+        step4Desc: "আপনার এলাকার মেরামতের কাজগুলোর বর্তমান অবস্থা জানতে আমরা একটি সহজ ট্র্যাকিং পথ দেখাই।",
+        copyright: "© 2026 স্মার্ট ভারত। যত্ন ও স্বচ্ছতার সাথে নাগরিকদের পাশে।",
+        complaintDrafted: "আবেদনপত্রের খসড়া কপি করা হয়েছে!",
+        copierText: "খসড়া কপি করুন",
+        suggestedTitle: "জিজ্ঞাসা করার জন্য কিছু পরামর্শ:",
+        officialResources: "সরকারি হেল্পলাইন ও লিঙ্কসমূহ"
       },
       ta: {
         brand: "Smart Bharat",
         tagline: "உங்களின் அன்பான குடிமைத் தோழன்",
-        title: "எளிமையான குடிமக்கள் உதவி மையம்",
-        subtitle: "அரசு திட்டங்கள், அடையாள ஆவணங்களின் தேவைகள் மற்றும் நகராட்சி குறை தீர்ப்பு கடிதங்கள் எழுதுவதை எளிதாக்கும் உங்களின் டிஜிட்டல் நண்பன்.",
-        chatHeading: "ஸ்மார்ட் பாரத் உதவித் தோழன்",
-        chatSub: "உங்களுக்குப் பிடித்த மொழியில் உதவக் காத்திருக்கிறது",
-        aboutTitle: "எங்கள் நோக்கம்",
-        aboutText: "ஸ்மார்ட் பாரத் என்பது மக்கள் தங்களின் உள்ளூர் அரசு அலுவலகங்களை எளிதில் அணுக உருவாக்கப்பட்டுள்ள ஒரு எளிய தளமாகும். கடினமான ஆவணத் தடைகளைத் தகர்த்து உங்களுக்குத் தேவையான எளிய வழிகாட்டல்களையும் கடிதங்களையும் இது உடனுக்குடன் வழங்குகிறது.",
-        servicesHeading: "எங்கள் சேவைகள்",
-        servicesSub: "உங்களுக்குத் தேவையான ஆவணப் பட்டியல்கள் அல்லது வழிகாட்டல்களைப் பெற கீழே ஒரு பிரிவைத் தேர்ந்தெடுக்கவும்.",
-        myComplaintsHeading: "உங்கள் புகாரின் நிலை",
-        myComplaintsSub: "நீங்கள் சமர்ப்பித்த புகாரை எளிதாகக் கண்காணித்து அதன் தற்போதைய நிலையைத் தெரிந்துகொள்ளுங்கள்.",
-        trackingTitle: "எளிய முறையில் நிலையைச் சரிபார்க்கவும்",
-        flowchartTitle: "நாங்கள் எப்படி உதவுகிறோம்?",
-        flowchartSub: "உங்கள் கேள்விகள் எவ்வாறு எளிய முறையில் அரசுப் புகார் கடிதமாக மாறுகிறது என்பதற்கான வரைபடம்.",
-        step1: "1. உங்களின் தேவையைச் சொல்லுங்கள்",
-        step1Desc: "ஏதேனும் உள்ளூர் பிரச்சனை அல்லது அரசு திட்டங்கள் குறித்து உங்களது சொந்த மொழியில் கேளுங்கள்.",
-        step2: "2. நாங்கள் எளிதாக்குகிறோம்",
-        step2Desc: "எங்கள் தளம் உங்கள் கோரிக்கையைப் பகுப்பாய்வு செய்து முறையான கடிதமாக மாற்றுகிறது.",
-        step3: "3. அனுப்பத் தயார்",
-        step3Desc: "இந்தக் கடிதத்தை அப்படியே நகலெடுத்து (Copy) உங்களது உள்ளூர் நகராட்சி இணையதளத்தில் சமர்ப்பிக்கலாம்.",
+        title: "உங்களின் குடிமக்கள் உதவி மையத்திற்கு வரவேற்கிறோம்",
+        subtitle: "அரசுத் திட்டங்களை எளிதாகப் புரிந்து கொள்ளவும், தேவையான ஆவணங்களைச் சரிபார்க்கவும், உள்ளூர் பிரச்சினைகளுக்கு விண்ணப்பக் கடிதம் எழுதவும் நாங்கள் உங்களுக்கு உதவுகிறோம்.",
+        chatHeading: "ஸ்மார்ட் பாரத் உதவி மையம்",
+        chatSub: "உங்கள் தாய்மொழியில் கேட்கக் காத்திருக்கிறது",
+        placeholderInput: "ஆங்கிலம், தமிழ் அல்லது உங்கள் சொந்த மொழியில் கேளுங்கள்...",
+        aboutTitle: "எங்கள் சேவையின் நோக்கம்",
+        aboutText: "ஸ்மார்ட் பாரத் என்பது அரசுச் சேவைகளை எளிதாக்குவதற்காக உருவாக்கப்பட்ட ஒரு சுதந்திரமான குடிமக்கள் உதவித் தளமாகும். சிக்கலான விதிகளை எளிய சொற்களாக மாற்றி, உள்ளூர் மேம்பாட்டிற்கான விண்ணப்பக் கடிதங்களை எழுத உதவுகிறோம்.",
+        servicesHeading: "எளிமையான உதவிப் பிரிவுகள்",
+        servicesSub: "தேவையான ஆவணங்களை அறிய அல்லது திட்டங்களின் தகுதிகளைச் சரிபார்க்க கீழே உள்ள ஒரு தலைப்பைத் தேர்ந்தெடுக்கவும்.",
+        myComplaintsHeading: "புகார்களின் தற்போதைய நிலையை அறிய",
+        myComplaintsSub: "உங்கள் பகுதியில் உள்ள பழுதுபார்ப்புப் பணிகளின் முன்னேற்றத்தை அறிய கீழே உங்களது அடையாள எண்ணை உள்ளிடவும்.",
+        trackingTitle: "விண்ணப்ப நிலையைச் சரிபார்க்கவும்",
+        flowchartTitle: "பிரச்சினை எவ்வாறு தீர்க்கப்படுகிறது",
+        flowchartSub: "உங்கள் கோரிக்கை எவ்வாறு முறையான விண்ணப்பக் கடிதமாக மாற்றப்பட்டு அரசு அலுவலகத்திற்குச் செல்கிறது என்பதைக் காட்டும் எளிய வரைபடம்.",
+        step1: "1. உங்கள் தேவையைச் சொல்லுங்கள்",
+        step1Desc: "உள்ளூர் பிரச்சினை அல்லது அரசுத் திட்டம் குறித்து ஏதேனும் ஒரு இந்திய மொழியில் உங்கள் தோழனிடம் கேளுங்கள்.",
+        step2: "2. எளிய கடித வடிவம்",
+        step2Desc: "உங்கள் கோரிக்கையை ஒரு தெளிவான, மரியாதையான மற்றும் முறையான விண்ணப்பக் கடிதமாக மாற்றித் தருவோம்.",
+        step3: "3. அலுவலகத்தில் சமர்ப்பித்தல்",
+        step3Desc: "தயாரான விண்ணப்பத்தை நகலெடுத்து நேரடியாக உள்ளூர் அலுவலகத்திலோ அல்லது இணைய போர்ட்டலிலோ சமர்ப்பிக்கலாம்.",
         step4: "4. எளிய கண்காணிப்பு",
-        step4Desc: "உங்கள் புகார் மீதான நடவடிக்கைகளை எளிய முறையில் எப்போது வேண்டுமானாலும் சரிபார்க்கலாம்.",
-        copyright: "© 2026 ஸ்மார்ட் பாரத். மக்கள் சேவைக்கான ஒரு எளிய தளம்.",
-        complaintDrafted: "நகலெடுக்கப்பட்டது! இப்போது நீங்கள் இதனைப் பயன்படுத்தலாம்.",
-        suggestedTitle: "உடனடி பதில்களைப் பெற கிளிக் செய்க:"
+        step4Desc: "உங்கள் பகுதியில் நடக்கும் சீரமைப்புப் பணிகளின் முன்னேற்றத்தை அறிய எளிய கண்காணிப்பு வழியைத் தருகிறோம்.",
+        copyright: "© 2026 ஸ்மார்ட் பாரத். அன்போடும் வெளிப்படைத்தன்மையோடும் குடிமக்களுக்கான உதவி.",
+        complaintDrafted: "தயாரிக்கப்பட்ட விண்ணப்பக் கடிதம் நகலெடுக்கப்பட்டது!",
+        copierText: "கடிதத்தை நகலெடுக்கவும்",
+        suggestedTitle: "கேட்கக்கூடிய சில மாதிரி கேள்விகள்:",
+        officialResources: "அதிகாரப்பூர்வ உதவி எண்கள் மற்றும் இணைப்புகள்"
       },
       te: {
         brand: "Smart Bharat",
-        tagline: "మీ స్నేహపూర్వక పౌర సహాయకుడు",
-        title: "సులభమైన పౌర సహాయ కేంద్రం",
-        subtitle: "ప్రభుత్వ సేవలను కనుగొనడం, పథకాలను అర్థం చేసుకోవడం మరియు మునిసిపల్ అధికారులకు సులభంగా లేఖలు రాయడం వంటి విషయాలలో మీ డిజిటల్ స్నేహితుడు.",
-        chatHeading: "స్మార్ట్ భారత్ సహాయకుడు",
-        chatSub: "మీకు నచ్చిన భాషలో సహాయం చేయడానికి సిద్ధంగా ఉంది",
-        aboutTitle: "మా ముఖ్య ఉద్దేశ్యం",
-        aboutText: "స్మార్ట్ భారత్ అనేది పౌరులు తమ సమస్యలను సులభంగా ప్రభుత్వ అధికారుల దృష్టికి తీసుకెళ్లేందుకు రూపొందించబడిన ఒక సేవా వేదిక. మేము ఎలాంటి కఠినమైన సాంకేతిక పదాలు లేకుండా, సాధారణ భాషలో మీకు అవసరమైన సమాచారాన్ని అందిస్తాము.",
-        servicesHeading: "మా సేవల విభాగం",
-        servicesSub: "కావలసిన పత్రాల వివరాలు చూడటానికి లేదా మా సహాయకుడితో మాట్లాడటానికి క్రింది అంశాలలో ఒకటి ఎంచుకోండి.",
-        myComplaintsHeading: "మీ సమస్యల పరిష్కార స్థితి",
-        myComplaintsSub: "మీరు సమర్పించిన ఫిర్యాదులపై అధికారులు ఎంతవరకు చర్యలు తీసుకున్నారో ఇక్కడ సులభంగా తెలుసుకోండి.",
-        trackingTitle: "సులభంగా తనిఖీ చేయండి",
-        flowchartTitle: "సమస్యల పరిష్కార సులభ ప్రయాణం",
-        flowchartSub: "మీ సమస్యపై అధికారులకు ఒక చక్కటి లేఖను సిద్ధం చేసే సాధారణ విధానం.",
-        step1: "1. మీ అవసరాన్ని తెలపండి",
-        step1Desc: "స్థానిక సమస్యలు లేదా ప్రభుత్వ పథకాల గురించి మీ స్వంత భాషలో మాకు తెలియజేయండి.",
-        step2: "2. మేము సులభతరం చేస్తాము",
-        step2Desc: "మా సహాయకుడు మీ కోరికను ఒక చక్కటి అధికారిక లేఖ రూపంలోకి మారుస్తాడు.",
-        step3: "3. పంపడానికి సిద్ధం",
-        step3Desc: "ఈ లేఖను కాపీ చేసి మీ స్థానిక మునిసిపల్ పోర్టల్‌లో సులభంగా అప్‌లోడ్ చేయవచ్చు.",
-        step4: "4. నిరంతర నిఘా",
-        step4Desc: "మీ అభ్యర్థనపై చర్యలు ఏ స్థాయిలో ఉన్నాయో ఎప్పటికప్పుడు తెలుసుకోవచ్చు.",
-        copyright: "© 2026 స్మార్ట్ భారత్. ప్రజల సేవ కొరకు ఒక చిన్న ప్రయత్నం.",
-        complaintDrafted: "కాపీ చేయబడింది! మీరు దీనిని ఉపయోగించుకోవచ్చు.",
-        suggestedTitle: "సహాయం కోసం వీటిపై క్లిక్ చేయండి:"
+        tagline: "మీ ఆత్మీయ పౌర స్నేహితుడు",
+        title: "మీ పౌర సహాయ కేంద్రానికి స్వాగతం",
+        subtitle: "ప్రభుత్వ పథకాలను సులభంగా అర్థం చేసుకోవడానికి, కావలసిన పత్రాలను తెలుసుకోవడానికి మరియు స్థానిక సమస్యలపై దరఖాస్తులు రాసుకోవడానికి మేము మీకు సహాయం చేస్తాము.",
+        chatHeading: "స్మార్ట్ భారత్ సహాయ కేంద్రం",
+        chatSub: "మీ మాతృభాషలో వినడానికి సిద్ధంగా ఉంది",
+        placeholderInput: "తెలుగు, ఇంగ్లీష్ లేదా మీ సొంత భాషలో అడగండి...",
+        aboutTitle: "మా సహాయ పథకం గురించి",
+        aboutText: "స్మార్ట్ భారత్ అనేది ప్రభుత్వ సేవలను సాధారణ ప్రజలకు సులభతరం చేయడానికి ఏర్పాటు చేసిన ఒక స్వతంత్ర సహాయక వెబ్‌సైట్. కష్టమైన నిబంధనలను సులువైన పదాలలో వివరిస్తూ స్థానిక సమస్యల పరిష్కారానికి స్పష్టమైన లేఖలు రాయడంలో సహాయపడుతుంది.",
+        servicesHeading: "సులువైన సహాయ ఫోల్డర్లు",
+        servicesSub: "కావలసిన పత్రాలు తెలుసుకోవడానికి లేదా పథకాల అర్హత వివరాలు చూడటానికి క్రింది ఒక అంశాన్ని ఎంచుకోండి.",
+        myComplaintsHeading: "మీ ఫిర్యాదుల ప్రస్తుత స్థితి",
+        myComplaintsSub: "మీ వీధి మరమ్మతులు లేదా ఫిర్యాదుల పురోగతిని తెలుసుకోవడానికి క్రింద మీ గుర్తింపు నంబర్ నమోదు చేయండి.",
+        trackingTitle: "దరఖాస్తు స్థితిని తనిఖీ చేయండి",
+        flowchartTitle: "మీ సమస్య ఎలా పరిష్కారమవుతుంది",
+        flowchartSub: "మీ అభ్యర్థన ఎలా ఒక స్పష్టమైన దరఖాస్తు లేఖగా మారి సంబంధిత ప్రభుత్వ కార్యాలయానికి చేరుతుందో వివరించే సరళమైన చిత్రం.",
+        step1: "1. మీ సమస్యను చెప్పండి",
+        step1Desc: "ఏదైనా భారతీయ భాషలో మీ సమస్య లేదా కావలసిన పథకం గురించి మీ స్నేహితుడికి తెలియజేయండి.",
+        step2: "2. దరఖాస్తు లేఖ రూపకల్పన",
+        step2Desc: "మీ అభ్యర్థనను ఒక స్పష్టమైన, వినయపూర్వకమైన మరియు అధికారిక లేఖ రూపంలోకి మారుస్తాము.",
+        step3: "3. కార్యాలయంలో సమర్పణ",
+        step3Desc: "తయారైన లేఖను కాపీ చేసి నేరుగా మీ స్థానిక కార్యాలయంలో లేదా ఆన్‌లైన్ పోర్టల్‌లో సమர்ப்பించవచ్చు.",
+        step4: "4. సులువైన పురోగతి తనిఖీ",
+        step4Desc: "మీ ప్రాంతంలో జరిగే పనుల స్థితిని తెలుసుకోవడానికి మేము మీకు ఒక సులువైన మార్గాన్ని అందిస్తాము.",
+        copyright: "© 2026 స్మార్ట్ భారత్. నిబద్ధత మరియు పారదర్శకతతో ప్రజల సేవలో.",
+        complaintDrafted: "తయారు చేసిన లేఖ కాపీ చేయబడింది!",
+        copierText: "లేఖను కాపీ చేయండి",
+        suggestedTitle: "ప్రారంభించడానికి కొన్ని సూచనలు:",
+        officialResources: "అధికారిక సహాయ కేంద్రాలు మరియు ఉపయోగకరమైన లింకులు"
       }
     };
 
-
     // ==========================================
-    // EXTENSIVE SCHEME, CIVIC & DOCUMENT DATABASE
     // ==========================================
     const LOCAL_KNOWLEDGE_BASE = {
       en: {
-        welcome: "Hello and welcome! 🙏 I am your **Smart Bharat Assistant**. I'm here to help you understand government support schemes, find out what papers you need for applications, or help you write a polite, formal letter to report a problem in your street. Ask me anything in plain English or your own language!",
-        scheme_trigger: ["scheme", "yojana", "benefit", "farmer", "agriculture", "healthcare", "ayushman", "awas", "house", "pension", "money", "poor"],
-        scheme_response: `🏥 **Ayushman Bharat Yojana (Free Healthcare)**
-- **What it is:** Free healthcare support of up to ₹5 Lakhs per family every year for hospital stays and serious treatments.
-- **Who can apply:** Families listed in the economic survey, low-income households, and daily wage workers.
-- **Papers you need:**
-  1. Aadhaar Card of all family members.
-  2. Ration Card.
-  3. Mobile number linked to Aadhaar.
+        welcome: "Hello and Namaste! 🙏 I am your **Smart Bharat Civic Friend**. I am here to assist you with real government benefit guidelines, document rules, or writing nice letters for local public problems.\n\nYou can chat with me naturally. Behind the scenes, I communicate securely with our helper services to give you comforting, easy-to-follow advice!",
+        scheme_trigger: ["scheme", "benefit", "yojana", "farmer", "pm-kisan", "money", "crop", "pension", "housing", "ayushman", "health"],
+        scheme_response: `🏛️ **Pradhan Mantri Kisan Samman Nidhi Yojana (Farmers Support)**
+        
+**How much support is given:** You receive ₹6,000 every year, paid directly into your bank account in three simple parts of ₹2,000 each.
 
-🌾 **PM-Kisan Scheme (Farmer Support)**
-- **What it is:** A financial gift of ₹6,000 every year, sent directly to your bank account in three portions of ₹2,000.
-- **Who can apply:** Families who own farming land.
-- **Papers you need:**
-  1. Land ownership papers (Patta or land tax receipt).
-  2. Aadhaar Card.
-  3. Bank account book linked to Aadhaar.
+**Who qualifies:**
+- ✅ You must be a citizen who owns cultivable land under your name.
+- ❌ High-income individuals, government servants, or retired professionals do not qualify.
 
-🏠 **Pradhan Mantri Awas Yojana (Housing Support)**
-- **What it is:** Financial help or lower interest rates to build or buy a simple, safe home.
-- **Who can apply:** Families with low income who do not own a concrete house.
-- **Papers you need:**
-  1. Aadhaar Card.
-  2. Income Certificate or wage receipt.
-  3. Bank account details.`,
-        document_trigger: ["aadhaar", "address", "update", "card", "pan", "voter", "passport", "change", "papers", "identity"],
-        document_response: `📄 **Aadhaar Card Address Update Guide**
-You can update your home address online easily by yourself:
-- **Accepted papers (Any one):**
-  - Electricity bill or Water bill (not older than 3 months)
-  - Bank statement or Post office passbook with your photo
-  - Registered Rent Agreement or Land Sale Deed
-  - Voter ID or Passport
+**What you need to apply:**
+1. Land ownership papers (Patta/Mutation receipts).
+2. Aadhaar Card (fully linked with your active phone number).
+3. Bank Account linked with your Aadhaar Card to receive payments directly.
+4. Active mobile number to get the simple SMS code.
 
-- **Simple Steps to Update Online:**
-  1. Open the official MyAadhaar website.
-  2. Log in with your Aadhaar number and the SMS code sent to your phone.
-  3. Click **'Update Address Online'** and type your correct address.
-  4. Upload a clear photo of your proof of address.
-  5. Pay a simple process fee of ₹50 online and save your receipt.`,
-        complaint_trigger: ["pothole", "road", "complaint", "trash", "garbage", "water", "drainage", "leak", "light", "street", "pipe", "clean"],
-        complaint_response: `✍️ **Your Municipal Complaint Letter Draft**
-I have written a polite, clear letter for you. You can copy this and send it to your local ward office:
+---
 
-> **To,**
-> **The Ward Officer / Municipal Commissioner,**
-> **Local Municipal Ward Office.**
+🏥 **Ayushman Bharat Yojana (Free Family Healthcare Cover)**
+
+**How much support is given:** Free medical cover of up to ₹5 Lakhs per family every year for serious hospital treatments.
+
+**Who qualifies:**
+- ✅ Economically weak households listed in the National Health Database (SECC 2011).
+- ✅ Families living in simple kucha houses, landless workers, and daily wage earners.
+
+**What you need to apply:**
+1. Aadhaar Card or Ration Card.
+2. Family identification number (PM Letter or Ration ID).`,
+        document_trigger: ["document", "card", "aadhaar", "address", "update", "pan", "passport", "identity", "ration", "voter"],
+        document_response: `📄 **How to Update Your Aadhaar Address Easily**
+
+You do not need to pay extra to middlemen. You can easily update your home address online through the official government portal.
+
+**Accepted Home Address Proofs (Only 1 needed):**
+- 🏠 Electricity bill or Water bill (must not be older than 3 months).
+- 🏠 Bank Passbook containing your photo and local branch stamp.
+- 🏠 Registered Rent Agreement or Property Papers.
+- 🏠 Passport or Government Voter Card.
+
+**Simple Steps to Update Online:**
+1. Open the official **UIDAI MyAadhaar Portal**.
+2. Log in using your 12-digit Aadhaar Number and the security code sent to your phone.
+3. Choose the option that says **'Update Address Online'** and type your corrected address.
+4. Upload a clean, clear photo of your address proof document.
+5. Pay the small official processing fee (₹50) directly online.
+6. Keep the 14-digit Service Number safe to check your application's status later.`,
+        complaint_trigger: ["pothole", "road", "complaint", "trash", "garbage", "water", "drainage", "leak", "light", "street", "issue", "municipal"],
+        complaint_response: `⚠️ **Friendly Local Issue Draft: Street Repair & Safety Warning**
+
+I have formatted a very clear, respectful letter ready for you to send to your local Municipal Office.
+
+**Identified Issue:** Deep and hazardous potholes on the local street.
+**Suggested Urgency:** High Safety Risk for children and elderly.
+
+**Your Prepared Draft Letter (Ready to copy):**
+> To,
+> The Officer-in-Charge / Municipal Executive Engineer,
+> Local Development and Ward Office.
 >
-> **Subject:** Request to repair dangerous potholes and damaged road on our street.
+> **Subject:** Humble request for urgent repair of dangerous road potholes in our neighborhood.
 >
-> Respected Sir/Madam,
-> I am writing to politely bring to your notice the bad condition of the road in our residential area. There are several deep and dangerous potholes that make it very risky for elderly citizens to walk and for children to ride cycles. We have also had minor falls during the rainy evenings due to poor visibility.
+> Respectful Sir/Madam,
 >
-> We request you to kindly send a repair team to patch these potholes at the earliest to ensure our neighborhood stays safe.
+> I am writing on behalf of the residents of our locality to bring to your kind attention the critical condition of our local street. Deep, hazardous potholes have formed on our main passage, which are causing frequent slips and accidents, especially for children, elder citizens, and passing two-wheelers.
 >
-> Thanking you,
-> **Residents of the Neighborhood**
+> During rainfall, these potholes fill up with water, making them completely invisible and dangerous. We kindly request you to inspect our street and direct the maintenance staff to fill and secure these potholes at your earliest convenience to prevent any major accidents.
+>
+> Thanking you in advance for your kind support.
+>
+> Yours sincerely,
+> [Your Name]
+> [Your Neighborhood Address]
 
-*Click the copy button in the top right of this letter box to use this text.*`
+*Feel free to copy this draft, fill in your name and address, and submit it to your nearest ward office.*`
       },
       hi: {
-        welcome: "नमस्ते! 🙏 मैं आपका **स्मार्ट भारत सहायक** हूँ। मैं सरकारी योजनाओं को समझने, दस्तावेजों के लिए जरूरी कागजात पता करने, और स्थानीय समस्याओं के लिए सीधे शिकायत पत्र लिखने में आपकी मदद कर सकता हूँ। मुझसे बेझिझक अपनी भाषा में पूछें!",
-        scheme_trigger: ["योजना", "लाभ", "किसान", "खेती", "अस्पताल", "मुफ्त", "इलाज", "घर", "आवास", "पेंशन", "गरीब"],
-        scheme_response: `🏥 **आयुष्मान भारत योजना (मुफ्त इलाज)**
-- **यह क्या है:** अस्पताल में भर्ती होने और गंभीर बीमारियों के मुफ्त इलाज के लिए हर साल प्रति परिवार ₹5 लाख तक की मदद।
-- **कौन आवेदन कर सकता है:** आर्थिक रूप से कमजोर परिवार और दैनिक वेतन भोगी।
-- **जरूरी कागजात:**
-  1. परिवार के सभी सदस्यों का आधार कार्ड।
-  2. राशन कार्ड।
-  3. आधार से जुड़ा मोबाइल नंबर।
+        welcome: "नमस्ते! 🙏 मैं आपका **स्मार्ट भारत नागरिक साथी** हूँ। मैं यहाँ सरकारी योजनाओं को समझने, सही दस्तावेज़ों की चेकलिस्ट तैयार करने और स्थानीय समस्याओं (जैसे सड़क, पानी, कचरा) के लिए सरल आवेदन पत्र लिखने में आपकी मदद के लिए हूँ।\n\nआप मुझसे बेझिझक किसी भी भाषा में बात कर सकते हैं। हमारी सहायता सेवाएँ आपकी बात को सुनकर आपको आसान और मीठे शब्दों में मार्गदर्शन प्रदान करेंगी।",
+        scheme_trigger: ["योजना", "लाभ", "किसान", "पीएम किसान", "पैसा", "मदद", "पेंशन", "आयुष्मान", "इलाज"],
+        scheme_response: `🏛️ **प्रधानमंत्री किसान सम्मान निधि योजना (किसान सहायता)**
+        
+**सहायता राशि:** आपको हर साल ₹6,000 की वित्तीय मदद मिलती है, जो ₹2,000 की तीन आसान किश्तों में सीधे आपके बैंक खाते में भेजी जाती है।
 
-🌾 **पीएम-किसान योजना (किसान सहायता)**
-- **यह क्या है:** खेती करने वाले परिवारों को हर साल ₹6,000 की वित्तीय सहायता, जो ₹2,000 की तीन किश्तों में सीधे बैंक खाते में भेजी जाती है।
-- **कौन आवेदन कर सकता है:** जिनके नाम पर कृषि योग्य भूमि है।
-- **जरूरी कागजात:**
-  1. जमीन के कागजात (पट्टा या लगान रसीद)।
-  2. आधार कार्ड।
-  3. आधार से लिंक बैंक खाता।
+**पात्रता नियम:**
+- ✅ आवेदक के नाम पर कृषि योग्य भूमि के दस्तावेज़ होने चाहिए।
+- ❌ सरकारी नौकरी करने वाले, आयकरदाता या उच्च पदों पर कार्यरत लोग इसके पात्र नहीं हैं।
 
-🏠 **प्रधानमंत्री आवास योजना (घर बनाने की योजना)**
-- **यह क्या है:** पक्का और सुरक्षित घर बनाने या खरीदने के लिए सरकार की तरफ से मदद या सस्ते ब्याज पर लोन।
-- **कौन आवेदन कर सकता है:** ऐसे परिवार जिनके पास पक्का मकान नहीं है और आमदनी कम है।
-- **जरूरी कागजात:**
-  1. आधार कार्ड।
-  2. आय प्रमाण पत्र या वेतन की रसीद।
-  3. बैंक खाते की पासबुक।`,
-        document_trigger: ["आधार", "पता", "बदलना", "कार्ड", "कागज", "दस्तावेज", "वोटर आईडी", "पहचान पत्र"],
+**आवेदन के लिए आवश्यक दस्तावेज़:**
+1. जमीन के कागजात (खतौनी या दाखिल-खारिज पर्ची)।
+2. आधार कार्ड (मोबाइल नंबर से लिंक होना आवश्यक)।
+3. आधार कार्ड से लिंक चालू बैंक खाता (ताकि पैसा सीधे खाते में आ सके)।
+4. मोबाइल नंबर ताकि ओटीपी कोड प्राप्त हो सके।
+
+---
+
+🏥 **आयुष्मान भारत योजना (मुफ़्त इलाज सहायता)**
+
+**सहायता राशि:** गंभीर बीमारियों के इलाज के लिए प्रत्येक पात्र परिवार को हर साल ₹5 लाख तक का मुफ़्त इलाज मिलता है।
+
+**पात्रता नियम:**
+- ✅ आर्थिक रूप से कमजोर परिवार जो सरकारी स्वास्थ्य सूची (SECC 2011) में शामिल हैं।
+- ✅ कच्चे घरों में रहने वाले, भूमिहीन मजदूर या दिहाड़ी कामगार।
+
+**आवेदन के लिए आवश्यक दस्तावेज़:**
+1. आधार कार्ड या राशन कार्ड।
+2. परिवार पहचान पत्र (पीएम पत्र या राशन आईडी)।`,
+        document_trigger: ["दस्तावेज़", "कार्ड", "आधार", "पता", "अपडेट", "पैन", "पासपोर्ट", "बदलना", "राशन"],
         document_response: `📄 **आधार कार्ड में पता बदलने का आसान तरीका**
-आप घर बैठे ऑनलाइन अपने आधार का पता बदल सकते हैं:
-- **स्वीकार्य कागजात (कोई भी एक):**
-  - बिजली या पानी का बिल (3 महीने से पुराना न हो)
-  - फोटो के साथ बैंक की पासबुक
-  - पंजीकृत रेंट एग्रीमेंट या मकान की रजिस्ट्री
-  - वोटर आईडी या पासपोर्ट
 
-- **ऑनलाइन अपडेट करने के सरल चरण:**
-  1. आधिकारिक MyAadhaar वेबसाइट खोलें।
-  2. अपना आधार नंबर डालें और मोबाइल पर आए ओटीपी से लॉग इन करें।
-  3. **'Update Address Online'** विकल्प पर क्लिक करें और नया पता भरें।
-  4. अपने पते के प्रमाण दस्तावेज की साफ फोटो अपलोड करें।
-  5. ₹50 की फीस का भुगतान करें और रसीद संभाल कर रखें।`,
-        complaint_trigger: ["सड़क", "गड्ढा", "शिकायत", "कचरा", "नाली", "पानी", "बिजली", "सफाई", "लाइट"],
-        complaint_response: `✍️ **तैयार किया गया शिकायत पत्र का प्रारूप**
-मैंने आपके लिए एक सरल और स्पष्ट शिकायत पत्र तैयार किया है। आप इसे कॉपी करके अपने नगर निगम या वार्ड कार्यालय में दे सकते हैं:
+आपको किसी दलाल को अतिरिक्त पैसे देने की आवश्यकता नहीं है। आप आधिकारिक वेबसाइट के जरिए स्वयं ऑनलाइन अपना पता बदल सकते हैं।
 
-> **सेवा में,**
-> **वार्ड अधिकारी / मुख्य नगर आयुक्त,**
-> **स्थानीय नगर निगम कार्यालय।**
+**स्वीकार्य पते के प्रमाण (कोई भी 1 दस्तावेज़):**
+- 🏠 बिजली, पानी या टेलीफोन का बिल (3 महीने से पुराना न हो)।
+- 🏠 फोटो और बैंक शाखा की मुहर के साथ पासबुक।
+- 🏠 रजिस्टर्ड किरायानामा (रेंट एग्रीमेंट) या जमीन की रजिस्ट्री।
+- 🏠 पासपोर्ट या मतदाता पहचान पत्र।
+
+**ऑनलाइन अपडेट करने के सरल चरण:**
+1. आधिकारिक **MyAadhaar पोर्टल** खोलें।
+2. अपना 12 अंकों का आधार नंबर डालें और मोबाइल पर आए ओटीपी कोड से लॉग इन करें।
+3. **'Update Address Online'** विकल्प पर क्लिक करें और अपना नया पता ध्यानपूर्वक भरें।
+4. अपने पते के प्रमाण दस्तावेज़ की साफ तस्वीर खींचकर अपलोड करें।
+5. ₹50 की सरकारी फीस का ऑनलाइन भुगतान करें।
+6. मिलने वाले 14 अंकों के सेवा नंबर को संभाल कर रखें, जिससे आप बाद में स्थिति जांच सकें।`,
+        complaint_trigger: ["गड्ढा", "सड़क", "शिकायत", "कचरा", "नाली", "पानी", "बिजली", "समस्या", "नगर निगम"],
+        complaint_response: `⚠️ **स्थानीय समस्या के लिए आवेदन पत्र: सड़क मरम्मत और सुरक्षा**
+
+मैंने नगर निगम या स्थानीय कार्यालय में जमा करने के लिए एक अत्यंत विनम्र और स्पष्ट आवेदन पत्र तैयार किया है।
+
+**समस्या:** क्षेत्र की सड़क पर गहरे और खतरनाक गड्ढे।
+**प्राथमिकता:** दुर्घटनाओं से बचाव हेतु अति आवश्यक।
+
+**तैयार किया गया आवेदन पत्र (कॉपी करने के लिए तैयार):**
+> सेवा में,
+> श्रीमान मुख्य अभियंता / वार्ड अधिकारी,
+> स्थानीय नगर निगम कार्यालय।
 >
-> **विषय:** हमारे क्षेत्र में सड़क के गहरे गड्ढों की मरम्मत का अनुरोध।
+> **विषय:** हमारे क्षेत्र की मुख्य सड़क के जानलेवा गड्ढों की मरम्मत कराने हेतु विनम्र प्रार्थना पत्र।
 >
 > आदरणीय महोदय / महोदया,
-> मैं इस पत्र के माध्यम से हमारे क्षेत्र की मुख्य सड़क की खराब स्थिति की ओर आपका ध्यान आकर्षित करना चाहता हूँ। हमारी सड़क पर कई गहरे गड्ढे हो गए हैं, जिससे बुजुर्गों को चलने और बच्चों को साइकिल चलाने में बहुत खतरा रहता है। बारिश के मौसम में पानी भरने के कारण अक्सर दुर्घटनाएं होने का डर बना रहता है।
 >
-> आपसे विनम्र निवेदन है कि हमारी सुरक्षा को ध्यान में रखते हुए सड़क की जल्द मरम्मत कराने की कृपा करें।
+> मैं इस पत्र के माध्यम से आपका ध्यान हमारे क्षेत्र की मुख्य सड़क की दयनीय स्थिति की ओर आकर्षित करना चाहता हूँ। सड़क पर जगह-जगह गहरे और खतरनाक गड्ढे बन गए हैं, जिसके कारण यहाँ आए दिन दुर्घटनाएँ होती रहती हैं। विशेष रूप से बुजुर्गों, छोटे बच्चों और दोपहिया वाहनों के लिए यहाँ से गुजरना अत्यंत जोखिम भरा हो गया है।
 >
-> धन्यवाद,
-> **क्षेत्र के निवासी**
+> बारिश के दिनों में इन गड्ढों में पानी भर जाता है जिससे ये दिखाई नहीं देते और खतरा दोगुना हो जाता है। अतः आपसे विनम्र निवेदन है कि जनहित को ध्यान में रखते हुए इस सड़क का निरीक्षण कराएं और कर्मचारियों को जल्द से जल्द गड्ढे भरने का निर्देश देने की कृपा करें।
+>
+> आपके त्वरित सहयोग के लिए हम सभी निवासी सदैव आभारी रहेंगे।
+>
+> भवदीय,
+> [आपका नाम]
+> [आपके मोहल्ले का पता]
 
-*इस लेटर बॉक्स के ऊपर दाईं ओर दिए गए कॉपी बटन पर क्लिक करके आप इसे उपयोग कर सकते हैं।*`
+*आप इस पत्र को यहाँ से कॉपी कर सकते हैं, इसमें अपना नाम व पता लिखकर सीधे अपने स्थानीय कार्यालय में जमा कर सकते हैं।*`
       },
       bn: {
-        welcome: "নমস্কার! 🙏 আমি আপনার **স্মার্ট ভারত সহকারী**। আমি আপনাকে বিভিন্ন সরকারি সুযোগ-সুবিধা বুঝতে, দরকারি নথিপত্র জোগাড় করতে, অথবা আপনার এলাকার কোনো সমস্যার জন্য চিঠি লিখতে সাহায্য করব। আপনার নিজের ভাষায় যেকোনো প্রশ্ন করুন!",
-        scheme_trigger: ["প্রকল্প", "টাকা", "কৃষক", "চাষ", "হাসপাতাল", "চিকিৎসা", "ঘর", "বাড়ি", "পেনশন", "গরিব"],
-        scheme_response: `🏥 **আয়ুষ্মান ভারত যোজনা (বিনামূল্যে চিকিৎসা)**
-- **সুবিধা:** হাসপাতালে ভর্তি ও চিকিৎসার জন্য প্রতি পরিবারকে বছরে ₹৫ লক্ষ টাকা পর্যন্ত বিনামূল্যে চিকিৎসা সহায়তা।
-- **কারা পাবেন:** আর্থিকভাবে দুর্বল পরিবার এবং দিনমজুর মানুষ।
-- **দরকারি কাগজপত্র:**
-  ১. পরিবারের সবার আধার কার্ড।
-  ২. রেশন কার্ড।
-  ৩. আধারের সাথে যুক্ত মোবাইল নম্বর।
+        welcome: "নমস্কার! 🙏 আমি আপনার **স্মার্ট ভারত নাগরিক বন্ধু**। আমি আপনাকে সরকারি প্রকল্পের সহজ নিয়ম বুঝতে, নথিপত্রের তালিকা মেলাতে এবং এলাকার যেকোনো সমস্যা (যেমন রাস্তা, ড্রেন, আলো) সমাধানের জন্য সহজ দরখাস্ত লিখতে সাহায্য করতে প্রস্তুত।\n\nআপনি বাংলা বা যেকোনো ভাষায় আমার সাথে সহজভাবে কথা বলতে পারেন। আমাদের সাহায্য কেন্দ্র আপনার প্রতিটি কথা গুরুত্ব দিয়ে শুনবে।",
+        scheme_trigger: ["প্রকল্প", "সুবিধা", "কৃষক", "যোজনা", "টাকা", "চাষ", "পেনশন", "স্বাস্থ্য", "চিকিৎসা"],
+        scheme_response: `🏛️ **প্রধানমন্ত্রী কিষাণ সম্মান নিধি যোজনা (কৃষক সহায়তা)**
+        
+**সহায়তার পরিমাণ:** আপনি প্রতি বছর ₹৬,০০০ আর্থিক সাহায্য পাবেন, যা সরাসরি আপনার ব্যাঙ্ক অ্যাকাউন্টে ₹২,০০০ করে তিনটি সমান কিস্তিতে পাঠানো হয়।
 
-🌾 **পিএম-কিষাণ প্রকল্প (চাষীদের জন্য সাহায্য)**
-- **সুবিধা:** চাষী পরিবারগুলিকে বছরে মোট ₹৬,০০০ টাকা সাহায্য, যা সরাসরি ব্যাঙ্ক অ্যাকাউন্টে ৩টি কিস্তিতে (₹২,০০০ করে) পাঠানো হয়।
-- **কারা পাবেন:** যাদের নিজেদের নামে চাষযোগ্য জমি রয়েছে।
-- **দরকারি কাগজপত্র:**
-  ১. জমির খতিয়ান বা পর্চা।
-  ২. আধার কার্ড।
-  ৩. আধারের সাথে যুক্ত ব্যাঙ্ক অ্যাকাউন্ট।
+**যোগ্যতার নিয়ম:**
+- ✅ আপনার নিজের নামে চাষের জমি থাকতে হবে।
+- ❌ সরকারি চাকরিজীবী, আয়করদাতা বা বড়ো ব্যবসায়ীরা এই সুবিধার যোগ্য নন।
 
-🏠 **প্রধানমন্ত্রী আবাস যোজনা (পাকা বাড়ি তৈরির প্রকল্প)**
-- **সুবিধা:** একটি নিরাপদ পাকা বাড়ি তৈরি করতে বা কিনতে সরকারের পক্ষ থেকে সরাসরি টাকা বা কম সুদে ঋণের সুবিধা।
-- **কারা পাবেন:** যাদের নিজস্ব পাকা বাড়ি নেই এবং বার্ষিক আয় কম।
-- **দরকারি কাগজপত্র:**
-  ১. আধার কার্ড।
-  ২. আয়ের শংসাপত্র বা ইনকাম সার্টিফিকেট।
-  ৩. ব্যাঙ্ক অ্যাকাউন্টের বিবরণী।`,
-        document_trigger: ["আধার", "ঠিকানা", "পরিবর্তন", "কার্ড", "নথিপত্র", "ভোটার আইডি", "পাসপোর্ট"],
-        document_response: `📄 **আধার কার্ডের ঠিকানা পরিবর্তন করার সহজ গাইড**
-আপনি নিজেই অনলাইনে আপনার আধার কার্ডের ঠিকানা পরিবর্তন করতে পারেন:
-- **গ্রহণযোগ্য কাগজপত্র (যেকোনো একটি):**
-  - বিদ্যুৎ বিল বা জলের বিল (৩ মাসের বেশি পুরানো নয়)
-  - ছবি সহ ব্যাঙ্ক পাসবুক
-  - রেজিস্টার্ড ভাড়া চুক্তি বা জমির দলিল
-  - ভোটার কার্ড বা পাসপোর্ট
+**আবেদনের প্রয়োজনীয় কাগজপত্র:**
+১. জমির পর্চা বা মিউটেশন রশিদ।
+২. আধার কার্ড (অবশ্যই মোবাইল নম্বরের সাথে যুক্ত থাকতে হবে)।
+৩. আধার কার্ডের সাথে যুক্ত চালু ব্যাঙ্ক অ্যাকাউন্ট (সরাসরি টাকা পাওয়ার জন্য)।
+৪. ওটিপি কোড পাওয়ার জন্য চালু মোবাইল নম্বর।
 
-- **অনলাইন পরিবর্তনের সহজ ধাপ:**
-  ১. UIDAI-এর MyAadhaar ওয়েবসাইটে যান।
-  ২. আধার নম্বর দিয়ে ফোনে আসা ওটিপি (OTP) দিয়ে লগ-ইন করুন।
-  ৩. **'Update Address Online'** এ ক্লিক করে নতুন ঠিকানাটি লিখুন।
-  ৪. আপনার ঠিকানার প্রমাণের একটি পরিষ্কার ছবি আপলোড করুন।
-  ৫. অনলাইনে ₹৫০ ফি দিয়ে রশিদটি ডাউনলোড করে রাখুন।`,
-        complaint_trigger: ["রাস্তা", "গর্ত", "অভিযোগ", "ময়লা", "ড্রেন", "জল", "আলো", "পরিষ্কার", "পাইপ"],
-        complaint_response: `✍️ **অভিযোগ পত্রের খসড়া চিঠি**
-আমি আপনার জন্য একটি স্পষ্ট ও সুন্দর চিঠি তৈরি করেছি। এটি কপি করে আপনার স্থানীয় ওয়ার্ড বা পৌরসভা দপ্তরে জমা দিতে পারেন:
+---
 
-> **প্রতি,**
-> **ওয়ার্ড অফিসার / পৌর কমিশনার,**
-> **স্থানীয় পৌরসভা কার্যালয়।**
+🏥 **আয়ুষ্মান ভারত যোজনা (বিনামূল্যে চিকিৎসা সহায়তা)**
+
+**সহায়তার পরিমাণ:** প্রতিটি যোগ্য পরিবার সরকারি তালিকাভুক্ত হাসপাতালে প্রতি বছর ₹৫ লক্ষ টাকা পর্যন্ত বিনামূল্যে চিকিৎসা সুবিধা পেতে পারে।
+
+**যোগ্যতার নিয়ম:**
+- ✅ আর্থিকভাবে দুর্বল পরিবার যারা সরকারি স্বাস্থ্য তালিকায় (SECC 2011) অন্তর্ভুক্ত আছেন।
+- ✅ কাঁচা বাড়ির বাসিন্দা, দিনমজুর এবং ভূমিহীন শ্রমিক পরিবার।
+
+**আবেদনের প্রয়োজনীয় কাগজপত্র:**
+১. আধার কার্ড অথবা রেশন কার্ড।
+২. পরিবারের পরিচয়পত্র (পিএম চিঠি বা রেশন আইডি)।`,
+        document_trigger: ["কাগজপত্র", "কার্ড", "আধার", "ঠিকানা", "আপডেট", "বদল", "প্যান", "পাসপোর্ট", "রেশন"],
+        document_response: `📄 **আধার কার্ডের ঠিকানা বদল করার সহজ নিয়ম**
+
+আপনাকে কোনো দালালের কাছে বাড়তি টাকা খরচ করতে হবে না। আপনি নিজেই সরকারি ওয়েবসাইটের মাধ্যমে অনলাইনে আপনার ঠিকানা পরিবর্তন করতে পারেন।
+
+**ঠিকানার প্রমাণপত্র (যেকোনো ১টি কাগজ):**
+- 🏠 বিদ্যুৎ বিল বা জলের বিল (৩ মাসের বেশি পুরোনো হওয়া চলবে না)।
+- 🏠 ছবি এবং ব্যাঙ্ক শাখার স্ট্যাম্প সহ ব্যাঙ্কের পাসবই।
+- 🏠 রেজিস্টার্ড বাড়ি ভাড়ার চুক্তিপত্র বা জমির দলিল।
+- 🏠 পাসপোর্ট বা ভোটার কার্ড।
+
+**অনলাইনে আপডেট করার সহজ ধাপসমূহ:**
+১. আধার বিভাগের অফিসিয়াল **MyAadhaar পোর্টাল** খুলুন।
+২. ১২ সংখ্যার আধার নম্বরটি লিখুন এবং মোবাইলে আসা ওটিপি দিয়ে লগ ইন করুন।
+৩. **'Update Address Online'** এ ক্লিক করে আপনার নতুন ঠিকানাটি সঠিক বানান সহ লিখুন।
+৪. আপনার ঠিকানার প্রমাণপত্রের একটি পরিষ্কার ছবি তুলে আপলোড করুন।
+৫. ৫০ টাকার সরকারি ফি অনলাইনে জমা দিন।
+৬. ১৪ সংখ্যার ট্র্যাকিং নম্বরটি যত্ন করে রাখুন, এটি দিয়ে পরে আবেদনের অবস্থা জানতে পারবেন।`,
+        complaint_trigger: ["গর্ত", "রাস্তা", "অভিযোগ", "ময়লা", "ড্রেন", "জল", "আলো", "সমস্যা", "পৌরসভা", "পঞ্চায়েত"],
+        complaint_response: `⚠️ **এলাকার সমস্যা সমাধানের জন্য দরখাস্ত: রাস্তা মেরামত**
+
+আমি আপনার হয়ে স্থানীয় পৌরসভা বা পঞ্চায়েত অফিসে জমা দেওয়ার জন্য একটি অত্যন্ত নম্র এবং স্পষ্ট দরখাস্তের খসড়া তৈরি করেছি।
+
+**চিহ্নিত সমস্যা:** প্রধান রাস্তায় বিপজ্জনক গর্ত ও চলাচলের অসুবিধা।
+**জরুরি স্তর:** দুর্ঘটনা এড়াতে দ্রুত মেরামত প্রয়োজন।
+
+**তৈরি দরখাস্তের খসড়া (কপি করার জন্য প্রস্তুত):**
+> প্রতি,
+> মাননীয় কার্যনির্বাহী আধিকারিক / ওয়ার্ড কমিশনার,
+> স্থানীয় পৌরসভা / পঞ্চায়েত কার্যালয়।
 >
-> **বিষয়:** আমাদের এলাকার ভাঙা রাস্তা ও বিপজ্জনক গর্ত মেরামতের আবেদন।
+> **বিষয়:** আমাদের এলাকার প্রধান রাস্তাটি দ্রুত মেরামতের জন্য বিনীত আবেদন।
 >
 > শ্রদ্ধেয় মহাশয় / মহাশয়া,
-> আমি আমাদের এলাকার রাস্তার বেহাল অবস্থার কথা আপনার নজরে আনার জন্য এই চিঠিটি লিখছি। রাস্তায় প্রচুর বিপজ্জনক গর্ত তৈরি হয়েছে যার ফলে প্রবীণ মানুষদের হাঁটতে এবং ছোট শিশুদের যাতায়াত করতে খুবই অসুবিধা হচ্ছে। বর্ষাকালে জল জমে দুর্ঘটনা ঘটার আশঙ্কা আরও বেড়ে যায়।
 >
-> জনস্বার্থে আমাদের এই রাস্তাটি দ্রুত সংস্কার করার ব্যবস্থা নিলে আমরা বিশেষভাবে বাধিত হব।
+> আমি আমাদের এলাকার বাসিন্দাদের পক্ষ থেকে অত্যন্ত বিনীতভাবে আমাদের প্রধান সড়কটির বেহাল দশার প্রতি আপনার দৃষ্টি আকর্ষণ করছি। রাস্তার মাঝে মাঝে অত্যন্ত বিপজ্জনক গর্তের সৃষ্টি হয়েছে, যার ফলে প্রায়শই এখানে দুর্ঘটনা ঘটছে। বিশেষ করে বয়স্ক মানুষ, ছোট শিশু এবং মোটরসাইকেল আরোহীদের যাতায়াত অত্যন্ত ঝুঁকিপূর্ণ হয়ে উঠেছে।
 >
-> ধন্যবাদান্তে,
-> **এলাকাবাসী**
+> বৃষ্টির সময় এই গর্তগুলিতে জল জমে থাকায় এগুলি দেখা যায় না, যা বিপদ আরও বাড়িয়ে তোলে। অতএব আপনার কাছে আমাদের বিনীত অনুরোধ, দয়া করে রাস্তাটি একবার পরিদর্শন করে এটি দ্রুত মেরামতের ব্যবস্থা করলে আমরা অত্যন্ত উপকৃত হব।
+>
+> আপনার দ্রুত পদক্ষেপের অপেক্ষায় আমরা পথ চেয়ে রইলাম।
+>
+> বিনীত,
+> [আপনার নাম]
+> [আপনার এলাকার ঠিকানা]
 
-*চিঠিটির বক্সের ডানদিকের কোণায় থাকা কপি বোতামে ক্লিক করে আপনি এই টেক্সটটি ব্যবহার করতে পারেন।*`
+*আপনি এই খসড়াটি কপি করে নিজের নাম ও ঠিকানা বসিয়ে সরাসরি আপনার পঞ্চায়েত বা পৌরসভা অফিসে জমা দিতে পারেন।*`
       },
       ta: {
-        welcome: "வணக்கம்! 🙏 நான் உங்களது **ஸ்மார்ட் பாரத் உதவித் தோழன்**. அரசு திட்டங்கள், தேவையான அடையாள ஆவணங்கள் மற்றும் உள்ளூர் பிரச்சனைகளுக்கான புகார் கடிதங்களை எளிதாக உருவாக்க நான் உங்களுக்கு உதவ முடியும். உங்களது சொந்த மொழியில் கேளுங்கள்!",
-        scheme_trigger: ["திட்டம்", "விவசாயி", "நெல்", "உதவி", "பணம்", "மருத்துவம்", "அஸ்பத்திரி", "இலவச", "வீடு", "ஓய்வூதியம்"],
-        scheme_response: `🏥 **ஆயுஷ்மான் பாரத் திட்டம் (இலவச மருத்துவம்)**
-- **நோக்கம்:** மருத்துவமனைச் செலவுகள் மற்றும் பெரிய சிகிச்சைகளுக்காக ஒவ்வொரு குடும்பத்திற்கும் ஆண்டுக்கு ₹5 லட்சம் வரை இலவச மருத்துவ உதவி.
-- **யார் விண்ணப்பிக்கலாம்:** ஏழை எளிய குடும்பங்கள் மற்றும் தினசரி கூலித் தொழிலாளர்கள்.
-- **தேவையான ஆவணங்கள்:**
-  1. குடும்ப உறுப்பினர்கள் அனைவரின் ஆதார் அட்டை.
-  2. ரேஷன் கார்டு.
-  3. ஆதாருடன் இணைக்கப்பட்ட மொபைல் எண்.
+        welcome: "வணக்கம்! 🙏 நான் உங்களது **ஸ்மார்ட் பாரத் குடிமைத் தோழன்**. அரசு உதவித் திட்டங்களைப் புரிந்துகொள்ளவும், ஆவணப் பட்டியல்களைச் சரிபார்க்கவும், உள்ளூர் பொதுப் பிரச்சினைகளுக்கு (சாலை, தண்ணீர், விளக்கு போன்றவை) விண்ணப்பக் கடிதம் எழுதவும் நான் உங்களுக்கு உதவுவேன்.\n\nநீங்கள் என்னிடம் தமிழ் அல்லது உங்களுக்கு விருப்பமான மொழியில் எளிதாகப் பேசலாம். உங்களுக்குத் தேவையான உதவிகளை எளிய முறையில் வழங்க நான் தயாராக உள்ளேன்.",
+        scheme_trigger: ["திட்டம்", "உதவி", "விவசாயி", "யோஜனா", "பணம்", "பயிர்", "ஓய்வூதியம்", "ஆரோக்கியம்", "மருத்துவம்"],
+        scheme_response: `🏛️ **பிரதம மந்திரி கிசான் சம்மன் நிதி யோஜனா (விவசாயிகள் உதவி)**
+        
+**உதவித் தொகை:** உங்களுக்கு ஆண்டுதோறும் ₹6,000 உதவித் தொகை நேரடியாக வங்கி கணக்கில் தலா ₹2,000 வீதம் மூன்று தவணைகளாகச் செலுத்தப்படும்.
 
-🌾 **பிரதம மந்திரி கிசான் திட்டம் (விவசாயிகள் உதவி)**
-- **நோக்கம்:** விவசாயக் குடும்பங்களுக்கு ஆண்டுக்கு ₹6,000 நேரடி உதவித்தொகை. இது ₹2,000 வீதம் மூன்று தவணைகளாக நேரடியாக வங்கிக் கணக்கில் செலுத்தப்படும்.
-- **யார் விண்ணப்பிக்கலாம்:** சொந்தமாக விவசாய நிலம் வைத்திருக்கும் விவசாயிகள்.
-- **தேவையான ஆவணங்கள்:**
-  1. நிலப் பட்டா அல்லது நில வரி ரசீது.
-  2. ஆதார் அட்டை.
-  3. ஆதாருடன் இணைக்கப்பட்ட வங்கிக் கணக்கு புத்தகம்.
+**தகுதி வரம்புகள்:**
+- ✅ தங்களது பெயரில் விவசாய நிலம் வைத்துள்ள இந்தியக் குடிமகனாக இருக்க வேண்டும்.
+- ❌ அரசு ஊழியர்கள், ஓய்வு பெற்ற அதிகாரிகள், வருமான வரி செலுத்துபவர்களுக்கு விலக்கு அளிக்கப்பட்டுள்ளது.
 
-🏠 **பிரதம மந்திரி அவாஸ் யோஜனா (இலவச வீடு திட்டம்)**
-- **நோக்கம்:** பாதுகாப்பான சொந்தப் பக்கா வீடு கட்டுவதற்கு அல்லது வாங்குவதற்கு அரசாங்கத்தின் நேரடி நிதியுதவி அல்லது வட்டி சலுகை.
-- **யார் விண்ணப்பிக்கலாம்:** சொந்தமாகப் பக்கா வீடு இல்லாத ஏழைக் குடும்பங்கள்.
-- **தேவையான ஆவணங்கள்:**
-  1. ஆதார் அட்டை.
-  2. வருமானச் சான்றிதழ்.
-  3. வங்கிக் கணக்கு விவரங்கள்.`,
-        document_trigger: ["ஆதார்", "முகவரி", "மாற்றம்", "அட்டை", "ஆவணம்", "வோட்டர் আইডি", "கடவுச்சீட்டு"],
-        document_response: `📄 **ஆதார் அட்டை முகவரி மாற்ற எளிய வழிகாட்டி**
-உங்கள் முகவரியை நீங்களே ஆன்லைனில் எளிதாக மாற்றிக்கொள்ளலாம்:
-- **ஏற்றுக்கொள்ளப்படும் ஆவணங்கள் (ஏதேனும் ஒன்று):**
-  - மின்சாரக் கட்டணம் அல்லது தண்ணீர் கட்டண ரசீது (3 மாதத்திற்குள் இருக்க வேண்டும்)
-  - புகைப்படத்துடன் கூடிய வங்கிக் கணக்கு புத்தகம்
-  - பதிவு செய்யப்பட்ட வாடகை ஒப்பந்தப் பத்திரம்
-  - வாக்காளர் அடையாள அட்டை அல்லது பாஸ்போர்ட்
+**விண்ணப்பிக்கத் தேவையான ஆவணங்கள்:**
+1. நில உரிமைப் பத்திரங்கள் (பட்டா/சிட்டா நகல்).
+2. ஆதார் அட்டை (மொபைல் எண்ணுடன் இணைக்கப்பட்டிருக்க வேண்டும்).
+3. ஆதார் இணைக்கப்பட்ட வங்கி கணக்கு புத்தகம் (நேரடியாகப் பணம் பெற).
+4. மொபைல் எண் (OTP பெற).
 
-- **முகவரி மாற்ற எளிய வழிமுறைகள்:**
-  1. அதிகாரப்பூர்வ MyAadhaar இணையதளத்தைத் திறக்கவும்.
-  2. உங்கள் ஆதார் எண் மற்றும் உங்கள் மொபைலுக்கு வரும் OTP மூலம் உள்ளே நுழையவும்.
-  3. **'Update Address Online'** என்பதைத் தேர்ந்தெடுத்து புதிய முகவரியைப் பதியவும்.
-  4. உங்களது முகவரி சான்றை ஒரு தெளிவான புகைப்படமாக எடுத்து பதிவேற்றவும்.
-  5. ஆன்லைன் கட்டணம் ₹50 செலுத்தி, அதற்கான ரசீதைச் சேமித்துக் கொள்ளவும்.`,
-        complaint_trigger: ["சாலை", "பள்ளம்", "புகார்", "குப்பை", "கழிவுநீர்", "தண்ணீர்", "மின்சாரம்", "தெருவிளக்கு", "சுத்தம்"],
-        complaint_response: `✍️ **உங்களுக்காகத் தயாரிக்கப்பட்ட புகார் கடித வரைவு**
-நகராட்சி வார்டு அலுவலகத்தில் சமர்ப்பிப்பதற்காக ஒரு எளிய கடிதத்தை நான் தயார் செய்துள்ளேன். நகலெடுத்துப் பயன்படுத்திக் கொள்ளலாம்:
+---
 
-> **பெறுநர்,**
-> **வார்டு அதிகாரி / நகராட்சி ஆணையர்,**
-> **உள்ளூர் நகராட்சி அலுவலகம்.**
+🏥 **ஆயுஷ்மான் பாரத் யோஜனா (இலவச மருத்துவக் காப்பீடு)**
+
+**உதவித் தொகை:** கடுமையான நோய்களுக்கான மருத்துவச் சிகிச்சைக்கு ஆண்டுதோறும் ஒரு குடும்பத்திற்கு ₹5 லட்சம் வரை இலவச மருத்துவ உதவி வழங்கப்படும்.
+
+**தகுதி வரம்புகள்:**
+- ✅ அரசு பொருளாதாரப் பட்டியலில் (SECC 2011) உள்ள ஏழை எளிய குடும்பங்கள்.
+- ✅ கூரை வீடுகளில் வசிப்பவர்கள், நிலமற்ற தினக்கூலித் தொழிலாளர்கள்.
+
+**தேவையான ஆவணங்கள்:**
+1. ஆதார் அட்டை அல்லது ரேஷன் அட்டை.
+2. குடும்ப அடையாள எண் (ரேஷன் கார்டு ஐடி).`,
+        document_trigger: ["ஆவணம்", "அட்டை", "ஆதார்", "முகவரி", "மாற்றம்", "புதுப்பித்தல்", "பான்", "ரேஷன்"],
+        document_response: `📄 **ஆதார் முகவரியை ஆன்லைனில் மாற்றும் எளிய முறை**
+
+இதற்காக நீங்கள் இடைத்தரகர்களுக்கு கூடுதல் கட்டணம் செலுத்தத் தேவையில்லை. நீங்களே அரசு இணையதளத்தில் முகவரியை மாற்றிக்கொள்ளலாம்.
+
+**முகவரி சான்றுகள் (ஏதேனும் 1 ஆவணம்):**
+- 🏠 மின்சாரக் கட்டணம் அல்லது குடிநீர்க் கட்டணம் (3 மாதங்களுக்குள் இருக்க வேண்டும்).
+- 🏠 புகைப்படத்துடன் கூடிய வங்கி கணக்குப் புத்தகம் (வங்கி முத்திரையுடன்).
+- 🏠 பதிவு செய்யப்பட்ட வாடகை ஒப்பந்தப் பத்திரம் அல்லது சொத்துப் பத்திரம்.
+- 🏠 கடவுச்சீட்டு (Passport) அல்லது வாக்காளர் அடையாள அட்டை.
+
+**ஆன்லைனில் மாற்றுவதற்கான எளிய படிகள்:**
+1. அரசின் **MyAadhaar இணையதளத்தைத்** திறக்கவும்.
+2. உங்கள் 12-இலக்க ஆதார் எண்ணை உள்ளிட்டு மொபைலுக்கு வரும் OTP மூலம் உள்நுழையவும்.
+3. **'Update Address Online'** என்பதைத் தேர்ந்தெடுத்து புதிய முகவரியைத் தட்டச்சு செய்யவும்.
+4. உங்கள் முகவரி சான்றின் தெளிவான புகைப்படத்தைப் பதிவேற்றவும்.
+5. அரசு செயலாக்கக் கட்டணம் ₹50-ஐ ஆன்லைனில் செலுத்தவும்.
+6. உங்களது விண்ணப்ப நிலையை அறிய வழங்கப்பட்ட 14-இலக்க விண்ணப்ப எண்ணைச் பத்திரமாகச் சேமித்து வைக்கவும்.`,
+        complaint_trigger: ["பள்ளம்", "சாலை", "புகார்", "குப்பை", "கழிவுநீர்", "தண்ணீர்", "மின்சாரம்", "பிரச்சினை", "நகராட்சி"],
+        complaint_response: `⚠️ **உள்ளூர் பிரச்சினைக்கான விண்ணப்பக் கடிதம்: சாலைப் பழுது நீக்கம்**
+
+நகராட்சி அல்லது உள்ளூர் வார்டு அலுவலகத்தில் சமர்ப்பிப்பதற்காக மரியாதையான விண்ணப்பக் கடித வரைவை நான் தயாரித்துள்ளேன்.
+
+**பிரச்சினை:** பிரதான சாலையில் உள்ள ஆபத்தான பள்ளங்கள்.
+**முன்னுரிமை:** விபத்துக்களைத் தவிர்க்க உடனடியாகச் சீரமைக்க வேண்டியது அவசியம்.
+
+**விண்ணப்பக் கடித வரைவு (நகலெடுக்கத் தயார்):**
+> பெறுநர்,
+> வார்டு பொறியாளர் / நகராட்சி அதிகாரி,
+> உள்ளூர் நகராட்சி அலுவலகம்.
 >
-> **பொருள்:** எங்கள் தெருவிலுள்ள சாலைப் பள்ளங்களைச் சீரமைக்கக் கோருதல்.
+> **பொருள்:** எங்கள் பகுதியில் உள்ள ஆபத்தான சாலைப் பள்ளங்களை உடனடியாகச் சீரமைக்கக் கோரி அன்பான விண்ணப்பக் கடிதம்.
 >
 > மதிப்பிற்குரிய ஐயா / அம்மா,
-> எங்களது குடியிருப்புப் பகுதியில் மிகவும் மோசமாக உள்ள சாலையை உங்களின் கவனத்திற்குக் கொண்டுவர விரும்புகிறேன். தெருவில் ஆழமான பள்ளங்கள் விழுந்துள்ளதால் முதியவர்கள் நடப்பதற்கும், சிறுவர்கள் சைக்கிள் ஓட்டுவதற்கும் பெரும் சிரமமாக உள்ளது. இரவு நேரங்களில் பலரும் தவறி விழுந்து காயம் அடைந்துள்ளனர்.
 >
-> பொதுமக்கள் நலன் கருதி சாலையை விரைவில் சீரமைத்துத் தருமாறு மிகவும் பணிவுடன் கேட்டுக்கொள்கிறேன்.
+> எங்கள் பகுதி மக்களின் சார்பாக, எங்களது பிரதான சாலையின் மோசமான நிலையைத் தங்களது அவசர கவனத்திற்குக் கொண்டுவர விரும்புகிறேன். சாலையின் பல இடங்களில் ஆபத்தான ஆழமான பள்ளங்கள் ஏற்பட்டுள்ளன, இதனால் தினசரி விபத்துக்கள் நடக்கின்றன. குறிப்பாக முதியவர்கள், சிறு குழந்தைகள் மற்றும் இருசக்கர வாகன ஓட்டிகள் இதில் பயணிப்பது மிகவும் ஆபத்தானது.
 >
-> நன்றியுடன்,
-> **குடியிருப்பு மக்கள்**
+> மழைக்காலத்தில் இந்தப் பள்ளங்களில் தண்ணீர் தேங்குவதால் அவை கண்ணுக்குத் தெரிவதில்லை, இதனால் ஆபத்து இன்னும் அதிகமாகிறது. எனவே, பொதுமக்கள் நலன் கருதி தாங்கள் சாலையை ஆய்வு செய்து, இந்தப் பள்ளங்களை விரைவாகச் சீரமைக்க நடவடிக்கை எடுக்குமாறு பணிவுடன் கேட்டுக்கொள்கிறேன்.
+>
+> பொதுமக்களின் இந்த நியாயமான கோரிக்கையை நிறைவேற்றித் தருவீர்கள் என நம்புகிறோம்.
+>
+> தங்கள் உண்மையுள்ள,
+> [உங்கள் பெயர்]
+> [உங்கள் வீட்டு முகவரி]
 
-*இந்தக் கடிதப் பெட்டியின் மேலே வலது புறமுள்ள நகல் (Copy) பொத்தானைப் பயன்படுத்தி இதனைப் பெற்றுக்கொள்ளலாம்.*`
+*இந்த வரைவை இங்கிருந்து நகலெடுத்து, உங்கள் பெயர் மற்றும் முகவரியை எழுதி உள்ளூர் நகராட்சி அலுவலகத்தில் சமர்ப்பிக்கலாம்.*`
       },
       te: {
-        welcome: "నమస్తే! 🙏 నేను మీ **స్మార్ట్ భారత్ సహాయకుడిని**. నేను మీకు ప్రభుత్వ సంక్షేమ పథకాలను అర్థం చేసుకోవడానికి, దరఖాస్తులకు కావలసిన పత్రాలను తెలుసుకోవడానికి, మరియు మీ వీధి సమస్యలపై అధికారులకు చక్కని లేఖ రాయడానికి సహాయం చేస్తాను. మీ స్వంత భాషలో అడగండి!",
-        scheme_trigger: ["పథకం", "లాభం", "రైతు", "వ్యవసాయం", "ఉచిత", "వైద్యం", "ఇల్లు", "ఆవాస్", "పెన్షన్", "పేదలు"],
-        scheme_response: `🏥 **ఆయుష్మాన్ భారత్ యోజన (ఉచిత వైద్య సహాయం)**
-- **ప్రయోజనం:** తీవ్రమైన అనారోగ్యాలు మరియు ఆసుపత్రి ఖర్చుల కోసం ప్రతి కుటుంబానికి సంవత్సరానికి ₹5 లక్షల వరకు ఉచిత వైద్య సేవలు.
-- **ఎవరు అర్హులు:** ఆర్థికంగా వెనుకబడిన కుటుంబాలు మరియు రోజువారీ కూలీలు.
-- **కావలసిన పత్రాలు:**
-  1. కుటుంబ సభ్యులందరి ఆధార్ కార్డులు.
-  2. రేషన్ కార్డు.
-  3. ఆధార్‌తో అనుసంధానించబడిన మొబైల్ నంబర్.
+        welcome: "నమస్తే! 🙏 నేను మీ **స్మార్ట్ భారత్ పౌర స్నేహితుడు**. నేను మీకు ప్రభుత్వ సహాయ పథకాల గురించి వివరించడానికి, కావలసిన పత్రాల జాబితాను అందించడానికి మరియు స్థానిక ప్రజా సమస్యలపై (రహదారి, నీరు, చెత్త మొదలైనవి) దరఖాస్తు లేఖలు రాసి ఇవ్వడానికి సిద్ధంగా ఉన్నాను.\n\nమీరు నాతో తెలుగులో లేదా మీకు నచ్చిన భాషలో మాట్లాడవచ్చు. మీ సమస్యలను విని సరళమైన మాటలలో మార్గదర్శకత్వం ఇవ్వడమే నా కర్తవ్యం.",
+        scheme_trigger: ["పథకం", "సహాయం", "రైతు", "యోజన", "డబ్బులు", "పంట", "పెన్షన్", "ఆరోగ్యం", "వైద్యం"],
+        scheme_response: `🏛️ **ప్రధాన మంత్రి కిసాన్ సమ్మాన్ నిధి యోజన (రైతుల సహాయం)**
+        
+**సహాయం ఎంత వస్తుంది:** మీకు ప్రతి సంవత్సరం ₹6,000 సహాయం అందుతుంది. ఇది తలా ₹2,000 చొప్పున మూడు సమాన వాయిదాలలో నేరుగా మీ బ్యాంక్ ఖాతాలో జమ చేయబడుతుంది.
 
-🌾 **పీఎం-కిసాన్ పథకం (రైతు సంక్షేమం)**
-- **ప్రయోజనం:** భూమి ఉన్న రైతు కుటుంబాలకు సంవత్సరానికి ₹6,000 సహాయం. ఇది ₹2,000 చొప్పున మూడు వాయిదాలలో నేరుగా బ్యాంక్ ఖాతాల్లో జమ చేయబడుతుంది.
-- **ఎవరు అర్హులు:** సాగు భూమి కలిగిన రైతులు.
-- **కావలసిన పత్రాలు:**
-  1. భూ యాజమాన్య పత్రాలు (పట్టాదారు పాస్ బుక్).
-  2. ఆధార్ కార్డు.
-  3. ఆధార్‌తో అనుసంధానించబడిన బ్యాంక్ ఖాతా.
+**అర్హతలు:**
+- ✅ మీ పేరు మీద వ్యవసాయ భూమి ఉన్న భారతీయ పౌరుడై ఉండాలి.
+- ❌ ప్రభుత్వ ఉద్యోగులు, ఆదాయపు పన్ను చెల్లించేవారు ఈ పథకానికి అర్హులు కారు.
 
-🏠 **ప్రధాన మంత్రి ఆవాస్ యోజన (ఇంటి నిర్మాణం)**
-- **ప్రయోజనం:** సొంత పక్కా ఇల్లు నిర్మించుకోవడానికి లేదా కొనడానికి ప్రభుత్వం నుండి నేరుగా డబ్బు సహాయం లేదా తక్కువ వడ్డీతో రుణాలు.
-- **ఎవరు అర్హులు:** పక్కా ఇల్లు లేని పేద కుటుంబాలు.
-- **కావలసిన పత్రాలు:**
-  1. ఆధార్ కార్డు.
-  2. ఆదాయ ధృవీకరణ పత్రం.
-  3. బ్యాంక్ ఖాతా పుస్తకం.`,
-        document_trigger: ["ఆధార్", "చిరునామా", "మార్పు", "కార్డు", "పత్రాలు", "ఓటర్ ఐడి", "పాస్‌పోర్ట్"],
-        document_response: `📄 **ఆధార్ కార్డు చిరునామా మార్పు సులభ గైడ్**
-మీరు ఆన్‌లైన్‌లో మీ చిరునామాను సులభంగా మార్చుకోవచ్చు:
-- **ఆమోదించబడే పత్రాలు (ఏదైనా ఒకటి):**
-  - కరెంట్ బిల్లు లేదా నీటి బిల్లు (3 నెలల కంటే పాతది కాకూడదు)
-  - ఫోటో ఉన్న బ్యాంక్ పాస్ బుక్
-  - రిజిస్టర్డ్ రెంట్ అగ్రిమెంట్ లేదా ఇంటి రిజిస్ట్రేషన్ పత్రాలు
-  - ఓటర్ ఐడి లేదా పాస్‌పోర్ట్
+**దరఖాస్తుకు కావలసిన పత్రాలు:**
+1. భూమి యాజమాన్య పత్రాలు (పట్టాదారు పాస్ బుక్ లేదా రిజిస్ట్రేషన్ పత్రాలు).
+2. ఆధార్ కార్డ్ (మొబైల్ నంబర్‌తో లింక్ చేయబడి ఉండాలి).
+3. ఆధార్ లింక్ చేయబడిన బ్యాంక్ ఖాతా (సహాయం నేరుగా జమ కావడానికి).
+4. ఓటిపి కోడ్ పొందడానికి మొబైల్ నంబర్.
 
-- **చిరునామా మార్పు సాధారణ దశలు:**
-  1. అధికారిక MyAadhaar వెబ్‌సైట్ ఓపెన్ చేయండి.
-  2. మీ ఆధార్ నంబర్ నమోదు చేసి, మొబైల్‌కు వచ్చే OTPతో లాగిన్ అవ్వండి.
-  3. **'Update Address Online'** క్లిక్ చేసి మీ కొత్త చిరునామా నమోదు చేయండి.
-  4. మీ చిరునామా రుజువు పత్రం యొక్క స్పష్టమైన ఫోటోను అప్‌లోడ్ చేయండి.
-  5. ఆన్‌లైన్ రుసుము ₹50 చెల్లించి, రసీదు భద్రపరుచుకోండి.`,
-        complaint_trigger: ["రోడ్డు", "గుంతలు", "ఫిర్యాదు", "చెత్త", "నాళాలు", "నీరు", "కరెంట్", "లైట్లు", "సఫాయి"],
-        complaint_response: `✍️ **మీ కోసం సిద్ధం చేసిన ఫిర్యాదు లేఖ**
-మున్సిపల్ అధికారులకు సమర్పించడానికి నేను ఒక చక్కటి లేఖను సిద్ధం చేశాను. మీరు దీనిని కాపీ చేసి ఉపయోగించుకోవచ్చు:
+---
 
-> **గౌరవనీయులైన వార్డు అధికారి గారికి,**
-> **మున్సిపల్ కార్పొరేషన్ కార్యాలయం,**
-> **స్థానిక మున్సిపల్ కార్యాలయం.**
+🏥 **ఆయుష్మాన్ భారత్ యోజన (ఉచిత వైద్య సహాయం)**
+
+**సహాయం ఎంత వస్తుంది:** తీవ్రమైన అనారోగ్య సమస్యలకు ప్రతి కుటుంబానికి సంవత్సరానికి ₹5 లక్షల వరకు ఉచిత వైద్య సహాయం అందుతుంది.
+
+**అర్హతలు:**
+- ✅ ప్రభుత్వ సామాజిక జాబితా (SECC 2011) లో ఉన్న బలహీన వర్గాల కుటుంబాలు.
+- ✅ కచ్చా ఇళ్లలో నివసించే వారు, భూమి లేని దినసరి కూలీల కుటుంబాలు.
+
+**కావలసిన పత్రాలు:**
+1. ఆధార్ కార్డ్ లేదా రేషన్ కార్డ్.
+2. కుటుంబ గుర్తింపు కార్డు (రేషన్ కార్డ్ ఐడి).`,
+        document_trigger: ["పత్రాలు", "కార్డు", "ఆధార్", "చిరునామా", "అప్‌డేట్", "మార్పు", "పాన్", "రేషన్"],
+        document_response: `📄 **ఆధార్ కార్డ్‌లో చిరునామా మార్చుకునే సులువైన పద్ధతి**
+
+దీని కోసం మీరు దళారులకు అదనపు డబ్బులు చెల్లించాల్సిన అవసరం లేదు. మీరే స్వయంగా ఆన్‌లైన్‌లో చిరునామాను మార్చుకోవచ్చు.
+
+**చిరునామా రుజువు పత్రాలు (ఏదైనా 1 పత్రం):**
+- 🏠 విద్యుత్ బిల్లు లేదా నీటి బిల్లు (3 నెలల కంటే పాతది కాకూడదు).
+- 🏠 ఫోటో మరియు బ్యాంక్ ముద్రతో కూడిన బ్యాంక్ పాస్‌బుక్.
+- 🏠 రిజిస్టర్డ్ రెంట్ అగ్రిమెంట్ లేదా ఇంటి రిజిస్ట్రేషన్ పత్రాలు.
+- 🏠 పాస్‌పోర్ట్ లేదా ఓటర్ ఐడి కార్డ్.
+
+**ఆన్‌లైన్ అప్‌డేట్ విధానం:**
+1. అధికారిక **MyAadhaar వెబ్‌సైట్** ఓపెన్ చేయండి.
+2. మీ 12 అంకెల ఆధార్ సంఖ్యను నమోదు చేసి, మొబైల్‌కు వచ్చే OTP కోడ్‌తో లాగిన్ అవ్వండి.
+3. **'Update Address Online'** క్లిక్ చేసి మీ కొత్త చిరునామాను నమోదు చేయండి.
+4. మీ చిరునామా రుజువు పత్రాన్ని స్పష్టంగా ఫోటో తీసి అప్‌లోడ్ చేయండి.
+5. ప్రభుత్వ రుసుము ₹50 ఆన్‌లైన్‌లో చెల్లించండి.
+6. దరఖాస్తు స్థితిని తెలుసుకోవడానికి ఇవ్వబడిన 14 అంకెల గుర్తింపు నంబర్‌ను భద్రపరుచుకోండి.`,
+        complaint_trigger: ["గుంతలు", "రహదారి", "ఫిర్యాదు", "చెత్త", "డ్రైనేజీ", "నీరు", "కరెంట్", "సమస్య", "మునిసిపల్"],
+        complaint_response: `⚠️ **స్థానిక సమస్య దరఖాస్తు లేఖ: రహదారి మరమ్మతులు**
+
+స్థానిక మున్సిపల్ కార్యాలయం లేదా వార్డు కార్యాలయంలో సమర్పించడానికి ఒక గౌరవప్రదమైన లేఖను నేను సిద్ధం చేశాను.
+
+**సమస్య:** వీధి రోడ్డుపై ప్రమాదకరమైన గుంతలు.
+**ప్రాధాన్యత:** ప్రమాదాలు నివారించడానికి తక్షణ మరమ్మతులు అవసరం.
+
+**సిద్ధం చేసిన దరఖాస్తు లేఖ (కాపీ చేయడానికి సిద్ధంగా ఉంది):**
+> గౌరవనీయులైన వార్డు అధికారి గారికి,
+> మునిసిపల్ కార్పొరేషన్ కార్యాలయం,
+> స్థానిక వార్డు కార్యాలయం.
 >
-> **విషయం:** మా వీధిలోని ప్రమాదకరమైన గుంతల రోడ్డును మరమ్మతు చేయవలసిందిగా అభ్యర్థన.
+> **విషయం:** మా వీధి రహదారిపై ప్రమాదకరమైన గుంతలను పూడ్చి మరమ్మతులు చేయాల్సిందిగా వినయపూర్వక మనవి.
 >
-> అయ్యా / అమ్మ,
-> మా నివాస ప్రాంతంలోని రోడ్డు చాలా అధ్వాన్నంగా ఉన్నందున ప్రజా ప్రయోజనాలను దృష్టిలో ఉంచుకుని ఈ లేఖను వ్రాస్తున్నాను. రోడ్డుపై లోతైన గుంతలు పడడం వల్ల ముసలివారు నడవడానికి మరియు చిన్నపిల్లలు సైకిళ్ళు తొక్కడానికి తీవ్ర ఇబ్బంది పడుతున్నారు. రాత్రి వేళల్లో చిన్నచిన్న ప్రమాదాలు కూడా జరిగాయి.
+> గౌరవనీయులైన అయ్యా / అమ్మ గారికి,
 >
-> దయచేసి మా సమస్యను అర్థం చేసుకుని వీలైనంత త్వరగా రోడ్డు మరమ్మతులు చేయిస్తారని ఆశిస్తున్నాము.
+> మా వీధి నివాసితుల తరఫున, ప్రధాన రహదారి దయనీయ స్థితిని మీ దృష్టికి తీసుకురావడానికి ఈ లేఖను రాస్తున్నాను. రహదారి మధ్యలో ప్రమాదకరమైన లోతైన గుంతలు ఏర్పడ్డాయి, దీనివల్ల తరచుగా ప్రమాదాలు జరుగుతున్నాయి. ముఖ్యంగా వృద్ధులు, చిన్న పిల్లలు మరియు ద్విచక్ర వాహనదారులు ఈ రోడ్డుపై ప్రయాణించడం చాలా ప్రమాదకరంగా మారింది.
 >
-> ధన్యవాదాలు,
-> **స్థానిక నివాసితులు**
+> వర్షాకాలంలో ఈ గుంతలలో నీరు నిలిచిపోవడం వల్ల అవి కనిపించక ప్రమాదాలు మరింత పెరుగుతున్నాయి. కావున, దయచేసి మా రహదారిని పరిశీలించి, వీలైనంత త్వరగా ఈ గుంతలను పూడ్చడానికి సిబ్బందికి ఆదేశాలు ఇవ్వాల్సిందిగా ప్రార్థిస్తున్నాము.
+>
+> ప్రజల క్షేమాన్ని కోరి తగిన చర్యలు చేపడతారని ఆశిస్తున్నాము.
+>
+> భవదీయుడు,
+> [మీ పేరు]
+> [మీ వీధి చిరునామా]
 
-*లేఖ ఉన్న బాక్స్ పైభాగాన ఉన్న కాపీ బటన్ పై క్లిక్ చేసి మీరు దీనిని ఉపయోగించవచ్చు.*`
+*మీరు ఈ లేఖను ఇక్కడి నుండి కాపీ చేసుకొని, మీ పేరు మరియు చిరునామాను రాసి మీ స్థానిక వార్డు ఆఫీసులో అందజేయవచ్చు.*`
       }
     };
-
 
     // ==========================================
     // MAIN APP COMPONENT
     // ==========================================
     function App() {
-      // DEFAULT THEME IS LIGHT MODE
+      // Default theme is Light Mode with white bg
       const [isDark, setIsDark] = useState(false);
       const [lang, setLang] = useState('en');
       const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
       
-      // Interactive Services Dropdown State
-      const [activeCategory, setActiveCategory] = useState(null);
+      // Accordion Active Folder State
+      const [activeFolder, setActiveFolder] = useState(null);
       
-      // Request tracking status
-      const [trackCode, setTrackCode] = useState("");
-      const [trackInfo, setTrackInfo] = useState(null);
+      // Friendly Complaint Tracker State
+      const [trackerCode, setTrackerCode] = useState("");
+      const [trackingResult, setTrackingResult] = useState(null);
 
-      // Heartwarming Toast Notifications
+      // Simple Notification Toast
       const [toastMessage, setToastMessage] = useState("");
 
-      // Chat Logs
+      // Chat Simulator & API Stream State
       const [messages, setMessages] = useState([]);
       const [inputVal, setInputVal] = useState("");
       const [isTyping, setIsTyping] = useState(false);
       const chatEndRef = useRef(null);
 
-      // Populate warm welcome based on language choice
+      // Trigger standard warm welcome message on language switch
       useEffect(() => {
         const selectedText = LOCAL_KNOWLEDGE_BASE[lang] || LOCAL_KNOWLEDGE_BASE.en;
         setMessages([
@@ -635,162 +669,145 @@ I have written a polite, clear letter for you. You can copy this and send it to 
         ]);
       }, [lang]);
 
-      // Scroll view on new comments
+      // Auto scroll inside chat box
       useEffect(() => {
         chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
       }, [messages, isTyping]);
 
       const triggerToast = (msg) => {
         setToastMessage(msg);
-        setTimeout(() => setToastMessage(""), 3500);
+        setTimeout(() => setToastMessage(""), 4000);
       };
 
-      // Call central secure Vercel API `/api/chat`
-      const callBackendAPI = async (userPrompt, chatHistory) => {
+      // ==========================================
+      // ==========================================
+      const callVercelChatAPI = async (userPrompt, chatHistory, currentLang) => {
         try {
-          const apiEndpoint = `/api/chat`;
-          
-          const systemContext = `You are a warm, highly empathetic, and comforting citizen companion called the Smart Bharat Assistant. 
-          Your goal is to help Indian citizens access government services, understand welfare schemes, understand card document rules, and write clear municipal complaints. 
-          Use very simple, comforting, and everyday language. DO NOT use technical jargon, administrative codes, or robotic speech. Be warm, kind, objective, and extremely supportive.
-          Provide your step-by-step guidance in ${lang === 'en' ? 'English' : lang === 'hi' ? 'Hindi' : lang === 'bn' ? 'Bengali' : lang === 'ta' ? 'Tamil' : 'Telugu'}. 
-          If writing a letter, write it clearly inside a block so they can easily copy and send it.`;
+          // System Prompt written with absolute comfort, kindness, and clear simple instructions
+          const systemContext = `You are the official Smart Bharat Civic Friend, a supportive and comforting public assistant helping Indian citizens. 
+          Respond in ${currentLang === 'en' ? 'English' : currentLang === 'hi' ? 'Hindi' : currentLang === 'bn' ? 'Bengali' : currentLang === 'ta' ? 'Tamil' : 'Telugu'}.
+          Always use warm, comforting, and simple words. Never use computer jargon (like backend, vector, API, sandbox, engine, telemetry). 
+          Explain government schemes (PM-Kisan, Ayushman Bharat, PM Awas) and document steps (Aadhaar update, Ration Card) easily.
+          If asked to write a letter or complaint, write a respectful, structured formal letter that the citizen can easily copy. Include clear placeholders like [Your Name].`;
 
-          const payload = {
-            message: userPrompt,
-            messages: chatHistory.map(m => ({
-              role: m.sender === 'user' ? 'user' : 'assistant',
-              content: m.text
-            })),
-            systemInstruction: systemContext
-          };
+          // Format chat history safely for LLM endpoint
+          const formattedHistory = chatHistory.map(m => ({
+            role: m.sender === 'user' ? 'user' : 'assistant',
+            content: m.text
+          }));
 
-          const response = await fetch(apiEndpoint, {
+          const response = await fetch('/api/chat', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
+            body: JSON.stringify({
+              messages: [
+                { role: 'system', content: systemContext },
+                ...formattedHistory,
+                { role: 'user', content: userPrompt }
+              ]
+            })
           });
 
           if (!response.ok) {
-            throw new Error(`Server returned code: ${response.status}`);
+            throw new Error(`API Status Code: ${response.status}`);
           }
 
           const result = await response.json();
-          return result?.text || result?.choices?.[0]?.message?.content || result?.content;
+          // Extract message text according to standard LLM chat APIs
+          const botReply = result?.choices?.[0]?.message?.content || result?.content || result?.reply;
+          if (botReply) {
+            return botReply;
+          } else {
+            return "I could not hear clearly. Please try saying it again in a different way, I am listening.";
+          }
         } catch (err) {
-          console.warn("Vercel route failed. Processing query with safe offline local registry support...", err);
-          return null; // Return null to fallback to deep local lookup smoothly
+          console.log("Vercel Chat API error: falling back to local simplified database.", err);
+          // Return fallback content matching search query if Vercel endpoint is not initialized
+          const normalizedInput = userPrompt.toLowerCase();
+          const targetKb = LOCAL_KNOWLEDGE_BASE[currentLang] || LOCAL_KNOWLEDGE_BASE.en;
+          
+          if (targetKb.scheme_trigger.some(t => normalizedInput.includes(t))) {
+            return targetKb.scheme_response;
+          } else if (targetKb.document_trigger.some(t => normalizedInput.includes(t))) {
+            return targetKb.document_response;
+          } else if (targetKb.complaint_trigger.some(t => normalizedInput.includes(t))) {
+            return targetKb.complaint_response;
+          } else {
+            const fallbacks = {
+              en: `🔍 I searched our simplified database for "${userPrompt}". To find specific details, try asking me about **"PM-Kisan Scheme"**, **"Aadhaar card update steps"**, or **"Report street pothole"**!`,
+              hi: `🔍 मैंने आपकी बात "${userPrompt}" को समझने की कोशिश की। इसके बारे में अधिक जानने के लिए, कृपया **"किसान योजना"**, **"आधार कार्ड सुधार"**, या **"सड़क के गड्ढों की शिकायत"** जैसे प्रश्न पूछें!`,
+              bn: `🔍 আমি আমাদের সাধারণ তালিকায় "${userPrompt}" খুঁজলাম। এই বিষয়ে জানতে দয়া করে আমাকে **"কিষাণ প্রকল্প"**, **"আধার কার্ড পরিবর্তন"**, অথবা **"রাস্তার গর্ত মেরামতের দরখাস্ত"** লিখে প্রশ্ন করুন!`,
+              ta: `🔍 நான் உங்கள் கேள்விக்கான "${userPrompt}" தகவலைத் தேடினேன். இன்னும் தெளிவாக அறிய **"விவசாயிகள் திட்டம்"**, **"ஆதார் முகவரி மாற்றம்"** அல்லது **"சாலைப் பள்ளம் புகார் கடிதம்"** என்று என்னிடம் கேளுங்கள்!`,
+              te: `🔍 నేను మన సులువైన డేటాబేస్ లో "${userPrompt}" కోసం వెతికాను. మరిన్ని వివరాల కోసం **"రైతు పథకం"**, **"ఆధార్ కార్డ్ మార్పులు"**, లేదా **"రోడ్డు గుంతల దరఖాస్తు"** గురించి నన్ను అడగండి!`
+            };
+            return fallbacks[currentLang] || fallbacks.en;
+          }
         }
       };
 
-      // Process and trigger chat messages
+      // Handle sending messages from user input
       const handleSendMessage = async (customText) => {
-        const activeText = customText || inputVal;
-        if (!activeText.trim()) return;
+        const textToProcess = customText || inputVal;
+        if (!textToProcess.trim()) return;
 
         const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        
-        // Append user voice message
-        const updatedHistory = [...messages, { sender: 'user', text: activeText, timestamp }];
-        setMessages(updatedHistory);
+        const updatedMessages = [...messages, { sender: 'user', text: textToProcess, timestamp }];
+        setMessages(updatedMessages);
         setInputVal("");
         setIsTyping(true);
 
-        // Attempt live API resolution first
-        const apiReply = await callBackendAPI(activeText, updatedHistory);
+        // Fetch using our secure connection
+        const botResponse = await callVercelChatAPI(textToProcess, updatedMessages.slice(1, -1), lang);
         
-        if (apiReply) {
-          setMessages(prev => [...prev, { 
-            sender: 'bot', 
-            text: apiReply, 
-            timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) 
-          }]);
-          setIsTyping(false);
-        } else {
-          // Robust comforting local offline response
-          await new Promise(resolve => setTimeout(resolve, 800));
-          const normalizedInput = activeText.toLowerCase();
-          const targetKb = LOCAL_KNOWLEDGE_BASE[lang] || LOCAL_KNOWLEDGE_BASE.en;
-          
-          let responseText = "";
-          
-          if (targetKb.scheme_trigger.some(t => normalizedInput.includes(t))) {
-            responseText = targetKb.scheme_response;
-          } else if (targetKb.document_trigger.some(t => normalizedInput.includes(t))) {
-            responseText = targetKb.document_response;
-          } else if (targetKb.complaint_trigger.some(t => normalizedInput.includes(t))) {
-            responseText = targetKb.complaint_response;
-          } else {
-            // Empathetic comforting failure explanation
-            const comfortFallbacks = {
-              en: `🔍 I've searched our local guide lists for "${activeText}". If you can describe it as a **"government scheme"**, **"Aadhaar card update"**, or ask me to **"report street damage"**, I can help you instantly with step-by-step guidance!`,
-              hi: `🔍 मैंने आपकी खोज "${activeText}" के लिए हमारी सूची में देखा। यदि आप मुझे **"सरकारी योजना"**, **"आधार कार्ड सुधार"**, या **"सड़क की समस्या"** के रूप में बताएंगे, तो मैं तुरंत आपकी मदद कर पाऊंगा!`,
-              bn: `🔍 আমি আপনার খোঁজা বিষয় "${activeText}" সম্পর্কে আমাদের সাহায্য তালিকায় খুঁজেছি। আপনি যদি আমাকে কোনো **"সরকারি প্রকল্প"**, **"আধার কার্ড পরিবর্তন"**, বা **"রাস্তা মেরামতের আবেদন"** নিয়ে জিজ্ঞাসা করেন, আমি এখনই সঠিক তথ্য দিয়ে সাহায্য করতে পারব!`,
-              ta: `🔍 உங்களது கேள்வி "${activeText}" குறித்து எங்கள் ஆவணங்களில் தேடினேன். ஏதேனும் **"அரசு திட்டம்"**, **"ஆதார் முகவரி மாற்றம்"** அல்லது **"சாலைப் பள்ளம் புகார்"** பற்றி கேட்டால் என்னால் உங்களுக்கு மிகச் சிறந்த எளிய கடிதத்தை எழுதிக் கொடுக்க முடியும்!`,
-              te: `🔍 నేను మీ ప్రశ్న "${activeText}" గురించి మన మార్గదర్శకాలలో వెతికాను. మీరు ఏదైనా **"ప్రభుత్వ పథకం"**, **"ఆధార్ కార్డు మార్పులు"**, లేదా **"రోడ్డు సమస్య ఫిర్యాదు"** గురించి అడిగితే నేను మీకు వెంటనే సహాయం చేయగలను!`
-            };
-            responseText = comfortFallbacks[lang] || comfortFallbacks.en;
-          }
-
-          setMessages(prev => [...prev, {
-            sender: 'bot',
-            text: responseText,
-            timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-          }]);
-          setIsTyping(false);
-        }
+        setMessages(prev => [...prev, {
+          sender: 'bot',
+          text: botResponse,
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        }]);
+        setIsTyping(false);
       };
 
-      // Empathetic text parser supporting clean display of bold parameters and letter boxes
+      // Parse bold markers and blockquotes into highly readable visual elements
       const parseFriendlyMarkdown = (raw) => {
         if (!raw) return '';
         return raw.split('\n').map((line, idx) => {
           let lineContent = line;
           
-          // Render comforting bold parameters
+          // Match simple bold text **text**
           const boldRegex = /\*\*([^*]+)\*\*/g;
-          const segments = [];
-          let lastIdx = 0;
+          const pieces = [];
+          let lastPosition = 0;
           let match;
           
           while ((match = boldRegex.exec(line)) !== null) {
-            if (match.index > lastIdx) {
-              segments.push(line.substring(lastIdx, match.index));
+            if (match.index > lastPosition) {
+              pieces.push(line.substring(lastPosition, match.index));
             }
-            segments.push(<strong key={match.index} className="font-bold text-orange-600 dark:text-orange-400">{match[1]}</strong>);
-            lastIdx = boldRegex.lastIdx;
+            pieces.push(<strong key={match.index} className="font-bold text-orange-600 dark:text-orange-400">{match[1]}</strong>);
+            lastPosition = boldRegex.lastIndex;
           }
-          if (lastIdx < line.length) {
-            segments.push(line.substring(lastIdx));
+          if (lastPosition < line.length) {
+            pieces.push(line.substring(lastPosition));
           }
 
-          const hasFormatting = segments.length > 0;
+          const containsFormatting = pieces.length > 0;
 
-          // Render copyable letter boxes
+          // Render blockquote letters beautifully with a warm click-to-copy helper
           if (line.trim().startsWith('>')) {
-            const letterText = line.replace(/^>\s*/, '');
+            const letterTextOnly = line.replace(/^>\s*/, '').trim();
             return (
-              <blockquote key={idx} className="border-l-4 border-orange-500 pl-4 py-2.5 my-2.5 bg-slate-50 dark:bg-slate-850 text-slate-700 dark:text-slate-300 rounded-r-xl relative group transition-all">
-                {hasFormatting ? segments : letterText}
+              <blockquote key={idx} className="border-l-4 border-orange-500 pl-4 py-2.5 my-2.5 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-r-xl font-mono text-[11px] leading-relaxed relative group">
+                {containsFormatting ? pieces : line.replace(/^>\s*/, '')}
                 <button 
                   onClick={() => {
-                    const textToCopy = line.replace(/^>\s*/, '').trim();
-                    if (navigator.clipboard) {
-                      navigator.clipboard.writeText(textToCopy);
-                    } else {
-                      const tempElement = document.createElement('textarea');
-                      tempElement.value = textToCopy;
-                      document.body.appendChild(tempElement);
-                      tempElement.select();
-                      document.execCommand('copy');
-                      document.body.removeChild(tempElement);
-                    }
+                    document.execCommand('copy') || navigator.clipboard.writeText(letterTextOnly);
                     triggerToast(currentText.complaintDrafted);
                   }} 
-                  className="absolute top-2 right-2 p-1.5 rounded-lg bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-500 hover:text-orange-500 hover:border-orange-500/30 transition-all shadow-sm"
-                  title="Copy Letter"
+                  className="absolute top-2 right-2 p-1.5 rounded-lg bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-500 hover:text-slate-800 dark:hover:text-white transition-all shadow-sm"
+                  title="Copy This Draft"
                 >
-                  <CopyIcon className="w-3.5 h-3.5" />
+                  {/* Inline Copy Icon */}
+                  <svg className="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
                 </button>
               </blockquote>
             );
@@ -798,14 +815,14 @@ I have written a polite, clear letter for you. You can copy this and send it to 
 
           return (
             <span key={idx} className="block min-h-[0.5rem]">
-              {hasFormatting ? segments : line}
+              {containsFormatting ? pieces : line}
             </span>
           );
         });
       };
 
-      // Simple navigation scrolling helper
-      const scrollToView = (sectionId) => {
+      // Navigate comfortably inside single page
+      const handleSmoothScroll = (sectionId) => {
         const element = document.getElementById(sectionId);
         if (element) {
           element.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -813,124 +830,885 @@ I have written a polite, clear letter for you. You can copy this and send it to 
         setMobileMenuOpen(false);
       };
 
-      // Reassuring simple lookup matching realistic milestones
+      // Track issue status using warm, non-technical words
       const handleTrackComplaint = (e) => {
         e.preventDefault();
-        if (!trackCode.trim()) return;
+        if (!trackerCode.trim()) return;
         
-        const key = trackCode.trim().toUpperCase();
-        const comfortingSteps = [
-          { status: "Received", badge: "text-blue-600 bg-blue-50 dark:bg-blue-900/10 border-blue-100", milestone: "Received at Office", date: "Today", desc: "Your helpful letter has been received at the central office and registered. It is safe in our files." },
-          { status: "Under Review", badge: "text-amber-600 bg-amber-50 dark:bg-amber-900/10 border-amber-100", milestone: "Officer Appointed", date: "Ongoing", desc: "A local officer has been chosen to look after your request and verify the location." },
-          { status: "Action Taken", badge: "text-green-600 bg-green-50 dark:bg-green-900/10 border-green-100", milestone: "Repair Team Dispatched", date: "Soon", desc: "A local repair crew has been instructed to fix the street issue. We are tracking this closely." }
+        const code = trackerCode.trim().toUpperCase();
+        const simplifiedStages = [
+          { status: "Received", progress: 25, title: "Our Support Received Your Letter", date: "July 05, 2026", note: "Your letter was safely received at our civic help desk and is being prepared to be sent directly to your local ward office." },
+          { status: "Forwarded", progress: 50, title: "Forwarded to Local Officers", date: "July 06, 2026", note: "The letter has been forwarded to the local ward maintenance supervisor. They are preparing a local inspection team." },
+          { status: "Work Scheduled", progress: 75, title: "Work Commencing Soon", date: "July 07, 2026", note: "The local office has scheduled repair team visits to inspect the potholes. Work supplies are being prepared." },
+          { status: "Fully Resolved", progress: 100, title: "Problem Handled Safely", date: "July 08, 2026", note: "The local officers have filled the potholes. Roads are now safe for children and elder citizens." }
         ];
         
-        const index = Math.abs(key.charCodeAt(0) || 0) % comfortingSteps.length;
-        setTrackInfo(comfortingSteps[index]);
-        triggerToast("Details updated.");
+        // Select deterministic step from array
+        const stepIndex = Math.abs(code.charCodeAt(0) || 0) % simplifiedStages.length;
+        setTrackingResult(simplifiedStages[stepIndex]);
+        triggerToast("We synchronized your letter's progress.");
       };
 
-      const currentText = TRANSLATION_STRINGS[lang] || TRANSLATION_STRINGS.en;
+      const currentText = CIVIC_TRANSLATIONS[lang] || CIVIC_TRANSLATIONS.en;
 
       return (
         <div className={`min-h-screen transition-colors duration-300 relative overflow-x-hidden selection:bg-orange-500/20 selection:text-orange-700 ${
-          isDark ? 'bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'
+          isDark ? 'bg-slate-950 text-slate-100' : 'bg-slate-50/50 text-slate-900'
         }`}>
 
           {/* ==========================================
-              TRICOLOR BACKGROUND (Reassuring Warm Light Accents)
+              TRICOLOR BACKGROUND AURAS (Patriotic Warm Design)
               ========================================== */}
-          <div className="absolute top-0 left-0 w-full h-[850px] pointer-events-none overflow-hidden z-0">
-            {/* Saffron Aura representing warm guidance */}
-            <div className="absolute top-[-10%] left-[-15%] w-[55%] h-[55%] rounded-full bg-orange-500/10 dark:bg-orange-600/5 blur-[120px] animate-aura-orange"></div>
-            {/* Gentle Green Aura representing safety & hope */}
-            <div className="absolute top-[20%] right-[-15%] w-[55%] h-[55%] rounded-full bg-emerald-500/10 dark:bg-emerald-600/5 blur-[120px] animate-aura-green"></div>
+          <div className="absolute top-0 left-0 w-full h-[800px] pointer-events-none overflow-hidden z-0">
+            <div className="absolute top-[-5%] left-[-10%] w-[50%] h-[50%] rounded-full bg-orange-500/5 dark:bg-orange-600/5 blur-[120px] animate-aura-saffron"></div>
+            <div className="absolute top-[25%] right-[-10%] w-[50%] h-[50%] rounded-full bg-emerald-500/5 dark:bg-emerald-600/5 blur-[120px] animate-aura-green"></div>
             
-            {/* The Emblem Circle Design */}
-            <div className="absolute top-[15%] left-[50%] -translate-x-1/2 w-[600px] h-[600px] rounded-full border border-slate-200/50 dark:border-slate-800/15 flex items-center justify-center opacity-60">
-              <div className="w-[540px] h-[540px] rounded-full border border-dashed border-slate-300/30 dark:border-slate-800/10 animate-wheel-rotation"></div>
+            {/* Elegant Emblem Backdrop in the background */}
+            <div className="absolute top-[12%] left-[50%] -translate-x-1/2 w-[550px] h-[550px] rounded-full border border-slate-200/40 dark:border-slate-800/20 flex items-center justify-center opacity-60">
+              <div className="w-[480px] h-[480px] rounded-full border border-dashed border-slate-300/30 dark:border-slate-800/10 animate-symbol-spin"></div>
             </div>
           </div>
 
           {/* ==========================================
-              TOP NAVIGATION HEADER
+              STREAMING_CHUNK: Preparing the beautiful top navigation bar...
               ========================================== */}
+          {/* NAVIGATION BAR */}
           <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b ${
             isDark 
-              ? 'bg-slate-950/90 backdrop-blur-md border-slate-900 py-3.5' 
-              : 'bg-white/90 backdrop-blur-md border-slate-200/80 py-3.5'
+              ? 'bg-slate-950/90 backdrop-blur-md border-slate-900 py-3' 
+              : 'bg-white/90 backdrop-blur-md border-slate-200/80 py-3 shadow-sm'
           }`}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex items-center justify-between">
                 
-                {/* Brand Footprint Logo Group */}
-                <div className="flex items-center space-x-3 cursor-pointer" onClick={() => scrollToView('main-section')}>
-                  <div className="relative w-9.5 h-9.5 rounded-xl bg-orange-500/10 border border-orange-500/30 flex items-center justify-center shadow-sm">
-                    {/* Reassuring Indian Wheel emblem representation */}
-                    <div className="w-6 h-6 rounded-full border-2 border-dashed border-blue-700 dark:border-blue-400 flex items-center justify-center animate-spin [animation-duration:120s]">
-                      <div className="w-1.5 h-1.5 rounded-full bg-blue-700 dark:bg-blue-400"></div>
-                    </div>
+                {/* Genuine Branding Logo Area */}
+                <div className="flex items-center space-x-3 cursor-pointer" onClick={() => handleSmoothScroll('main')}>
+                  <div className="relative w-10 h-10 rounded-xl overflow-hidden bg-slate-100 border border-slate-200 dark:border-slate-800 flex items-center justify-center shadow-inner">
+                    <img 
+                      src="bharat.png" 
+                      alt="Smart Bharat" 
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        // Safe fallback design if files/bharat.jpg is missing
+                        e.target.style.display = 'none';
+                        e.target.parentNode.innerHTML = `<div class="text-xs font-black text-orange-500">SB</div>`;
+                      }}
+                    />
                   </div>
                   <div>
                     <span className="block text-base font-extrabold tracking-tight">
                       {currentText.brand}
                     </span>
-                    <span className="block text-[10px] font-bold tracking-widest uppercase text-orange-500 dark:text-orange-400">
+                    <span className="block text-[10px] font-bold tracking-wider uppercase text-orange-500 dark:text-orange-400">
                       {currentText.tagline}
                     </span>
                   </div>
                 </div>
 
-                {/* Clean, Simple Navigation Options */}
-                <div className="hidden md:flex items-center space-x-7">
-                  <button onClick={() => scrollToView('main-section')} className="text-xs font-bold uppercase tracking-wider text-slate-500 hover:text-orange-500 dark:text-slate-400 dark:hover:text-orange-400 transition-colors">Main</button>
-                  <button onClick={() => scrollToView('services')} className="text-xs font-bold uppercase tracking-wider text-slate-500 hover:text-orange-500 dark:text-slate-400 dark:hover:text-orange-400 transition-colors">Services Directory</button>
-                  <button onClick={() => scrollToView('my-complaints')} className="text-xs font-bold uppercase tracking-wider text-slate-500 hover:text-orange-500 dark:text-slate-400 dark:hover:text-orange-400 transition-colors">My Complaints</button>
-                  <button onClick={() => scrollToView('resource-links')} className="text-xs font-bold uppercase tracking-wider text-slate-500 hover:text-orange-500 dark:text-slate-400 dark:hover:text-orange-400 transition-colors">Resources</button>
-                  <button onClick={() => scrollToView('about')} className="text-xs font-bold uppercase tracking-wider text-slate-500 hover:text-orange-500 dark:text-slate-400 dark:hover:text-orange-400 transition-colors">About Us</button>
+                {/* Friendly Menu Options */}
+                <div className="hidden md:flex items-center space-x-8">
+                  <button onClick={() => handleSmoothScroll('main')} className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors">Main</button>
+                  <button onClick={() => handleSmoothScroll('services')} className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors">Services</button>
+                  <button onClick={() => handleSmoothScroll('flowchart')} className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors">How It Works</button>
+                  <button onClick={() => handleSmoothScroll('my-complaints')} className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors">My Complaints</button>
+                  <button onClick={() => handleSmoothScroll('about')} className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors">About</button>
                 </div>
 
-                {/* Theme & Language Controls */}
-                <div className="hidden md:flex items-center space-x-3.5">
+                {/* Dynamic Theme & Language Utilities */}
+                <div className="hidden md:flex items-center space-x-4">
                   
-                  {/* Comfortable Simple Language Dropdown Selector */}
+                  {/* Language Selector Dropdown */}
                   <div className="relative group">
-                    <button className="flex items-center space-x-2 px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-xs font-bold transition-all hover:bg-slate-100 dark:hover:bg-slate-800">
-                      <LanguageIcon className="w-3.5 h-3.5 text-orange-500" />
+                    <button className="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-xs font-bold hover:bg-slate-100 dark:hover:bg-slate-800 transition-all focus:outline-none">
+                      {/* Language Icon */}
+                      <svg className="w-3.5 h-3.5 text-orange-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg>
                       <span>{lang === 'en' ? 'English' : lang === 'hi' ? 'हिन्दी' : lang === 'bn' ? 'বাংলা' : lang === 'ta' ? 'தமிழ்' : 'తెలుగు'}</span>
-                      <ChevronDownIcon className="w-3 h-3 text-slate-400" />
+                      <svg className="w-3 h-3 text-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
                     </button>
-                    <div className="absolute right-0 mt-1.5 w-40 rounded-xl border border-slate-150 dark:border-slate-800 bg-white dark:bg-slate-950 shadow-xl py-1 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-250 z-50">
-                      <button onClick={() => setLang('en')} className="w-full px-4 py-2 text-left text-xs text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 font-semibold">English</button>
-                      <button onClick={() => setLang('hi')} className="w-full px-4 py-2 text-left text-xs text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 font-semibold">हिन्दी (Hindi)</button>
-                      <button onClick={() => setLang('bn')} className="w-full px-4 py-2 text-left text-xs text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 font-semibold">বাংলা (Bengali)</button>
-                      <button onClick={() => setLang('ta')} className="w-full px-4 py-2 text-left text-xs text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 font-semibold">தமிழ் (Tamil)</button>
-                      <button onClick={() => setLang('te')} className="w-full px-4 py-2 text-left text-xs text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 font-semibold">తెలుగు (Telugu)</button>
+                    <div className="absolute right-0 mt-2 w-44 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 shadow-xl py-1 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 z-50">
+                      <button onClick={() => setLang('en')} className="w-full px-4 py-2.5 text-left text-xs text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 font-semibold">English</button>
+                      <button onClick={() => setLang('hi')} className="w-full px-4 py-2.5 text-left text-xs text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 font-semibold">हिन्दी (Hindi)</button>
+                      <button onClick={() => setLang('bn')} className="w-full px-4 py-2.5 text-left text-xs text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 font-semibold">বাংলা (Bengali)</button>
+                      <button onClick={() => setLang('ta')} className="w-full px-4 py-2.5 text-left text-xs text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 font-semibold">தமிழ் (Tamil)</button>
+                      <button onClick={() => setLang('te')} className="w-full px-4 py-2.5 text-left text-xs text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 font-semibold">తెలుగు (Telugu)</button>
                     </div>
                   </div>
 
-                  {/* Comforting Theme Switcher */}
+                  {/* Gentle Theme Switching Switch */}
                   <button 
                     onClick={() => setIsDark(!isDark)}
-                    className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-all"
-                    aria-label="Switch colors"
+                    className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 transition-all"
+                    aria-label="Toggle Theme"
                   >
-                    {isDark ? <SunIcon className="w-4 h-4 text-orange-400" /> : <MoonIcon className="w-4 h-4 text-slate-500" />}
+                    {isDark ? (
+                      /* Sun icon */
+                      <svg className="w-4 h-4 text-orange-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                    ) : (
+                      /* Moon icon */
+                      <svg className="w-4 h-4 text-slate-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    )}
                   </button>
 
                 </div>
 
-                {/* Mobile Navigation Trigger */}
+                {/* Mobile Hamburger menu */}
                 <div className="md:hidden flex items-center space-x-2">
                   <button 
                     onClick={() => setIsDark(!isDark)}
                     className="p-2 rounded-lg border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300"
                   >
-                    {isDark ? <SunIcon className="w-4 h-4 text-orange-400" /> : <MoonIcon className="w-4 h-4" />}
+                    {isDark ? (
+                      <svg className="w-4 h-4 text-orange-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/></svg>
+                    ) : (
+                      <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    )}
                   </button>
                   <button 
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                     className="p-2 rounded-lg border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300"
                   >
-                    {mobileMenuOpen ? <CloseIcon className="w-5 h-5" /> : <MenuIcon className="w-5 h-5" />}
+                    {mobileMenuOpen ? (
+                      <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    ) : (
+                      <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                    )}
                   </button>
+                </div>
+
+              </div>
+            </div>
+
+            {/* Mobile Expanded Links */}
+            {mobileMenuOpen && (
+              <div className={`md:hidden px-4 pt-2 pb-4 space-y-2 border-t mt-2 ${
+                isDark ? 'bg-slate-950 border-slate-900' : 'bg-white border-slate-200'
+              }`}>
+                <button onClick={() => handleSmoothScroll('main')} className="block w-full text-left py-2 text-xs font-bold uppercase tracking-wider">Main</button>
+                <button onClick={() => handleSmoothScroll('services')} className="block w-full text-left py-2 text-xs font-bold uppercase tracking-wider">Services</button>
+                <button onClick={() => handleSmoothScroll('flowchart')} className="block w-full text-left py-2 text-xs font-bold uppercase tracking-wider">How It Works</button>
+                <button onClick={() => handleSmoothScroll('my-complaints')} className="block w-full text-left py-2 text-xs font-bold uppercase tracking-wider">My Complaints</button>
+                <button onClick={() => handleSmoothScroll('about')} className="block w-full text-left py-2 text-xs font-bold uppercase tracking-wider">About</button>
+                <div className="pt-2 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                  <select 
+                    value={lang} 
+                    onChange={(e) => setLang(e.target.value)}
+                    className="bg-transparent text-xs font-bold text-slate-700 dark:text-slate-200 border-none focus:outline-none"
+                  >
+                    <option value="en" className="text-slate-900">English</option>
+                    <option value="hi" className="text-slate-900">हिन्दी (Hindi)</option>
+                    <option value="bn" className="text-slate-900">বাংলা (Bengali)</option>
+                    <option value="ta" className="text-slate-900">தமிழ் (Tamil)</option>
+                    <option value="te" className="text-slate-900">తెలుగు (Telugu)</option>
+                  </select>
+                </div>
+              </div>
+            )}
+          </nav>
+
+          {/* ==========================================
+              STREAMING_CHUNK: Crafting the main layout & responsive assistant screen...
+              ========================================== */}
+          {/* MAIN PAGE CONTAINER */}
+          <section id="main" className="relative pt-24 pb-12 overflow-hidden z-10">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              
+              {/* National Helper Badge */}
+              <div className="flex justify-center mb-6">
+                <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 dark:border-orange-500/30">
+                  <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></span>
+                  <span className="text-[10px] font-extrabold tracking-wider uppercase text-orange-600 dark:text-orange-400">
+                    A Safe and Simple Helper Portal for All Citizens
+                  </span>
+                </div>
+              </div>
+
+              {/* Main Welcome & AI Chat Grid */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                
+                {/* Left Area: Welcoming comforting greetings */}
+                <div className="lg:col-span-5 flex flex-col justify-center space-y-6">
+                  <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight tracking-tight">
+                    <span className="bg-gradient-to-r from-orange-500 via-slate-700 dark:via-white to-emerald-600 bg-clip-text text-transparent block">
+                      {currentText.title}
+                    </span>
+                  </h1>
+
+                  <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
+                    {currentText.subtitle}
+                  </p>
+
+                  {/* Comforting Guarantee Card */}
+                  <div className={`p-4 rounded-2xl border ${
+                    isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'
+                  }`}>
+                    <div className="flex items-start gap-3">
+                      <div className="w-3 h-3 rounded-full mt-1.5 bg-emerald-500 animate-pulse"></div>
+                      <div>
+                        <span className="block text-xs font-bold tracking-tight text-slate-800 dark:text-slate-100">
+                          Direct and Secure Connection Active
+                        </span>
+                        <span className="block text-[11px] text-slate-500 dark:text-slate-400 mt-1">
+                          You do not need to register or manage security keys. Every question you type goes securely to our central server to bring you quick, friendly, and expert advice.
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Helper action shortcuts */}
+                  <div className="flex items-center gap-2 pt-2">
+                    <button 
+                      onClick={() => handleSmoothScroll('services')}
+                      className="text-xs font-extrabold text-orange-500 hover:text-orange-600 transition-all flex items-center gap-1"
+                    >
+                      <span>Explore Helpful Directories</span>
+                      <svg className="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Right Area: THE EXQUISITE AI COMPANION (Primary Highlight) */}
+                <div className="lg:col-span-7 flex flex-col justify-stretch">
+                  
+                  <div className={`flex flex-col flex-1 border rounded-3xl shadow-xl overflow-hidden transition-all relative ${
+                    isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-250/80'
+                  }`}>
+                    
+                    {/* Reassuring Help Desk Header */}
+                    <div className={`px-4 py-3.5 border-b flex items-center justify-between ${
+                      isDark ? 'bg-slate-950/40 border-slate-800' : 'bg-slate-50 border-slate-200'
+                    }`}>
+                      <div className="flex items-center space-x-2.5">
+                        <div className="relative">
+                          <span className="w-2.5 h-2.5 bg-emerald-500 rounded-full block animate-pulse"></span>
+                          <span className="w-2.5 h-2.5 bg-emerald-500/40 rounded-full block animate-ping absolute inset-0"></span>
+                        </div>
+                        <div>
+                          <p className="text-xs font-extrabold text-slate-850 dark:text-slate-150">{currentText.chatHeading}</p>
+                          <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">{currentText.chatSub}</p>
+                        </div>
+                      </div>
+                      
+                      <span className="text-[9px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-lg border border-emerald-200/50 dark:border-slate-800 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+                        Secure Connection
+                      </span>
+                    </div>
+
+                    {/* Chat Area displaying comfort dialogs */}
+                    <div className={`flex-1 h-80 overflow-y-auto p-4 space-y-4 text-xs ${
+                      isDark ? 'scrollbar-dark bg-slate-950/20' : 'scrollbar-light bg-slate-50/30'
+                    }`}>
+                      {messages.map((m, idx) => (
+                        <div key={idx} className={`flex flex-col ${m.sender === 'user' ? 'items-end' : 'items-start'}`}>
+                          <div className={`max-w-[90%] rounded-2xl px-4 py-3.5 leading-relaxed text-xs shadow-sm ${
+                            m.sender === 'user' 
+                              ? 'bg-orange-600 text-white rounded-tr-none font-medium' 
+                              : isDark 
+                                ? 'bg-slate-900 text-slate-200 border border-slate-800 rounded-tl-none' 
+                                : 'bg-white text-slate-800 border border-slate-150 rounded-tl-none'
+                          }`}>
+                            {parseFriendlyMarkdown(m.text)}
+                          </div>
+                          <span className="text-[9px] font-bold text-slate-400 mt-1 px-1.5">{m.timestamp}</span>
+                        </div>
+                      ))}
+
+                      {/* AI Typing loading indicator */}
+                      {isTyping && (
+                        <div className="flex flex-col items-start">
+                          <div className={`rounded-2xl rounded-tl-none p-3.5 flex items-center space-x-1.5 border ${
+                            isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'
+                          }`}>
+                            <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-bounce"></span>
+                            <span className="w-1.5 h-1.5 rounded-full bg-slate-400 animate-bounce [animation-delay:0.2s]"></span>
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-bounce [animation-delay:0.4s]"></span>
+                          </div>
+                        </div>
+                      )}
+
+                      <div ref={chatEndRef} />
+                    </div>
+
+                    {/* Reassuring Quick Suggested Prompt buttons */}
+                    <div className={`p-3 border-t ${
+                      isDark ? 'bg-slate-950/30 border-slate-800' : 'bg-slate-50/40 border-slate-200'
+                    }`}>
+                      <p className="text-[10px] font-extrabold text-slate-400 mb-2 uppercase tracking-wider">
+                        {currentText.suggestedTitle}
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        <button 
+                          onClick={() => handleSendMessage("Tell me about the PM-Kisan scheme and who qualifies")}
+                          className={`text-[10.5px] font-semibold rounded-lg px-2.5 py-1 text-left border transition-all ${
+                            isDark ? 'bg-slate-900 hover:bg-slate-800 border-slate-800 text-slate-300' : 'bg-white hover:bg-slate-100 border-slate-200 text-slate-700 shadow-sm'
+                          }`}
+                        >
+                          🌾 Farmer Yojana benefits
+                        </button>
+                        <button 
+                          onClick={() => handleSendMessage("How to update my address in Aadhaar easily?")}
+                          className={`text-[10.5px] font-semibold rounded-lg px-2.5 py-1 text-left border transition-all ${
+                            isDark ? 'bg-slate-900 hover:bg-slate-800 border-slate-800 text-slate-300' : 'bg-white hover:bg-slate-100 border-slate-200 text-slate-700 shadow-sm'
+                          }`}
+                        >
+                          📄 Aadhaar checklist
+                        </button>
+                        <button 
+                          onClick={() => handleSendMessage("I want to write a letter to local officers to repair road potholes in my neighborhood")}
+                          className={`text-[10.5px] font-semibold rounded-lg px-2.5 py-1 text-left border transition-all ${
+                            isDark ? 'bg-slate-900 hover:bg-slate-800 border-slate-800 text-slate-300' : 'bg-white hover:bg-slate-100 border-slate-200 text-slate-700 shadow-sm'
+                          }`}
+                        >
+                          ✍️ Write road repair letter
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Comfort input controls */}
+                    <div className={`p-3.5 border-t flex items-center space-x-2 ${
+                      isDark ? 'bg-slate-950/55 border-slate-850' : 'bg-white border-slate-200'
+                    }`}>
+                      <input 
+                        type="text" 
+                        value={inputVal}
+                        onChange={(e) => setInputVal(e.target.value)}
+                        onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
+                        placeholder={currentText.placeholderInput}
+                        className={`flex-1 text-xs py-3 px-3.5 rounded-xl border outline-none transition-all ${
+                          isDark 
+                            ? 'bg-slate-950 border-slate-800 text-slate-200 focus:border-slate-600 focus:bg-slate-900' 
+                            : 'bg-slate-50 border-slate-200 text-slate-800 focus:border-orange-500 focus:bg-white'
+                        }`}
+                      />
+                      <button 
+                        onClick={() => handleSendMessage()}
+                        className="p-3 bg-orange-600 hover:bg-orange-500 text-white rounded-xl transition-all transform active:scale-95 shadow-md shadow-orange-500/10"
+                        aria-label="Send Message"
+                      >
+                        {/* Send icon */}
+                        <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                      </button>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </section>
+
+          {/* ==========================================
+              STREAMING_CHUNK: Structuring the beautiful Simplified Help Folders...
+              ========================================== */}
+          {/* SIMPLIFIED TOPIC FOLDERS */}
+          <section id="services" className={`py-16 border-t ${
+            isDark ? 'border-slate-900' : 'border-slate-200'
+          }`}>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              
+              <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
+                <h2 className="text-2xl sm:text-3xl font-black tracking-tight">
+                  {currentText.servicesHeading}
+                </h2>
+                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                  {currentText.servicesSub}
+                </p>
+              </div>
+
+              {/* Simplified Dropdown Registry Folders */}
+              <div className="max-w-3xl mx-auto space-y-3.5">
+                
+                {/* Folder 1 */}
+                <div className={`rounded-2xl border transition-all overflow-hidden ${
+                  activeFolder === 0 
+                    ? 'shadow-md shadow-orange-500/5 ' + (isDark ? 'bg-slate-900 border-orange-500/40' : 'bg-white border-orange-500/30')
+                    : (isDark ? 'bg-slate-900/50 border-slate-800' : 'bg-white border-slate-200')
+                }`}>
+                  <button 
+                    onClick={() => setActiveFolder(activeFolder === 0 ? null : 0)}
+                    className="w-full px-6 py-4.5 flex items-center justify-between text-left font-bold text-sm focus:outline-none"
+                  >
+                    <div className="flex items-center space-x-3">
+                      <div className="w-8 h-8 rounded-lg bg-orange-500/10 flex items-center justify-center text-orange-500">
+                        {/* Leaf/Farmer Icon */}
+                        <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6c-3.31 0-6 2.69-6 6 0 2.21 1.79 4 4 4s4-1.79 4-4c0-3.31-2.69-6-6-6z"/></svg>
+                      </div>
+                      <span className="text-slate-800 dark:text-slate-200">🌾 Central Agriculture & Health Welfare Schemes</span>
+                    </div>
+                    {/* Down arrow */}
+                    <svg className={`w-4 h-4 text-slate-400 transition-transform duration-300 ${activeFolder === 0 ? 'rotate-180' : ''}`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                  </button>
+                  
+                  {activeFolder === 0 && (
+                    <div className={`px-6 pb-5 pt-1 text-xs leading-relaxed space-y-3 border-t ${
+                      isDark ? 'border-slate-800 text-slate-300' : 'border-slate-200 text-slate-700'
+                    }`}>
+                      <p>Understand instructions and essential checklists for prime central social security and livelihood programs.</p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
+                        <div className={`p-3 rounded-xl border ${isDark ? 'bg-slate-950/50 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                          <h4 className="font-extrabold text-orange-500 mb-1">PM-Kisan Livelihood</h4>
+                          <p className="text-[11px] text-slate-500">Requires verified land mutation titles and bank link for Direct Benefit Transfer.</p>
+                          <button 
+                            onClick={() => { handleSendMessage("What are the criteria and paper requirements for PM-Kisan Scheme?"); handleSmoothScroll('main'); }}
+                            className="text-orange-500 hover:underline text-[11px] font-bold mt-2 inline-flex items-center gap-1"
+                          >
+                            <span>Explain in Chat</span>
+                            <svg className="w-3 h-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                          </button>
+                        </div>
+                        <div className={`p-3 rounded-xl border ${isDark ? 'bg-slate-950/50 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                          <h4 className="font-extrabold text-orange-500 mb-1">Ayushman Bharat Medical</h4>
+                          <p className="text-[11px] text-slate-500">Provides extensive healthcare hospitalization support cover for families.</p>
+                          <button 
+                            onClick={() => { handleSendMessage("Tell me about Ayushman Bharat health card benefits and how to apply"); handleSmoothScroll('main'); }}
+                            className="text-orange-500 hover:underline text-[11px] font-bold mt-2 inline-flex items-center gap-1"
+                          >
+                            <span>Explain in Chat</span>
+                            <svg className="w-3 h-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Folder 2 */}
+                <div className={`rounded-2xl border transition-all overflow-hidden ${
+                  activeFolder === 1 
+                    ? 'shadow-md shadow-orange-500/5 ' + (isDark ? 'bg-slate-900 border-orange-500/40' : 'bg-white border-orange-500/30')
+                    : (isDark ? 'bg-slate-900/50 border-slate-800' : 'bg-white border-slate-200')
+                }`}>
+                  <button 
+                    onClick={() => setActiveFolder(activeFolder === 1 ? null : 1)}
+                    className="w-full px-6 py-4.5 flex items-center justify-between text-left font-bold text-sm focus:outline-none"
+                  >
+                    <div className="flex items-center space-x-3">
+                      <div className="w-8 h-8 rounded-lg bg-orange-500/10 flex items-center justify-center text-orange-500">
+                        {/* Document Icon */}
+                        <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                      </div>
+                      <span className="text-slate-800 dark:text-slate-200">📄 Official Identity Updates & Checklists</span>
+                    </div>
+                    <svg className={`w-4 h-4 text-slate-400 transition-transform duration-300 ${activeFolder === 1 ? 'rotate-180' : ''}`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                  </button>
+                  
+                  {activeFolder === 1 && (
+                    <div className={`px-6 pb-5 pt-1 text-xs leading-relaxed space-y-3 border-t ${
+                      isDark ? 'border-slate-800 text-slate-300' : 'border-slate-200 text-slate-700'
+                    }`}>
+                      <p>Avoid agents or fee-hustlers. Generate simple, transparent lists for your vital identity documents.</p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
+                        <div className={`p-3 rounded-xl border ${isDark ? 'bg-slate-950/50 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                          <h4 className="font-extrabold text-orange-500 mb-1">Aadhaar Portal Assistance</h4>
+                          <p className="text-[11px] text-slate-500">Guidance on how to modify your home address or cell numbers completely on your own.</p>
+                          <button 
+                            onClick={() => { handleSendMessage("What documents can I use to update my Aadhaar card address?"); handleSmoothScroll('main'); }}
+                            className="text-orange-500 hover:underline text-[11px] font-bold mt-2 inline-flex items-center gap-1"
+                          >
+                            <span>Explain in Chat</span>
+                            <svg className="w-3 h-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                          </button>
+                        </div>
+                        <div className={`p-3 rounded-xl border ${isDark ? 'bg-slate-950/50 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                          <h4 className="font-extrabold text-orange-500 mb-1">Ration Cards & Links</h4>
+                          <p className="text-[11px] text-slate-500">How to get lists of essential items or link documents to secure subsidized food supplies.</p>
+                          <button 
+                            onClick={() => { handleSendMessage("How do I link my Ration card with Aadhaar Card or apply for family member entry?"); handleSmoothScroll('main'); }}
+                            className="text-orange-500 hover:underline text-[11px] font-bold mt-2 inline-flex items-center gap-1"
+                          >
+                            <span>Explain in Chat</span>
+                            <svg className="w-3 h-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Folder 3 */}
+                <div className={`rounded-2xl border transition-all overflow-hidden ${
+                  activeFolder === 2 
+                    ? 'shadow-md shadow-orange-500/5 ' + (isDark ? 'bg-slate-900 border-orange-500/40' : 'bg-white border-orange-500/30')
+                    : (isDark ? 'bg-slate-900/50 border-slate-800' : 'bg-white border-slate-200')
+                }`}>
+                  <button 
+                    onClick={() => setActiveFolder(activeFolder === 2 ? null : 2)}
+                    className="w-full px-6 py-4.5 flex items-center justify-between text-left font-bold text-sm focus:outline-none"
+                  >
+                    <div className="flex items-center space-x-3">
+                      <div className="w-8 h-8 rounded-lg bg-orange-500/10 flex items-center justify-center text-orange-500">
+                        {/* Alert Icon */}
+                        <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                      </div>
+                      <span className="text-slate-800 dark:text-slate-200">⚠️ Local Issues & Neighborhood Support</span>
+                    </div>
+                    <svg className={`w-4 h-4 text-slate-400 transition-transform duration-300 ${activeFolder === 2 ? 'rotate-180' : ''}`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                  </button>
+                  
+                  {activeFolder === 2 && (
+                    <div className={`px-6 pb-5 pt-1 text-xs leading-relaxed space-y-3 border-t ${
+                      isDark ? 'border-slate-800 text-slate-300' : 'border-slate-200 text-slate-700'
+                    }`}>
+                      <p>Receive help in writing beautifully structured letters regarding broken street lights, road potholes, or drinking water supply issues.</p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
+                        <div className={`p-3 rounded-xl border ${isDark ? 'bg-slate-950/50 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                          <h4 className="font-extrabold text-orange-500 mb-1">Drinking Water & Safety</h4>
+                          <p className="text-[11px] text-slate-500">Prepare friendly draft letters reporting supply contamination or water leaks directly to local departments.</p>
+                          <button 
+                            onClick={() => { handleSendMessage("Draft a polite complaint letter for municipal drinking water supply contamination issues"); handleSmoothScroll('main'); }}
+                            className="text-orange-500 hover:underline text-[11px] font-bold mt-2 inline-flex items-center gap-1"
+                          >
+                            <span>Explain in Chat</span>
+                            <svg className="w-3 h-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                          </button>
+                        </div>
+                        <div className={`p-3 rounded-xl border ${isDark ? 'bg-slate-950/50 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                          <h4 className="font-extrabold text-orange-500 mb-1">Streetlights & Lighting Repairs</h4>
+                          <p className="text-[11px] text-slate-500">Generate simple local requests for fixing broken neighborhood safety streetlights.</p>
+                          <button 
+                            onClick={() => { handleSendMessage("Write a formal, polite letter requesting repair of broken street lights in our lane"); handleSmoothScroll('main'); }}
+                            className="text-orange-500 hover:underline text-[11px] font-bold mt-2 inline-flex items-center gap-1"
+                          >
+                            <span>Explain in Chat</span>
+                            <svg className="w-3 h-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+              </div>
+
+            </div>
+          </section>
+
+          {/* ==========================================
+              STREAMING_CHUNK: Displaying the beautiful, warm citizen journey flowchart...
+              ========================================== */}
+          {/* SIMPLIFIED CITZEN JOURNEY FLOWCHART */}
+          <section id="flowchart" className={`py-16 border-t ${
+            isDark ? 'border-slate-900 bg-slate-950/20' : 'border-slate-200 bg-slate-100/30'
+          }`}>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              
+              <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <h2 className="text-2xl sm:text-3xl font-black tracking-tight">
+                  {currentText.flowchartTitle}
+                </h2>
+                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                  {currentText.flowchartSub}
+                </p>
+              </div>
+
+              {/* FLOWCHART GRAPHIC PATH */}
+              <div className="max-w-5xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative items-start">
+                  
+                  {/* Gentle visual joining line for desktop */}
+                  <div className="hidden md:block absolute top-12 left-[10%] right-[10%] h-[2px] bg-slate-200 dark:bg-slate-800 z-0">
+                    <svg className="w-full h-1 overflow-visible" fill="none">
+                      <line 
+                        x1="0" y1="0" x2="100%" y2="0" 
+                        stroke="#FF9933" strokeWidth="2" 
+                        className="animated-journey-path" 
+                      />
+                    </svg>
+                  </div>
+
+                  {/* Node 1 */}
+                  <div className="relative z-10 flex flex-col items-center text-center px-4 space-y-4 group">
+                    <div className="w-16 h-16 rounded-full bg-orange-500/10 border-2 border-orange-500 flex items-center justify-center text-orange-500 shadow-md group-hover:scale-110 transition-transform duration-300">
+                      <svg className="w-6 h-6 animate-pulse" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    </div>
+                    <div>
+                      <h3 className="text-xs font-black uppercase tracking-wider text-orange-500 mb-1.5">{currentText.step1}</h3>
+                      <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed font-semibold">
+                        {currentText.step1Desc}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Node 2 */}
+                  <div className="relative z-10 flex flex-col items-center text-center px-4 space-y-4 group">
+                    <div className="w-16 h-16 rounded-full bg-slate-100 dark:bg-slate-900 border-2 border-slate-300 dark:border-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-400 shadow-md group-hover:scale-110 transition-transform duration-300">
+                      <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    </div>
+                    <div>
+                      <h3 className="text-xs font-black uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">{currentText.step2}</h3>
+                      <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed font-semibold">
+                        {currentText.step2Desc}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Node 3 */}
+                  <div className="relative z-10 flex flex-col items-center text-center px-4 space-y-4 group">
+                    <div className="w-16 h-16 rounded-full bg-emerald-500/10 border-2 border-emerald-500 flex items-center justify-center text-emerald-500 shadow-md group-hover:scale-110 transition-transform duration-300">
+                      <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    </div>
+                    <div>
+                      <h3 className="text-xs font-black uppercase tracking-wider text-emerald-500 mb-1.5">{currentText.step3}</h3>
+                      <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed font-semibold">
+                        {currentText.step3Desc}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Node 4 */}
+                  <div className="relative z-10 flex flex-col items-center text-center px-4 space-y-4 group">
+                    <div className="w-16 h-16 rounded-full bg-blue-500/10 border-2 border-blue-500 flex items-center justify-center text-blue-500 shadow-md group-hover:scale-110 transition-transform duration-300">
+                      <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    </div>
+                    <div>
+                      <h3 className="text-xs font-black uppercase tracking-wider text-blue-500 mb-1.5">{currentText.step4}</h3>
+                      <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed font-semibold">
+                        {currentText.step4Desc}
+                      </p>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+          {/* ==========================================
+              STREAMING_CHUNK: Coding the friendly local letter status tracker...
+              ========================================== */}
+          {/* SECURE REPORT TRACKER SECTION */}
+          <section id="my-complaints" className={`py-16 border-t ${
+            isDark ? 'border-slate-900 bg-slate-950/10' : 'border-slate-200 bg-white'
+          }`}>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
+                
+                {/* Description left panel */}
+                <div className="lg:col-span-5 flex flex-col justify-center space-y-4">
+                  <span className="text-xs font-extrabold uppercase tracking-wider text-orange-500">
+                    Your Neighborhood Status Gateway
+                  </span>
+                  <h2 className="text-2xl sm:text-3xl font-black tracking-tight leading-tight">
+                    {currentText.myComplaintsHeading}
+                  </h2>
+                  <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed font-semibold">
+                    {currentText.myComplaintsSub}
+                  </p>
+                  
+                  <div className="pt-2 text-xs font-semibold text-slate-400 flex flex-col gap-2">
+                    <div className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-orange-500"></span>
+                      <span>Safe, automatic, local tracking logic</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                      <span>Zero complex jargon, completely transparent</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Tracker input panel */}
+                <div className="lg:col-span-7 flex flex-col justify-center">
+                  <div className={`p-6 rounded-3xl border ${
+                    isDark ? 'bg-slate-900 border-slate-800' : 'bg-slate-100/60 border-slate-200'
+                  }`}>
+                    <h3 className="text-xs font-extrabold uppercase tracking-wider text-orange-500 mb-4 flex items-center gap-1.5">
+                      {/* Search Icon */}
+                      <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                      {currentText.trackingTitle}
+                    </h3>
+                    
+                    <form onSubmit={handleTrackComplaint} className="flex gap-2 mb-4">
+                      <input 
+                        type="text" 
+                        placeholder="Type any reference code (e.g., SB-101)"
+                        value={trackerCode}
+                        onChange={(e) => setTrackerCode(e.target.value)}
+                        className={`flex-1 text-xs py-3 px-3.5 rounded-xl border outline-none transition-all ${
+                          isDark 
+                            ? 'bg-slate-950 border-slate-800 text-slate-200' 
+                            : 'bg-white border-slate-300 text-slate-800 shadow-sm'
+                        }`}
+                      />
+                      <button 
+                        type="submit"
+                        className="py-3 px-5 bg-slate-900 hover:bg-slate-800 dark:bg-orange-600 dark:hover:bg-orange-500 text-white font-extrabold text-xs rounded-xl transition-all shadow-sm"
+                      >
+                        Check Status
+                      </button>
+                    </form>
+
+                    {/* Show tracker outcomes */}
+                    {trackingResult ? (
+                      <div className={`p-4 rounded-2xl border transition-all ${
+                        isDark ? 'bg-slate-950/80 border-slate-800' : 'bg-white border-slate-300/80 shadow-inner'
+                      }`}>
+                        <div className="flex items-start justify-between mb-3">
+                          <div>
+                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Current Status</span>
+                            <h4 className="text-xs font-black text-slate-800 dark:text-slate-100 mt-0.5">{trackingResult.title}</h4>
+                          </div>
+                          <span className="text-[10px] px-2.5 py-0.5 rounded-full font-bold border border-emerald-500/20 bg-emerald-500/10 text-emerald-600">
+                            Verified
+                          </span>
+                        </div>
+                        
+                        <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed mb-4">
+                          {trackingResult.note}
+                        </p>
+
+                        <div className="space-y-1.5 pt-2.5 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-[10px] text-slate-400 font-bold">
+                          <span>Updated: {trackingResult.date}</span>
+                          <span className="text-orange-500">Local Area Verified ✓</span>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="text-center py-6 text-xs text-slate-400 font-semibold border border-dashed border-slate-300 dark:border-slate-800 rounded-2xl">
+                        Type any simple letter code (e.g. SB-101, SB-102) to inspect neighborhood progress reports.
+                      </div>
+                    )}
+
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </section>
+
+          {/* ==========================================
+              STREAMING_CHUNK: Directing citizens to genuine Indian authority resources...
+              ========================================== */}
+          {/* SIMPLIFIED GENUINE CITIZEN EXTERNAL RESOURCES */}
+          <section className={`py-12 border-t ${
+            isDark ? 'border-slate-900 bg-slate-950/10' : 'border-slate-200 bg-slate-100/10'
+          }`}>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              
+              <div className="text-center max-w-2xl mx-auto mb-8">
+                <h3 className="text-sm font-extrabold uppercase tracking-widest text-slate-400 dark:text-slate-500">
+                  {currentText.officialResources}
+                </h3>
+              </div>
+
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                
+                <a href="https://pgportal.gov.in/" target="_blank" rel="noreferrer" className={`p-4 rounded-2xl border text-center transition-all hover:-translate-y-0.5 ${
+                  isDark ? 'bg-slate-900 border-slate-800 hover:bg-slate-800' : 'bg-white border-slate-200 hover:bg-slate-50 shadow-sm'
+                }`}>
+                  <h4 className="text-xs font-black text-orange-500 uppercase tracking-wide mb-1">PGPortal</h4>
+                  <p className="text-[10px] text-slate-500 leading-relaxed">Centralized National Grievance Portal</p>
+                </a>
+
+                <a href="https://uidai.gov.in/" target="_blank" rel="noreferrer" className={`p-4 rounded-2xl border text-center transition-all hover:-translate-y-0.5 ${
+                  isDark ? 'bg-slate-900 border-slate-800 hover:bg-slate-800' : 'bg-white border-slate-200 hover:bg-slate-50 shadow-sm'
+                }`}>
+                  <h4 className="text-xs font-black text-orange-500 uppercase tracking-wide mb-1">UIDAI Aadhaar</h4>
+                  <p className="text-[10px] text-slate-500 leading-relaxed">Official Government Card Services</p>
+                </a>
+
+                <a href="https://pmkisan.gov.in/" target="_blank" rel="noreferrer" className={`p-4 rounded-2xl border text-center transition-all hover:-translate-y-0.5 ${
+                  isDark ? 'bg-slate-900 border-slate-800 hover:bg-slate-800' : 'bg-white border-slate-200 hover:bg-slate-50 shadow-sm'
+                }`}>
+                  <h4 className="text-xs font-black text-orange-500 uppercase tracking-wide mb-1">PM-Kisan Portal</h4>
+                  <p className="text-[10px] text-slate-500 leading-relaxed">Official Farming Benefit Register</p>
+                </a>
+
+                <a href="https://www.digitalindia.gov.in/" target="_blank" rel="noreferrer" className={`p-4 rounded-2xl border text-center transition-all hover:-translate-y-0.5 ${
+                  isDark ? 'bg-slate-900 border-slate-800 hover:bg-slate-800' : 'bg-white border-slate-200 hover:bg-slate-50 shadow-sm'
+                }`}>
+                  <h4 className="text-xs font-black text-orange-500 uppercase tracking-wide mb-1">Digital India</h4>
+                  <p className="text-[10px] text-slate-500 leading-relaxed">National Digital Empowerment Initiatives</p>
+                </a>
+
+              </div>
+            </div>
+          </section>
+
+          {/* ==========================================
+              ABOUT US SECTION
+              ========================================== */}
+          <section id="about" className={`py-16 border-t ${
+            isDark ? 'border-slate-900 bg-slate-950/20' : 'border-slate-200 bg-white'
+          }`}>
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+              <div className="inline-flex items-center justify-center p-3 rounded-2xl bg-orange-500/10 text-orange-500">
+                {/* Shield icon */}
+                <svg className="w-6 h-6 animate-pulse" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-black tracking-tight">{currentText.aboutTitle}</h2>
+              <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed max-w-2xl mx-auto font-semibold">
+                {currentText.aboutText}
+              </p>
+            </div>
+          </section>
+
+          {/* ==========================================
+              STREAMING_CHUNK: Coding the helpful footer area...
+              ========================================== */}
+          {/* FOOTER */}
+          <footer className={`border-t py-12 ${
+            isDark ? 'border-slate-900 bg-slate-950/40' : 'border-slate-200 bg-slate-50'
+          }`}>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              
+              <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-slate-550 font-medium">
+                
+                {/* Brand Footprint */}
+                <div className="flex items-center space-x-3">
+                  <div className="w-8 h-8 rounded-lg overflow-hidden bg-slate-100 border border-slate-200 dark:border-slate-800 flex items-center justify-center shadow-inner">
+                    <img 
+                      src="files/bharat.jpg" 
+                      alt="Smart Bharat Logo" 
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        e.target.style.display = 'none';
+                        e.target.parentNode.innerHTML = `<div class="text-xs font-black text-orange-500">SB</div>`;
+                      }}
+                    />
+                  </div>
+                  <div>
+                    <span className="block text-xs font-extrabold tracking-tight">{currentText.brand}</span>
+                    <span className="block text-[10px] text-slate-500 dark:text-slate-400">Independent Citizens Assistance Helper</span>
+                  </div>
+                </div>
+
+                {/* Right Links & Disclaimer */}
+                <div className="text-center md:text-right space-y-1">
+                  <p>{currentText.copyright}</p>
+                  <p className="text-[10px] text-slate-400 dark:text-slate-500 font-normal">
+                    This portal operates independently of official government servers to assist in application letter drafts.
+                  </p>
+                </div>
+
+              </div>
+
+            </div>
+          </footer>
+
+          {/* ==========================================
+              TOAST NOTIFICATION ENGINE
+              ========================================== */}
+          {toastMessage && (
+            <div className="fixed bottom-5 right-5 z-50 animate-bounce">
+              <div className={`py-3 px-5 rounded-2xl border text-xs font-extrabold shadow-xl flex items-center gap-2 ${
+                isDark ? 'bg-slate-900 border-slate-800 text-slate-200 shadow-slate-950/50' : 'bg-white border-slate-150 text-slate-800 shadow-slate-200/50'
+              }`}>
+                <div className="w-1.5 h-1.5 rounded-full bg-orange-500"></div>
+                <span>{toastMessage}</span>
+              </div>
+            </div>
+          )}
+
+        </div>
+      );
+    }
+
+    // React Mount Injection to DOM mount
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+
+</body>
+</html>
